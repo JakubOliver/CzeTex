@@ -8,13 +8,17 @@ namespace CzeTex
 
         public Files(string[] path)
         {
-            this.Path = GetRelativePath(path);
-            this.FileExists();
+            this.Path = this.GetPath(path);
         }   
 
-        public string GetRelativePath(string[] path){
+        public string GetRelativePath(string[] path, bool debug = false){
             string FilePath = System.IO.Path.Combine(path);
-            return System.IO.Path.Combine(new string[] {Directory.GetCurrentDirectory(), "..", "..", "..", FilePath});
+
+            if (debug){
+                return System.IO.Path.Combine(new string[] {Directory.GetCurrentDirectory(), "..", "..", "..", FilePath});
+            } else {
+                return FilePath;
+            }
         }
 
         public string[] LoadFile(){
@@ -25,10 +29,16 @@ namespace CzeTex
             return content;
         }
 
-        public void FileExists(){
-            if (!System.IO.File.Exists(Path)){
-                throw new System.IO.FileNotFoundException($"File {Path} not found from {AppContext.BaseDirectory}");
+        public string GetPath(string[] path){
+            if (System.IO.File.Exists(GetRelativePath(path))){
+                return GetRelativePath(path);
             }
+
+            if (System.IO.File.Exists(GetRelativePath(path, true))){
+                return GetRelativePath(path, true);
+            }
+
+            throw new System.IO.FileNotFoundException($"File {Path} not found");
         }
 
         public void ShowContent(){
