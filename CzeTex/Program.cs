@@ -6,7 +6,8 @@ namespace CzeTex
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world!");
+            Files files = new Files(new string[] {"examples", "example1.txt"});
+            files.ShowContent();
         }
     }
 }
