@@ -13,7 +13,7 @@ namespace CzeTex
         static void Main(string[] args)
         {
             
-            Files files = new Files(new string[] {"examples", "example1.txt"});
+            Files files = new Files(new string[] {"examples", "example3.txt"});
             //files.ShowContent();
             string[] content = files.LoadFile();
 
