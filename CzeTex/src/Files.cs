@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 
 namespace CzeTex
 {
@@ -10,18 +11,40 @@ namespace CzeTex
         {
             this.Path = this.GetPath(path);
         }   
+        
+        public Files(string path) : this (path.Split(System.IO.Path.DirectorySeparatorChar)){}
 
-        public string GetRelativePath(string[] path, bool debug = false){
+        public string GetRelativePath(string[] path, bool debug = false)
+        {
             string FilePath = System.IO.Path.Combine(path);
 
-            if (debug){
-                return System.IO.Path.Combine(new string[] {Directory.GetCurrentDirectory(), "..", "..", "..", FilePath});
-            } else {
+            if (debug)
+            {
+                return System.IO.Path.Combine(new string[] { Directory.GetCurrentDirectory(), "..", "..", "..", FilePath });
+            }
+            else
+            {
                 return FilePath;
             }
         }
 
-        public string[] LoadFile(){
+        public string GetBaseName()
+        {
+            string[] parts = this.Path.Split(System.IO.Path.DirectorySeparatorChar);
+
+            int end = 0;
+            string withEnding = parts[parts.Length - 1];
+
+            while (end != withEnding.Length && withEnding[end] != '.')
+            {
+                end++;
+            }
+
+            return withEnding[0..end];
+        }
+
+        public string[] LoadFile()
+        {
             string[] content;
 
             content = System.IO.File.ReadAllLines(Path);

@@ -1,35 +1,24 @@
 ﻿using System;
+using System.IO;
 using iText.Kernel.Pdf.Annot;
 
 namespace CzeTex
 {
     class Program
     {
-        static void Print()
-        {
-            Console.WriteLine("hello");
-        }
-
         static void Main(string[] args)
         {
+            string path;
+            if (args.Length < 1)
+            {
+                path = "examples/example3.txt";
+            }
+            else
+            {
+                path = args[0];
+            }
             
-            Files files = new Files(new string[] {"examples", "example3.txt"});
-            //files.ShowContent();
-            string[] content = files.LoadFile();
-
-            Commander commander = new Commander();
-            commander.ReadContent(content);
-            /*
-            PDF pdf = new PDF();
-
-            Trie trie = new Trie();
-            trie.AddFunction("bold", Print);
-
-            trie.DFS(trie.root);
-            System.Console.WriteLine("-----------------");
-            trie.AddFunction("cursive", pdf.AddBoldText);
-            trie.DFS(trie.root);
-            */
+            Commander commander = new Commander(path);
         }
     }
 }

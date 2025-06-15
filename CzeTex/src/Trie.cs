@@ -9,10 +9,18 @@ namespace CzeTex{
     public class Commander
     {
         PDF pdf;
+        Files file;
         Trie trie;
-        public Commander()
+
+        string[] content;
+
+        public Commander(string path)
         {
-            pdf = new PDF();
+            file = new Files(path);
+            content = file.LoadFile();
+            string basename = file.GetBaseName();
+
+            pdf = new PDF(basename);
             trie = new Trie();
 
             //toto nahradit hledanim v Trie plus nacitani kodu z JSON
@@ -21,10 +29,13 @@ namespace CzeTex{
             trie.AddFunction("title", pdf.AddTitle);
             trie.AddFunction("section", pdf.CreateParagraph);
             trie.AddFunction("slash", pdf.AddSlash);
+            trie.AddFunction("newpage", pdf.AddNewPage);
             trie.AddFunction("x", pdf.RemoveFont);
+
+            ReadContent();
         }
 
-        public void ReadContent(string[] content)
+        public void ReadContent()
         {
             string[] words;
             for (int i = 0; i < content.Length; i++)
@@ -46,7 +57,6 @@ namespace CzeTex{
                     else
                     {
                         string functionName = FunctionName(words[j]);
-                        System.Console.WriteLine(functionName);
 
                         //TODO: vyceslovne parametry
                         int idx = trie.FindFunction(functionName);

@@ -1,10 +1,11 @@
 using iText;
+using iText.Forms.Form.Element;
 using iText.IO.Font;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
-
+using iText.Layout.Properties;
 using System;
 using System.IO;
 
@@ -22,9 +23,9 @@ namespace CzeTex{
         CharacteristicsStack stack = new CharacteristicsStack();
 
         Paragraph? activeParagraph;
-        public PDF()
+        public PDF(string basename)
         {
-            writer = new PdfWriter("output/output3.pdf");
+            writer = new PdfWriter($"output/{basename}.pdf");
             pdf = new PdfDocument(writer);
             document = new Document(pdf);
             document.SetFont(font);
@@ -98,5 +99,13 @@ namespace CzeTex{
         {
             this.stack.Pop();
         }
+
+        public void AddNewPage()
+        {
+            this.AddParagraph();
+            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+        }
+
+        //podtrazení, přeškrtnutí atd.
     }
 }
