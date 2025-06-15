@@ -30,6 +30,10 @@ namespace CzeTex{
             trie.AddFunction("section", pdf.CreateParagraph);
             trie.AddFunction("slash", pdf.AddSlash);
             trie.AddFunction("newpage", pdf.AddNewPage);
+            trie.AddFunction("underline", pdf.AddUnderLineText);
+            trie.AddFunction("linethrough", pdf.AddLineThroughText);
+            trie.AddFunction("list", pdf.AddList);
+            trie.AddFunction("listitem", pdf.AddListItem);
             trie.AddFunction("x", pdf.RemoveFont);
 
             ReadContent();

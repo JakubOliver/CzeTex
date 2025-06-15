@@ -20,7 +20,7 @@ namespace CzeTex{
         PdfFont boldFont = PdfFontFactory.CreateFont("src/open-sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
         PdfFont cursiveFont = PdfFontFactory.CreateFont("src/open-sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
 
-        CharacteristicsStack stack = new CharacteristicsStack();
+        CharacteristicsStack stack;
 
         Paragraph? activeParagraph;
         public PDF(string basename)
@@ -30,6 +30,7 @@ namespace CzeTex{
             document = new Document(pdf);
             document.SetFont(font);
 
+            stack = new CharacteristicsStack(document);
             stack.Push(font);
         }
 
@@ -76,8 +77,22 @@ namespace CzeTex{
                 throw new Exception("No active paragraph. Create a paragraph first.");
             }
 
-            this.activeParagraph.Add(text.SetFont(this.stack.Font).SetFontSize(this.stack.Size));
-            this.activeParagraph.Add(" ");
+            if (this.stack.Top().DoNotAdd())
+            {
+                this.stack.Top().Special(text);
+                return;
+            }
+
+            if (this.stack.IsSpecial())
+            {
+                this.activeParagraph.Add(this.stack.Top().Special(text));
+            }
+            else
+            {
+                this.activeParagraph.Add(this.stack.Top().Define(text));
+            }
+
+            this.activeParagraph.Add(this.stack.Top().Define(new Text(" ")));
         }
 
         public void AddBoldText()
@@ -106,6 +121,34 @@ namespace CzeTex{
             document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         }
 
+        public void AddUnderLineText()
+        {
+            this.stack.Push(new UnderLineText(stack.Font, stack.Size));
+        }
+
+        public void AddLineThroughText()
+        {
+            this.stack.Push(new LineThroughText(stack.Font, stack.Size));
+        }
+
+        /*
+        public void AddDottedUnderline()
+        {
+
+        }
+        */
+
         //podtrazení, přeškrtnutí atd.
+
+        public void AddList()
+        {
+            this.CreateParagraph();
+            this.stack.Push(new ListText(stack.Font, stack.Size));
+        }
+
+        public void AddListItem()
+        {
+            this.stack.Push(new ListItemText(stack.Font, stack.Size));
+        }
     }
 }

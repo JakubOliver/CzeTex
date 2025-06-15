@@ -1,0 +1,20 @@
+/title Test seznamů /x
+
+/section()
+
+Toto je text mimo seznam
+
+/list()
+
+/listitem()
+    Toto má být v listu
+/x
+
+/listitem()
+    Toto ja také v seznamu
+/x
+
+/x
+
+/section()
+Toto je text po seznamu
