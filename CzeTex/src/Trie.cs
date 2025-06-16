@@ -1,96 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Security.Cryptography;
-using iText.StyledXmlParser.Jsoup.Nodes;
-using Org.BouncyCastle.Tls.Crypto;
 
 namespace CzeTex{
-    public class Commander
+    public class TrieNode
     {
-        PDF pdf;
-        Files file;
-        Trie trie;
-
-        string[] content;
-
-        public Commander(string path)
-        {
-            file = new Files(path);
-            content = file.LoadFile();
-            string basename = file.GetBaseName();
-
-            pdf = new PDF(basename);
-            trie = new Trie();
-
-            //toto nahradit hledanim v Trie plus nacitani kodu z JSON
-            trie.AddFunction("bold", pdf.AddBoldText);
-            trie.AddFunction("cursive", pdf.AddCursiveText);
-            trie.AddFunction("title", pdf.AddTitle);
-            trie.AddFunction("section", pdf.CreateParagraph);
-            trie.AddFunction("slash", pdf.AddSlash);
-            trie.AddFunction("newpage", pdf.AddNewPage);
-            trie.AddFunction("underline", pdf.AddUnderLineText);
-            trie.AddFunction("linethrough", pdf.AddLineThroughText);
-            trie.AddFunction("list", pdf.AddList);
-            trie.AddFunction("listitem", pdf.AddListItem);
-            trie.AddFunction("x", pdf.RemoveFont);
-
-            ReadContent();
-        }
-
-        public void ReadContent()
-        {
-            string[] words;
-            for (int i = 0; i < content.Length; i++)
-            {
-                words = content[i].Split(' ');
-
-                for (int j = 0; j < words.Length; j++)
-                {
-                    //Console.WriteLine(word);
-                    if (words[j].Length == 0)
-                    {
-                        continue;
-                    }
-
-                    if (words[j][0] != '/')
-                    {
-                        pdf.AddText(words[j]);
-                    }
-                    else
-                    {
-                        string functionName = FunctionName(words[j]);
-
-                        //TODO: vyceslovne parametry
-                        int idx = trie.FindFunction(functionName);
-                        //System.Console.WriteLine($"{functionName} {idx}");
-                        ((Action)trie.Functions[idx])();
-                    }
-                }
-            }
-
-            pdf.Export();
-        }
-
-        private string FunctionName(string word)
-        {
-            int end = 0;
-
-            while (end != word.Length && word[end] != '(')
-            {
-                end++;
-            }
-
-            return word[1..end];
-        }
-    }
-
-    public class TrieNode{
         public TrieNode[]? children;
         public int idx;
 
-        public void CreateChildren(){
+        public void CreateChildren()
+        {
             children = new TrieNode[27];
         }
     }

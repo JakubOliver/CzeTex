@@ -12,26 +12,22 @@ using System.IO;
 namespace CzeTex{
     public class PDF
     {
-        PdfWriter writer;
-        PdfDocument pdf;
-        Document document;
+        private PdfWriter writer;
+        private PdfDocument pdf;
+        private Document document;
 
-        PdfFont font = PdfFontFactory.CreateFont("src/open-sans/OpenSans-Regular.ttf", PdfEncodings.IDENTITY_H);
-        PdfFont boldFont = PdfFontFactory.CreateFont("src/open-sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
-        PdfFont cursiveFont = PdfFontFactory.CreateFont("src/open-sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
+        private CharacteristicsStack stack;
 
-        CharacteristicsStack stack;
-
-        Paragraph? activeParagraph;
+        private Paragraph? activeParagraph;
         public PDF(string basename)
         {
             writer = new PdfWriter($"output/{basename}.pdf");
             pdf = new PdfDocument(writer);
             document = new Document(pdf);
-            document.SetFont(font);
+            document.SetFont(Fonts.defaultFont);
 
             stack = new CharacteristicsStack(document);
-            stack.Push(font);
+            stack.Push(Fonts.defaultFont);
         }
 
         public void Export()
@@ -77,13 +73,13 @@ namespace CzeTex{
                 throw new Exception("No active paragraph. Create a paragraph first.");
             }
 
-            if (this.stack.Top().DoNotAdd())
+            if (this.stack.Top() is DoNotAddTextCharacteristics) //vyresit nadbytecne boolovske hodnoty u TextCharacteristics
             {
                 this.stack.Top().Special(text);
                 return;
             }
 
-            if (this.stack.IsSpecial())
+            if (this.stack.Top() is SpecialTextCharacteristics)
             {
                 this.activeParagraph.Add(this.stack.Top().Special(text));
             }
@@ -97,12 +93,12 @@ namespace CzeTex{
 
         public void AddBoldText()
         {
-            this.stack.Push(this.boldFont);
+            this.stack.Push(Fonts.boldFont);
         }
 
         public void AddCursiveText()
         {
-            this.stack.Push(this.cursiveFont);
+            this.stack.Push(Fonts.cursiveFont);
         }
 
         public void AddSlash()

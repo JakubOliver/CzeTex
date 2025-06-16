@@ -1,0 +1,13 @@
+{
+    "bold" : "AddBoldText",
+    "cursive" : "AddCursiveText",
+    "title" : "AddTitle",
+    "section" : "CreateParagraph",
+    "slash" : "AddSlash",
+    "newpage" : "AddNewPage",
+    "underline" : "AddUnderLineText",
+    "linethrough" : "AddLineThroughText",
+    "list" : "AddList",
+    "listitem" : "AddListItem",
+    "x" : "RemoveFont"
+}
