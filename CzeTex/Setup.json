@@ -2,6 +2,8 @@
     "bold" : "AddBoldText",
     "cursive" : "AddCursiveText",
     "title" : "AddTitle",
+    "subtitle" : "AddSubTitle",
+    "subsubtitle" : "AddSubSubTitle",
     "section" : "CreateParagraph",
     "slash" : "AddSlash",
     "newpage" : "AddNewPage",
@@ -9,5 +11,13 @@
     "linethrough" : "AddLineThroughText",
     "list" : "AddList",
     "listitem" : "AddListItem",
+    "math" : "AddMathPart",
+    "add" : "AddThis",
+    "cdot" : "AddMultiplicationDot",
+    "multi" : "AddMultiplicationSign",
+    "division" : "AddDivisionSign",
+    "pow" : "AddPower",
+    "infrac" : "AddInlineFraction",
+    "frac" : "AddFraction",
     "x" : "RemoveFont"
 }

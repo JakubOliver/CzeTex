@@ -45,19 +45,22 @@ namespace CzeTex{
             return current;
         }
 
-        public void AddFunction(string name, Action<string> function){
+        public void AddFunction(string name, Action<List<string>> function){
             TrieNode current = GetFunctionNode(name);
             current.idx = NumberOfFunctions;
-            Functions.Add((Action<string>)function);
+            Functions.Add((Action<List<string>>)function);
             NumberOfFunctions++;
         }
 
-        public void AddFunction(string name, Action function){
+        /*
+        public void AddFunction(string name, Action function)
+        {
             TrieNode current = GetFunctionNode(name);
             current.idx = NumberOfFunctions;
             Functions.Add((Action)function);
             NumberOfFunctions++;
         }
+        */
 
         public int FindFunction(string name){
             TrieNode current = root;

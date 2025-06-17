@@ -16,7 +16,13 @@ namespace CzeTex
         private Trie trie;
         private SetupLoader setupLoader;
 
+        private List<string>? parameteres;
+        private bool lookingForParameters;
+
         private string[] content;
+        private int contentIndex;
+        private string[]? words;
+        private int wordsIndex;
 
         public Commander(string path)
         {
@@ -43,41 +49,76 @@ namespace CzeTex
             trie.AddFunction("x", pdf.RemoveFont);
             */
 
+            lookingForParameters = false;
             ReadContent();
         }
 
         public void ReadContent()
         {
-            string[] words;
-            for (int i = 0; i < content.Length; i++)
+            for (contentIndex = 0; contentIndex < content.Length; contentIndex++)
             {
-                words = content[i].Split(' ');
+                words = content[contentIndex].Split(' ');
 
-                for (int j = 0; j < words.Length; j++)
+                for (wordsIndex = 0; wordsIndex < words.Length; wordsIndex++)
                 {
                     //Console.WriteLine(word);
-                    if (words[j].Length == 0)
+                    if (words[wordsIndex].Length == 0)
                     {
                         continue;
                     }
 
-                    if (words[j][0] != '/')
+                    if (words[wordsIndex][0] != '/')
                     {
-                        pdf.AddText(words[j]);
+                        pdf.AddText(words[wordsIndex]);
                     }
                     else
                     {
-                        string functionName = FunctionName(words[j]);
+                        string functionName = FunctionName(words[wordsIndex]);
 
                         //TODO: vyceslovne parametry
                         int idx = trie.FindFunction(functionName);
                         //System.Console.WriteLine($"{functionName} {idx}");
-                        ((Action)trie.Functions[idx])();
+
+                        parameteres = new List<string>();
+                        //pridat moznost nacitat parametry ve formátu /add(ahoj)
+
+                        if (LastChar(words[wordsIndex]) == '(')
+                        {
+                            lookingForParameters = true;
+                            while (lookingForParameters)
+                            {
+                                parameteres.Add(ReadWord());
+                            }
+                        }
+
+                        ((Action<List<string>>)trie.Functions[idx])(parameteres);
                     }
                 }
             }
 
             pdf.Export();
+        }
+
+        private string ReadWord()
+        {
+            if (words == null)
+            {
+                throw new Exception("Parameters of functions should be at the same line as the function");
+            }
+
+            wordsIndex++;
+            string word = words[wordsIndex];
+
+            if (LastChar(word) == ')')
+            {
+                lookingForParameters = false;
+            }
+
+            return word.Trim().Trim(')').Trim(',');
+        }
+
+        private char LastChar(string word) {
+            return word[word.Length - 1];
         }
 
         private string FunctionName(string word)
@@ -126,7 +167,7 @@ namespace CzeTex
                     throw new Exception($"Method with name {entry.Value} does not exists");
                 }
 
-                trie.AddFunction(entry.Key, (Action)Delegate.CreateDelegate(typeof(Action), pdf, method));
+                trie.AddFunction(entry.Key, (Action<List<string>>)Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method));
             }
         }
     }
