@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -89,6 +90,56 @@ namespace CzeTex
         public T Top()
         {
             return TopNode().Value;
+        }
+    }
+
+    public static class StringFunctions
+    {
+        public static bool IsFunction(string text)
+        {
+            if (text.Length == 0)
+            {
+                return false;
+            }
+
+            if (text[0] == '/')
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static string GetFunctionName(string word)
+        {
+            int end = 0;
+
+            while (end != word.Length && word[end] != '(')
+            {
+                end++;
+            }
+
+            return word[1..end];
+        }
+
+        public static char LastChar(string word)
+        {
+            return word[word.Length - 1];
+        }
+
+        public static int LastIndex(string word)
+        {
+            return word.Length - 1;
+        }
+
+        public static int LastIndex<T>(List<T> list)
+        {
+            return list.Count - 1;
+        }
+
+        public static int LastIndex(string[] list)
+        {
+            return list.Length - 1;
         }
     }
 }

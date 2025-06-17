@@ -1,23 +1,90 @@
 {
-    "bold" : "AddBoldText",
-    "cursive" : "AddCursiveText",
-    "title" : "AddTitle",
-    "subtitle" : "AddSubTitle",
-    "subsubtitle" : "AddSubSubTitle",
-    "section" : "CreateParagraph",
-    "slash" : "AddSlash",
-    "newpage" : "AddNewPage",
-    "underline" : "AddUnderLineText",
-    "linethrough" : "AddLineThroughText",
-    "list" : "AddList",
-    "listitem" : "AddListItem",
-    "math" : "AddMathPart",
-    "add" : "AddThis",
-    "cdot" : "AddMultiplicationDot",
-    "multi" : "AddMultiplicationSign",
-    "division" : "AddDivisionSign",
-    "pow" : "AddPower",
-    "infrac" : "AddInlineFraction",
-    "frac" : "AddFraction",
-    "x" : "RemoveFont"
+  "bold": {
+    "addFunction": "AddBoldText",
+    "getFunction": "null"
+  },
+  "cursive": {
+    "addFunction": "AddCursiveText",
+    "getFunction": "null"
+  },
+  "title": {
+    "addFunction": "AddTitle",
+    "getFunction": "null"
+  },
+  "subtitle": {
+    "addFunction": "AddSubTitle",
+    "getFunction": "null"
+  },
+  "subsubtitle": {
+    "addFunction": "AddSubSubTitle",
+    "getFunction": "null"
+  },
+  "section": {
+    "addFunction": "CreateParagraph",
+    "getFunction": "null"
+  },
+  "slash": {
+    "addFunction": "AddSlash",
+    "getFunction": "null"
+  },
+  "newpage": {
+    "addFunction": "AddNewPage",
+    "getFunction": "null"
+  },
+  "underline": {
+    "addFunction": "AddUnderLineText",
+    "getFunction": "null"
+  },
+  "linethrough": {
+    "addFunction": "AddLineThroughText",
+    "getFunction": "null"
+  },
+  "list": {
+    "addFunction": "AddList",
+    "getFunction": "null"
+  },
+  "listitem": {
+    "addFunction": "AddListItem",
+    "getFunction": "null"
+  },
+  "math": {
+    "addFunction": "AddMathPart",
+    "getFunction": "null"
+  },
+  "add": {
+    "addFunction": "AddThis",
+    "getFunction": "null"
+  },
+  "cdot": {
+    "addFunction": "AddMultiplicationDot",
+    "getFunction": "GetMultiplicationDot"
+  },
+  "multi": {
+    "addFunction": "AddMultiplicationSign",
+    "getFunction": "GetMultiplicationSign"
+  },
+  "division": {
+    "addFunction": "AddDivisionSign",
+    "getFunction": "GetDivisionSign"
+  },
+  "imply" : {
+    "addFunction" : "AddImplicationSign",
+    "getFunction" : "GetImplicationSign"
+  },
+  "pow": {
+    "addFunction": "AddPower",
+    "getFunction": "null"
+  },
+  "infrac": {
+    "addFunction": "AddInlineFraction",
+    "getFunction": "null"
+  },
+  "frac": {
+    "addFunction": "AddFraction",
+    "getFunction": "null"
+  },
+  "x": {
+    "addFunction": "RemoveFont",
+    "getFunction": "null"
+  }
 }

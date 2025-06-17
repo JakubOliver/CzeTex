@@ -15,5 +15,4 @@
 /math /infrac( x, y) /x
 
 /section
-
-/frac( x+y, y)
+/frac( x /cdot y , y)

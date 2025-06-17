@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using iText.Kernel.Pdf.Annot;
+using iText.Layout.Element;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace CzeTex
@@ -16,7 +19,8 @@ namespace CzeTex
         private Trie trie;
         private SetupLoader setupLoader;
 
-        private List<string>? parameteres;
+        private List<string> parameteres;
+        private List<string> parameter;
         private bool lookingForParameters;
 
         private string[] content;
@@ -30,8 +34,8 @@ namespace CzeTex
             content = file.LoadFile();
             string basename = file.GetBaseName();
 
-            pdf = new PDF(basename);
             trie = new Trie();
+            pdf = new PDF(basename, trie);
             setupLoader = new SetupLoader(trie, pdf);
 
             /*
@@ -50,6 +54,8 @@ namespace CzeTex
             */
 
             lookingForParameters = false;
+            parameteres = new List<string>();
+            parameter = new List<string>();
             ReadContent();
         }
 
@@ -73,25 +79,33 @@ namespace CzeTex
                     }
                     else
                     {
-                        string functionName = FunctionName(words[wordsIndex]);
+                        string functionName = StringFunctions.GetFunctionName(words[wordsIndex]);
 
                         //TODO: vyceslovne parametry
                         int idx = trie.FindFunction(functionName);
                         //System.Console.WriteLine($"{functionName} {idx}");
 
-                        parameteres = new List<string>();
                         //pridat moznost nacitat parametry ve formátu /add(ahoj)
 
-                        if (LastChar(words[wordsIndex]) == '(')
+                        if (StringFunctions.LastChar(words[wordsIndex]) == '(')
                         {
+                            parameteres = new List<string>();
+                            parameter = new List<string>();
+
                             lookingForParameters = true;
                             while (lookingForParameters)
                             {
-                                parameteres.Add(ReadWord());
+                                ReadWord();
                             }
+
+                            ((Action<List<string>>)trie.addFunctions[idx])(parameteres);
+                        }
+                        else
+                        {
+                            ((Action<List<string>>)trie.addFunctions[idx])(new List<string>());
                         }
 
-                        ((Action<List<string>>)trie.Functions[idx])(parameteres);
+                        
                     }
                 }
             }
@@ -99,45 +113,56 @@ namespace CzeTex
             pdf.Export();
         }
 
-        private string ReadWord()
+        private void ReadWord()
         {
-            if (words == null)
+            wordsIndex++;
+
+            if (words == null || wordsIndex >= words.Length)
             {
                 throw new Exception("Parameters of functions should be at the same line as the function");
             }
 
-            wordsIndex++;
             string word = words[wordsIndex];
 
-            if (LastChar(word) == ')')
+            if (word[0] == ',')
+            {
+                this.parameteres.Add(string.Join(" ", this.parameter));
+                this.parameter = new List<string>();
+
+                if (word.Length == 1)
+                {
+                    return;
+                }
+            }
+
+            parameter.Add(word.Trim().Trim(')').Trim(','));
+
+            if (StringFunctions.LastChar(word) == ',')
+            {
+                this.parameteres.Add(string.Join(" ", this.parameter));
+                this.parameter = new List<string>();
+            }
+
+            if (StringFunctions.LastChar(word) == ')')
             {
                 lookingForParameters = false;
+                this.parameteres.Add(string.Join(" ", this.parameter));
             }
 
-            return word.Trim().Trim(')').Trim(',');
+            return;
         }
+    }
 
-        private char LastChar(string word) {
-            return word[word.Length - 1];
-        }
-
-        private string FunctionName(string word)
-        {
-            int end = 0;
-
-            while (end != word.Length && word[end] != '(')
-            {
-                end++;
-            }
-
-            return word[1..end];
-        }
+    public class JsonEntry
+    {
+        public string? addFunction { get; set; }
+        public string? getFunction { get; set; }
     }
 
     public class SetupLoader
     {
         private static string path = "Setup.json";
-        private Dictionary<string, string> mapping;
+        private Dictionary<string, JsonEntry> mapping;
         private Trie trie;
         private PDF pdf;
 
@@ -150,24 +175,40 @@ namespace CzeTex
             AddFunctions();
         }
 
-        private Dictionary<string, string> ReadJson()
+        private Dictionary<string, JsonEntry> ReadJson()
         {
             string content = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<Dictionary<string, string>>(content)!;
+            return JsonSerializer.Deserialize<Dictionary<string, JsonEntry>>(content)!;
         }
 
         private void AddFunctions()
         {
-            foreach (KeyValuePair<string, string> entry in mapping)
+            foreach (KeyValuePair<string, JsonEntry> entry in mapping)
             {
-                MethodInfo? method = typeof(PDF).GetMethod(entry.Value);
+                MethodInfo? method = typeof(PDF).GetMethod(entry.Value.addFunction!);
 
                 if (method == null)
                 {
-                    throw new Exception($"Method with name {entry.Value} does not exists");
+                    throw new Exception($"Method with name {entry.Value.addFunction} does not exists");
                 }
 
-                trie.AddFunction(entry.Key, (Action<List<string>>)Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method));
+                Delegate addFunction = Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method);
+                if (entry.Value.getFunction != "null")
+                {
+                    MethodInfo? getMethod = typeof(PDF).GetMethod(entry.Value.getFunction!);
+
+                    if (getMethod == null)
+                    {
+                        throw new Exception($"Method with name {entry.Value.getFunction} does not exists");
+                    }
+
+                    Delegate getFunction = Delegate.CreateDelegate(typeof(Func<List<string>, Text>), pdf, getMethod);
+                    trie.AddFunction(entry.Key, (Action<List<string>>)addFunction, (Func<List<string>, Text>)getFunction);
+                }
+                else
+                {
+                    trie.AddFunction(entry.Key, (Action<List<string>>)addFunction);
+                }
             }
         }
     }

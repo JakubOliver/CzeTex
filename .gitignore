@@ -5,7 +5,8 @@
 
 #moje
 poznamky.txt
-CzeTex/output
+CzeTex/output/*
+!CzeTex/output/.gitkeep
 
 # User-specific files
 *.rsuser

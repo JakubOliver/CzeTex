@@ -13,16 +13,17 @@ using System.Security;
 using iText.Layout.Borders;
 
 namespace CzeTex{
-    public class PDF
+    public partial class PDF
     {
         private PdfWriter writer;
         private PdfDocument pdf;
         private Document document;
 
         private CharacteristicsStack stack;
+        private Trie trie;
 
         private Paragraph? activeParagraph;
-        public PDF(string basename)
+        public PDF(string basename, Trie trie)
         {
             writer = new PdfWriter($"output/{basename}.pdf");
             pdf = new PdfDocument(writer);
@@ -31,6 +32,8 @@ namespace CzeTex{
 
             stack = new CharacteristicsStack(document);
             stack.Push(Fonts.defaultFont);
+
+            this.trie = trie;
         }
 
         public void Export()
@@ -168,101 +171,6 @@ namespace CzeTex{
         public void AddThis(List<string> list) //testovaci funkce
         {
             this.AddText(list[0]);
-        }
-
-        public void AddMathPart(List<string> list)
-        {
-            this.stack.Push(Fonts.mathFont);
-        }
-
-        public void AddMathText(string text)
-        {
-            this.AddText(new Text(text).SetFont(Fonts.mathFont));
-        }
-
-        public Text GetMathText(string text)
-        {
-            Text mathText = new Text(text).SetFont(Fonts.mathFont);
-            return mathText;
-        }
-
-        public void AddMultiplicationDot(List<string> list) //pridat speciální font pro matematický text
-        {
-            this.AddText("\u22C5");
-        }
-
-        public void AddMultiplicationSign(List<string> list)
-        {
-            this.AddText("\u00D7");
-        }
-
-        public void AddDivisionSign(List<string> list)
-        {
-            this.AddText("\u00F7");
-        }
-
-        public void AddImplificationSign(List<string> list)
-        {
-            this.AddText("\u21D2");
-        }
-
-        public void AddPower(List<string> list) //pridat u vseho kontrolu poctu argumentu
-        {
-            this.AddText(list[0]);
-            this.AddText(new Text(list[1]).SetFontSize(8).SetTextRise(5));
-        }
-
-        public void AddInlineFraction(List<string> list)
-        {
-            this.AddText(new Text(list[0]).SetTextRise(2), false);
-            this.AddText("/", false);
-            this.AddText(list[1]);
-        }
-
-        public Cell SetCell(String text, int repetition = 1)
-        {
-            Cell cell = new Cell();
-            cell.SetTextAlignment(TextAlignment.CENTER);
-            cell.SetBorder(Border.NO_BORDER);
-            cell.SetMarginTop(0);
-            cell.SetMarginBottom(0.3f);
-            cell.SetPadding(0);
-
-            Paragraph paragraph = new Paragraph();
-            paragraph.SetMarginBottom(0);
-            paragraph.SetMarginBottom(0);
-            paragraph.SetPadding(0);
-            paragraph.SetMultipliedLeading(0.8f);
-
-            for (int i = 0; i < repetition; i++)
-            {
-                paragraph.Add(this.GetMathText(text));
-            }
-
-            cell.Add(paragraph);
-
-            return cell;
-        }
-
-        public void AddFraction(List<string> list)
-        {
-            int length = Math.Max(list[0].Length, list[1].Length);
-
-            Table fraction = new Table(1);
-            fraction.SetWidth(length);
-            fraction.SetMargin(0);
-
-            Cell numerator = this.SetCell(list[0]);
-            fraction.AddCell(numerator);
-
-            //Cell fractionLine = this.SetCell("—", length);
-            //fraction.AddCell(fractionLine);
-
-            Cell denominator = this.SetCell(list[1]);
-            denominator.SetBorderTop(new SolidBorder(1));
-            fraction.AddCell(denominator);
-
-            document.Add(fraction);
         }
     }
 }

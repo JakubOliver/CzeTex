@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using iText.Layout.Element;
 
 namespace CzeTex{
     public class TrieNode
@@ -16,9 +17,11 @@ namespace CzeTex{
     public class Trie{
         public TrieNode root;
         public int NumberOfFunctions = 0;
-        public List<Delegate> Functions = new List<Delegate>();
+        public List<Delegate> addFunctions = new List<Delegate>();
+        public List<Delegate?> getFunctions = new List<Delegate?>();
 
-        public Trie(){
+        public Trie()
+        {
             root = new TrieNode();
         }
 
@@ -45,10 +48,11 @@ namespace CzeTex{
             return current;
         }
 
-        public void AddFunction(string name, Action<List<string>> function){
+        public void AddFunction(string name, Action<List<string>> addFunction, Func<List<string>, Text>? getFunction = null){
             TrieNode current = GetFunctionNode(name);
             current.idx = NumberOfFunctions;
-            Functions.Add((Action<List<string>>)function);
+            addFunctions.Add((Action<List<string>>)addFunction);
+            getFunctions.Add(getFunction);
             NumberOfFunctions++;
         }
 
