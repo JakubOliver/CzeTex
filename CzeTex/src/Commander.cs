@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Org.BouncyCastle.Crypto.Parameters;
 
 namespace CzeTex
 {
@@ -36,6 +37,8 @@ namespace CzeTex
             parameteres = new List<string>();
             parameter = new List<string>();
             ReadContent();
+
+            pdf.Export();
         }
 
         /// <summary>
@@ -64,12 +67,8 @@ namespace CzeTex
 
                         int idx = trie.FindFunction(functionName);
 
-                        if (StringFunctions.LastChar(words[wordsIndex]) == '(')
+                        if (this.HasParametersNext() || this.ReadRestForParameter())
                         {
-                            parameteres = new List<string>();
-                            parameter = new List<string>();
-
-                            lookingForParameters = true;
                             while (lookingForParameters)
                             {
                                 ReadParameter();
@@ -84,8 +83,118 @@ namespace CzeTex
                     }
                 }
             }
+        }
 
-            pdf.Export();
+        /// <summary>
+        /// Adds parameter into the list of parameters.
+        /// </summary>
+        private void AddParameter(bool reset = false, bool split = false)
+        {
+            string[] splited = string.Join(" ", this.parameter).Split(",");
+
+            foreach (string p in splited)
+            {
+                this.parameteres.Add(p);
+            }
+
+            if (reset)
+            {
+                this.parameter = new List<string>();
+            }
+        }
+
+        /// <summary>
+        /// Resets parameters.
+        /// </summary>
+        private void ResetParameters()
+        {
+            parameteres = new List<string>();
+            parameter = new List<string>();
+        }
+
+        /// <summary>
+        /// Adds parameter into list of parameters if string ends with comma.
+        /// </summary>
+        private bool EndWithComma(string word)
+        {
+            if (StringFunctions.LastChar(word) == ',')
+            {
+                this.AddParameter(true);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Adds parameter into list of parameters and end looking for
+        /// additional parameters if string ends with closing brackets.
+        /// </summary>
+        private bool EndWithClosingBrackets(string word)
+        {
+            if (StringFunctions.LastChar(word) == ')')
+            {
+                lookingForParameters = false;
+                this.AddParameter(false, true);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks whether are parameters in the next word.
+        /// </summary>
+        private bool HasParametersNext()
+        {
+            if (StringFunctions.LastChar(words![wordsIndex]) != '(')
+            {
+                return false;
+            }
+
+            ResetParameters();
+            this.lookingForParameters = true;
+            return true;
+        }
+
+        /// <summary>
+        /// Checkes whether are parameters in the same string as function name.
+        /// </summary>
+        private bool ReadRestForParameter()
+        {
+            int start = 0;
+            //This warning is unjustified because when this method is called
+            //we already read part of this word, therefore is not null.
+            string word = this.words![this.wordsIndex]; 
+            int length = word.Length;
+
+            while (start < length && word[start] != '(')
+            {
+                start++;
+            }
+
+            if (start == length)
+            {
+                return false;
+            }
+
+            start++;
+
+            this.ResetParameters();
+            this.parameter.Add(word[start..].Trim(')').Trim(','));
+
+            this.EndWithComma(word);
+
+            if (this.EndWithClosingBrackets(word))
+            {
+                this.lookingForParameters = false;
+            }
+            else
+            {
+                this.lookingForParameters = true;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -102,10 +211,14 @@ namespace CzeTex
 
             string word = words[wordsIndex];
 
+            if (word.Length == 0)
+            {
+                return;
+            }
+
             if (word[0] == ',')
             {
-                this.parameteres.Add(string.Join(" ", this.parameter));
-                this.parameter = new List<string>();
+                this.AddParameter(true);
 
                 if (word.Length == 1)
                 {
@@ -115,17 +228,9 @@ namespace CzeTex
 
             parameter.Add(word.Trim().Trim(')').Trim(','));
 
-            if (StringFunctions.LastChar(word) == ',')
-            {
-                this.parameteres.Add(string.Join(" ", this.parameter));
-                this.parameter = new List<string>();
-            }
+            this.EndWithComma(word);
 
-            if (StringFunctions.LastChar(word) == ')')
-            {
-                lookingForParameters = false;
-                this.parameteres.Add(string.Join(" ", this.parameter));
-            }
+            this.EndWithClosingBrackets(word);
 
             return;
         }
