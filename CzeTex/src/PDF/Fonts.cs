@@ -1,4 +1,5 @@
 using iText.IO.Font;
+using iText.Kernel.Colors;
 using iText.Kernel.Font;
 
 namespace CzeTex
@@ -14,8 +15,11 @@ namespace CzeTex
             PdfFontFactory.CreateFont("src/open-sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
         public static PdfFont cursiveFont =
             PdfFontFactory.CreateFont("src/open-sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont boldcursiveFont =
+            PdfFontFactory.CreateFont("src/open-sans/OpenSans-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
         public static PdfFont mathFont =
             PdfFontFactory.CreateFont("src/open-sans/MathFonts/LibertinusMath-Regular.ttf", PdfEncodings.IDENTITY_H);
+        public static Color linkColor = ColorConstants.BLUE;
         public static uint defaultSize = 12;
     }
 }

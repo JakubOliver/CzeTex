@@ -1,0 +1,23 @@
+/nadpis() Toto je Česká verze /x
+
+/sekce()
+
+/seznam()
+/prvekseznamu()
+    Kde domov můj
+/x
+/prvekseznamu()
+    kde domov můj?
+/x
+/prvekseznamu()
+    Voda hučí po lučinách,
+/x
+/prvekseznamu()
+    bory šumí po skalinách.
+/x
+/x
+
+/sekce()
+/matematika()
+/provse Čecha /existuje Země: Čech /leziv Zemi /a Země = domov /implikace Země = Česko
+/x

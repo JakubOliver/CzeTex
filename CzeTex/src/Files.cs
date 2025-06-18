@@ -4,18 +4,31 @@ using System.IO;
 namespace CzeTex
 {
     /// <summary>
+    /// Class containing file related constants 
+    /// </summary>
+    public static class FilesConstants
+    {
+        public static int lengthOfTxtExtension = 3;
+    }
+
+    /// <summary>
     /// Class <c>Files</c> provides basic functions for working with files.
     /// </summary>
     public class Files
     {
-        string Path;
+        private string path;
 
         public Files(string[] path)
         {
-            this.Path = this.GetPath(path);
+            this.path = this.GetPath(path);
         }
 
         public Files(string path) : this(path.Split(System.IO.Path.DirectorySeparatorChar)) { }
+
+        public string Path
+        {
+            get { return this.path; }
+        }
 
         /// <summary>
         /// Returns relative path to file from different program entry points.
@@ -39,7 +52,7 @@ namespace CzeTex
         /// </summary>
         public string GetBaseName()
         {
-            string[] parts = this.Path.Split(System.IO.Path.DirectorySeparatorChar);
+            string[] parts = this.path.Split(System.IO.Path.DirectorySeparatorChar);
 
             int end = 0;
             string withEnding = parts[parts.Length - 1];
@@ -53,15 +66,33 @@ namespace CzeTex
         }
 
         /// <summary>
+        /// Returns path to the to be generated pdf file.
+        /// </summary>
+        public string GetPDFPath()
+        {
+            int length = this.path.Length;
+
+            return this.path[0..(length - FilesConstants.lengthOfTxtExtension)] + "pdf";
+        }
+
+        /// <summary>
         /// Reads all lines of a file and returns an array of file's lines.
         /// </summary>
         public string[] LoadFile()
         {
             string[] content;
 
-            content = System.IO.File.ReadAllLines(Path);
+            content = System.IO.File.ReadAllLines(path);
 
             return content;
+        }
+
+        /// <summary>
+        /// Returns concatenated path based on OS directory separator character
+        /// </summary>
+        public string ConcatPath(string[] path)
+        {
+            return string.Join(System.IO.Path.DirectorySeparatorChar, path);
         }
 
         /// <summary>
@@ -79,7 +110,13 @@ namespace CzeTex
                 return GetRelativePath(path, true);
             }
 
-            throw new System.IO.FileNotFoundException($"File {string.Join(System.IO.Path.DirectorySeparatorChar, path)} not found");
+            //Try absolute path (at lest from home)
+            if (File.Exists(this.ConcatPath(path)))
+            {
+                return this.ConcatPath(path);
+            }
+
+            throw new System.IO.FileNotFoundException($"File {this.ConcatPath(path)} not found");
         }
 
         /// <summary>

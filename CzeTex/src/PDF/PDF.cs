@@ -1,4 +1,5 @@
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Action;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
@@ -19,9 +20,9 @@ namespace CzeTex{
         private Trie trie;
 
         private Paragraph? activeParagraph;
-        public PDF(string basename, Trie trie)
+        public PDF(string outputPath, Trie trie)
         {
-            writer = new PdfWriter($"output/{basename}.pdf");
+            writer = new PdfWriter(outputPath);
             pdf = new PdfDocument(writer);
             document = new Document(pdf);
             document.SetFont(Fonts.defaultFont);
@@ -71,6 +72,10 @@ namespace CzeTex{
         /// </summary>
         public void AddTitle(List<string> list)
         {
+            foreach (string x in list)
+            {
+                System.Console.WriteLine(x);
+            }
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
@@ -117,7 +122,7 @@ namespace CzeTex{
                 throw new Exception("No active paragraph. Create a paragraph first.");
             }
 
-            if (this.stack.Top() is DoNotAddTextCharacteristics) 
+            if (this.stack.Top() is DoNotAddTextCharacteristics)
             {
                 this.stack.Top().Special(text);
                 return;
@@ -139,13 +144,30 @@ namespace CzeTex{
         }
 
         /// <summary>
+        /// Starts bold cursive text part (pushes bold-cursive layer to stack).
+        /// </summary>
+        public void AddBoldCursiveText(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 0);
+
+            this.stack.Push(Fonts.boldcursiveFont);
+        }
+
+        /// <summary>
         /// Starts bold text part (pushes bold layer to stack).
         /// </summary>
         public void AddBoldText(List<string> list)
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(Fonts.boldFont);
+            if (this.stack.IsFontInStack(Fonts.cursiveFont))
+            {
+                this.AddBoldCursiveText(list);
+            }
+            else
+            {
+                this.stack.Push(Fonts.boldFont);
+            }
         }
 
         /// <summary>
@@ -155,7 +177,14 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(Fonts.cursiveFont);
+            if (this.stack.IsFontInStack(Fonts.boldFont))
+            {
+                this.AddBoldCursiveText(list);
+            }
+            else
+            {
+                this.stack.Push(Fonts.cursiveFont);
+            }
         }
 
         /// <summary>
@@ -228,6 +257,21 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.stack.Push(new ListItemText(stack.Font, stack.Size));
+        }
+
+        /// <summary>
+        /// Adds hyperlink to the text.
+        /// </summary>
+        public void AddLink(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 2);
+
+            CzeTexText text = new CzeTexText(list[0]);
+            text.SetFontColor(Fonts.linkColor);
+            text.SetUnderline();
+            text.SetAction(PdfAction.CreateURI(list[1]));
+
+            this.AddText(text);
         }
     }
 }

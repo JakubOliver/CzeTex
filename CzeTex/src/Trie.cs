@@ -18,7 +18,7 @@ namespace CzeTex{
     public class TrieNode
     {
         public TrieNode[]? children;
-        public int idx;
+        public int idx = -1;
 
         /// <summary>
         /// Creates children of this vertex.
@@ -98,6 +98,17 @@ namespace CzeTex{
         public void AddFunction(string name, Action<List<string>> addFunction, Func<List<string>, Text>? getFunction = null)
         {
             TrieNode current = GetFunctionNode(name);
+
+            //It is not necessary to check whether the CzeTex function name has duplicate, 
+            //because in the JSON file cannot exists two valid entries with same key.
+            //However, for general purpose it makes sense to check for duplicate keys.
+            /*
+            if (current.idx != -1)
+            {
+                throw new TrieExceptions($"Functions with name {name} already exists");
+            }
+            */
+
             current.idx = NumberOfFunctions;
 
             addFunctions.Add(addFunction);
@@ -120,7 +131,7 @@ namespace CzeTex{
                 if (current.children == null || idx < 0 ||
                     idx > TrieConstants.numberOfChildren || current.children[idx] == null)
                 {
-                    throw new Exception($"Given CzeTex function {name} does not exist!");
+                    throw new TrieExceptions($"Given CzeTex function {name} does not exist!");
                 }
 
                 current = current.children[idx];

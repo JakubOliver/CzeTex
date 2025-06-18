@@ -1,6 +1,7 @@
 using System;
 using iText.Kernel.Font;
 using iText.Layout;
+using iText.Layout.Element;
 
 namespace CzeTex
 {
@@ -95,6 +96,23 @@ namespace CzeTex
             }
 
             return base.Pop();
+        }
+
+        public bool IsFontInStack(PdfFont font)
+        {
+            Node<TextCharacteristics>? node = this.head;
+
+            while (node != null)
+            {
+                if (node.Value.Font == font)
+                {
+                    return true;
+                }
+
+                node = node.Next;
+            }
+
+            return false;
         }
 
         public PdfFont Font

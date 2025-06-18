@@ -1,137 +1,137 @@
 {
-  "bold": {
+  "tucne": {
     "addFunction": "AddBoldText",
     "getFunction": null
   },
-  "cursive": {
+  "psace": {
     "addFunction": "AddCursiveText",
     "getFunction": null
   },
-  "title": {
+  "nadpis": {
     "addFunction": "AddTitle",
     "getFunction": null
   },
-  "subtitle": {
+  "mensinadpis": {
     "addFunction": "AddSubTitle",
     "getFunction": null
   },
-  "subsubtitle": {
+  "mensimensinadpis": {
     "addFunction": "AddSubSubTitle",
     "getFunction": null
   },
-  "section": {
+  "sekce": {
     "addFunction": "CreateParagraph",
     "getFunction": null
   },
-  "slash": {
+  "lomeno": {
     "addFunction": "AddSlash",
     "getFunction": null
   },
-  "newpage": {
+  "novastrana": {
     "addFunction": "AddNewPage",
     "getFunction": null
   },
-  "underline": {
+  "podtrzeno": {
     "addFunction": "AddUnderLineText",
     "getFunction": null
   },
-  "linethrough": {
+  "caraskrz": {
     "addFunction": "AddLineThroughText",
     "getFunction": null
   },
-  "list": {
+  "seznam": {
     "addFunction": "AddList",
     "getFunction": null
   },
-  "listitem": {
+  "prvekseznamu": {
     "addFunction": "AddListItem",
     "getFunction": null
   },
-  "math": {
+  "matematika": {
     "addFunction": "AddMathPart",
     "getFunction": null
   },
-  "cdot": {
+  "nasobicitecka": {
     "dynamicallyGenerated" : true,
     "sign" : "multiplicationDot"
   },
-  "multi": {
+  "nasobeni": {
     "dynamicallyGenerated" : true,
     "sign" : "multiplicationSign"
   },
-  "division": {
+  "deleni": {
     "dynamicallyGenerated" : true,
     "sign" : "divisionSign"
   },
-  "imply" : {
+  "implikace" : {
     "dynamicallyGenerated" : true,
     "sign" : "implicationSign"
   },
-  "negation" : {
+  "negace" : {
     "dynamicallyGenerated" : true,
     "sign" : "negationSign"
   },
-  "in" : {
+  "leziv" : {
     "dynamicallyGenerated" : true,
     "sign" : "elementOfSign"
   },
-  "notin" : {
+  "neleziv" : {
    "dynamicallyGenerated" : true,
     "sign" : "notElementOfSign"
   },
-  "forall" : {
+  "provse" : {
     "dynamicallyGenerated" : true,
     "sign" : "forAllSign"
   },
-  "exists" : {
+  "existuje" : {
     "dynamicallyGenerated" : true,
     "sign" : "existsSign"
   },
-  "infinity" : {
+  "nekonecno" : {
     "dynamicallyGenerated" : true,
     "sign" : "infinitySign"
   },
-  "and" : {
+  "a" : {
     "dynamicallyGenerated" : true,
     "sign" : "logicalAndSign"
   },
-  "or" : {
+  "nebo" : {
     "dynamicallyGenerated" : true,
     "sign" : "logicalOrSign"
   },
-  "real" : {
+  "realne" : {
     "dynamicallyGenerated" : true,
     "sign" : "realNumbersSign"
   },
-  "natural" : {
+  "prirozene" : {
     "dynamicallyGenerated" : true,
     "sign" : "naturalNumbersSign"
   },
-  "integers" : {
+  "cele" : {
     "dynamicallyGenerated" : true,
     "sign" : "integerSign"
   },
-  "rational" : {
+  "racionalni" : {
     "dynamicallyGenerated" : true,
     "sign" : "rationalNumberSign"
   },
-  "complex" : {
+  "komplexni" : {
     "dynamicallyGenerated" : true,
     "sign" : "complexNumberSign"
   },
-  "notequal" : {
+  "nerovnase" : {
     "dynamicallyGenerated" : true,
     "sign" : "notEqualSign"
   },
-  "leq" : {
+  "mensineborovno" : {
     "dynamicallyGenerated" : true,
     "sign" : "lessThanOrEqualSign"
   },
-  "geq" : {
+  "vetsineborovno" : {
     "dynamicallyGenerated" : true,
     "sign" : "greaterThanOrEqualSign"
   },
-  "iff" : {
+  "ekvivalence" : {
     "dynamicallyGenerated" : true,
     "sign" : "ifAndOnlyIfSign"
   },
@@ -147,19 +147,19 @@
     "dynamicallyGenerated" : true,
     "sign" : "piSign"
   },
-  "pow": {
+  "mocnina": {
     "addFunction": "AddPower",
     "getFunction": null
   },
-  "infrac": {
+  "radkovyzlomek": {
     "addFunction": "AddInlineFraction",
     "getFunction": null
   },
-  "frac": {
+  "zlomek": {
     "addFunction": "AddFraction",
     "getFunction": null
   },
-  "link": {
+  "odkaz": {
     "addFunction" : "AddLink",
     "getFunction" : null
   },

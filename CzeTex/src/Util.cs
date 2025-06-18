@@ -129,6 +129,19 @@ namespace CzeTex
     }
 
     /// <summary>
+    /// Class for CzeTex functions related exceptions.
+    /// </summary>
+    public class InvalidNumberOfParameters : CzeTexException
+    {
+        public InvalidNumberOfParameters(string message) : base(message) { }
+    }
+
+    public class TrieExceptions : CzeTexException
+    {
+        public TrieExceptions(string message) : base(message){ }
+    }
+
+    /// <summary>
     /// Class of functions related to work with strungs.
     /// </summary>
     public static class StringFunctions
@@ -207,11 +220,13 @@ namespace CzeTex
         /// <summary>
         /// Checks whether the calling function received correct number of parameters.
         /// </summary>
-        public static void CorrectParameters(List<string> list, int count, [CallerMemberName] string callerFunction = "")
+        public static void CorrectParameters(List<string> list, int count,
+                                            [CallerMemberName] string callerFunction = "")
         {
             if (list.Count != count)
             {
-                throw new Exception($"Function {callerFunction} should have {count} parameters not {list.Count}");
+                throw new InvalidNumberOfParameters(
+                    $"Function {callerFunction} should have {count} parameters not {list.Count}");
             }
         }
     }

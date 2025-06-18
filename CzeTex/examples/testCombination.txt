@@ -1,0 +1,3 @@
+/section()
+
+/bold() Tady to zacina /cursive() toto je tucnou kurzivou /x toto je uz pouze tucne (zase) /x

@@ -27,10 +27,10 @@ namespace CzeTex
         {
             file = new Files(textFile);
             content = file.LoadFile();
-            string basename = file.GetBaseName();
+            string outputPath = file.GetPDFPath();
 
             trie = new Trie();
-            pdf = new PDF(basename, trie);
+            pdf = new PDF(outputPath, trie);
             setupLoader = new SetupLoader(trie, pdf, setupFile);
 
             lookingForParameters = false;
@@ -173,7 +173,7 @@ namespace CzeTex
                 start++;
             }
 
-            if (start == length)
+            if (start == length || word[start + 1] == ')')
             {
                 return false;
             }
