@@ -110,7 +110,8 @@ namespace CzeTex
                         int idx = trie.FindFunction(StringFunctions.GetFunctionName(textSplit[j]));
                         if (trie.getFunctions[idx] == null)
                         {
-                            throw new Exception($"Function {StringFunctions.GetFunctionName(textSplit[j])} does not have getFunction");
+                            throw new Exception($"Function {StringFunctions.GetFunctionName(textSplit[j])}" +
+                                "does not have getFunction");
                         }
 
                         paragraph.Add(((Func<List<string>, Text>)trie.getFunctions[idx]!)(new List<string>()));
@@ -122,7 +123,8 @@ namespace CzeTex
 
                     if (j != StringFunctions.LastIndex(textSplit))
                     {
-                        //The iText library has autocropping enabled after every word, so it is necessary to use non-printable characters instead of spaces
+                        //The iText library has autocropping enabled after every word, 
+                        //so it is necessary to use non-printable characters instead of spaces
                         paragraph.Add(new Text("\u00A0")); 
                     }
                 }
