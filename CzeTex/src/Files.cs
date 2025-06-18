@@ -1,19 +1,25 @@
 using System;
 using System.IO;
-using System.Linq;
 
 namespace CzeTex
 {
-    public class Files{
+    /// <summary>
+    /// Class <c>Files</c> provides basic functions for working with files.
+    /// </summary>
+    public class Files
+    {
         string Path;
 
         public Files(string[] path)
         {
             this.Path = this.GetPath(path);
-        }   
-        
-        public Files(string path) : this (path.Split(System.IO.Path.DirectorySeparatorChar)){}
+        }
 
+        public Files(string path) : this(path.Split(System.IO.Path.DirectorySeparatorChar)) { }
+
+        /// <summary>
+        /// Returns relative path to file from different program entry points.
+        /// </summary>
         public string GetRelativePath(string[] path, bool debug = false)
         {
             string FilePath = System.IO.Path.Combine(path);
@@ -28,6 +34,9 @@ namespace CzeTex
             }
         }
 
+        /// <summary>
+        /// Returning basename of file (name without extension).
+        /// </summary>
         public string GetBaseName()
         {
             string[] parts = this.Path.Split(System.IO.Path.DirectorySeparatorChar);
@@ -43,6 +52,9 @@ namespace CzeTex
             return withEnding[0..end];
         }
 
+        /// <summary>
+        /// Reads all lines of a file and returns an array of file's lines.
+        /// </summary>
         public string[] LoadFile()
         {
             string[] content;
@@ -52,20 +64,31 @@ namespace CzeTex
             return content;
         }
 
-        public string GetPath(string[] path){
-            if (System.IO.File.Exists(GetRelativePath(path))){
+        /// <summary>
+        /// Returns correct file path from the current program entry point.
+        /// </summary>
+        public string GetPath(string[] path)
+        {
+            if (System.IO.File.Exists(GetRelativePath(path)))
+            {
                 return GetRelativePath(path);
             }
 
-            if (System.IO.File.Exists(GetRelativePath(path, true))){
+            if (System.IO.File.Exists(GetRelativePath(path, true)))
+            {
                 return GetRelativePath(path, true);
             }
 
-            throw new System.IO.FileNotFoundException($"File {Path} not found");
+            throw new System.IO.FileNotFoundException($"File {string.Join(System.IO.Path.DirectorySeparatorChar, path)} not found");
         }
 
-        public void ShowContent(){
-            foreach (string line in LoadFile()){
+        /// <summary>
+        /// Displays content of the file to the standard output.
+        /// </summary>
+        public void ShowContent()
+        {
+            foreach (string line in LoadFile())
+            {
                 Console.WriteLine(line);
             }
         }

@@ -1,24 +1,24 @@
-﻿using System;
-using System.IO;
-using iText.Kernel.Pdf.Annot;
-
-namespace CzeTex
+﻿namespace CzeTex
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string path;
-            if (args.Length < 1)
+            if (args.Length == 1)
             {
-                path = "examples/example3.txt";
+                //Only input file with CzeTex text is provided
+                Commander commander = new Commander(args[0]);
+            }
+            else if (args.Length == 2)
+            {
+                //Input file with CzeTex text and custom setup json file are provided
+                Commander commander = new Commander(args[0], args[1]);
             }
             else
             {
-                path = args[0];
+                //User provided incorrect number of arguments
+                throw new InvalidArguments(); 
             }
-            
-            Commander commander = new Commander(path);
         }
     }
 }

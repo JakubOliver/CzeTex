@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using iText.Kernel.Pdf.Annot;
 using iText.Layout.Element;
-using Org.BouncyCastle.Asn1.X509.Qualified;
-using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace CzeTex
 {
+    /// <summary>
+    /// Is a centerpoint of CzeTex project, manages calls to another class and function.
+    /// </summary>
     public class Commander
     {
         private PDF pdf;
@@ -28,30 +26,15 @@ namespace CzeTex
         private string[]? words;
         private int wordsIndex;
 
-        public Commander(string path)
+        public Commander(string textFile, string setupFile = "Setup.json")
         {
-            file = new Files(path);
+            file = new Files(textFile);
             content = file.LoadFile();
             string basename = file.GetBaseName();
 
             trie = new Trie();
             pdf = new PDF(basename, trie);
-            setupLoader = new SetupLoader(trie, pdf);
-
-            /*
-            //toto nahradit hledanim v Trie plus nacitani kodu z JSON
-            trie.AddFunction("bold", pdf.AddBoldText);
-            trie.AddFunction("cursive", pdf.AddCursiveText);
-            trie.AddFunction("title", pdf.AddTitle);
-            trie.AddFunction("section", pdf.CreateParagraph);
-            trie.AddFunction("slash", pdf.AddSlash);
-            trie.AddFunction("newpage", pdf.AddNewPage);
-            trie.AddFunction("underline", pdf.AddUnderLineText);
-            trie.AddFunction("linethrough", pdf.AddLineThroughText);
-            trie.AddFunction("list", pdf.AddList);
-            trie.AddFunction("listitem", pdf.AddListItem);
-            trie.AddFunction("x", pdf.RemoveFont);
-            */
+            setupLoader = new SetupLoader(trie, pdf, setupFile);
 
             lookingForParameters = false;
             parameteres = new List<string>();
@@ -59,6 +42,9 @@ namespace CzeTex
             ReadContent();
         }
 
+        /// <summary>
+        /// Parses the content of a file and detects functions in text.
+        /// </summary>
         public void ReadContent()
         {
             for (contentIndex = 0; contentIndex < content.Length; contentIndex++)
@@ -67,7 +53,6 @@ namespace CzeTex
 
                 for (wordsIndex = 0; wordsIndex < words.Length; wordsIndex++)
                 {
-                    //Console.WriteLine(word);
                     if (words[wordsIndex].Length == 0)
                     {
                         continue;
@@ -81,11 +66,7 @@ namespace CzeTex
                     {
                         string functionName = StringFunctions.GetFunctionName(words[wordsIndex]);
 
-                        //TODO: vyceslovne parametry
                         int idx = trie.FindFunction(functionName);
-                        //System.Console.WriteLine($"{functionName} {idx}");
-
-                        //pridat moznost nacitat parametry ve formátu /add(ahoj)
 
                         if (StringFunctions.LastChar(words[wordsIndex]) == '(')
                         {
@@ -95,7 +76,7 @@ namespace CzeTex
                             lookingForParameters = true;
                             while (lookingForParameters)
                             {
-                                ReadWord();
+                                ReadParameter();
                             }
 
                             ((Action<List<string>>)trie.addFunctions[idx])(parameteres);
@@ -104,8 +85,6 @@ namespace CzeTex
                         {
                             ((Action<List<string>>)trie.addFunctions[idx])(new List<string>());
                         }
-
-                        
                     }
                 }
             }
@@ -113,7 +92,10 @@ namespace CzeTex
             pdf.Export();
         }
 
-        private void ReadWord()
+        /// <summary>
+        /// Reads the parameters of functions in text.
+        /// </summary>
+        private void ReadParameter()
         {
             wordsIndex++;
 
@@ -153,6 +135,9 @@ namespace CzeTex
         }
     }
 
+    /// <summary>
+    /// Represents one entry in the setup JSON file.
+    /// </summary>
     public class JsonEntry
     {
         public string? addFunction { get; set; }
@@ -161,85 +146,121 @@ namespace CzeTex
         public string? sign { get; set; }
     }
 
+    /// <summary>
+    /// Loads and maps text functions to their corresponding code methods.
+    /// </summary>
     public class SetupLoader
     {
-        private static string path = "Setup.json";
+        private string path;
         private Dictionary<string, JsonEntry> mapping;
         private Trie trie;
         private PDF pdf;
         private FunctionGeneratorForPDF generator;
 
-        public SetupLoader(Trie trie, PDF pdf)
+        public SetupLoader(Trie trie, PDF pdf, string path = "Setup.json")
         {
             this.trie = trie;
             this.pdf = pdf;
             this.generator = new FunctionGeneratorForPDF(pdf);
+            this.path = path;
 
             mapping = ReadJson();
             AddFunctions();
         }
 
+        /// <summary>
+        /// Reads JSON setup file.
+        /// </summary>
         private Dictionary<string, JsonEntry> ReadJson()
         {
             string content = File.ReadAllText(path);
             return JsonSerializer.Deserialize<Dictionary<string, JsonEntry>>(content)!;
         }
 
+        /// <summary>
+        /// Generates function with parameters from JSON entry and stores it into tree structure.
+        /// </summary>
+        private void AddDynamicallyGeneratedFunction(KeyValuePair<string, JsonEntry> entry)
+        {
+            if (entry.Value.sign == null)
+            {
+                throw new JSONLoaderException($"CzeTex function with name {entry.Key} should have assigned a sign");
+            }
+
+            //Looking for an attribute in the Signs class with the same name as entry.Value.sign
+            FieldInfo? attribute = typeof(Signs).GetField(entry.Value.sign);
+
+            if (attribute == null || attribute.FieldType != typeof(string))
+            {
+                throw new JSONLoaderException($"CzeTex function with name {entry.Key} should have corrent a name of sign not {entry.Value.sign}");
+            }
+
+            string? sign = attribute.GetValue(null) as string;
+
+            if (sign == null)
+            {
+                throw new JSONLoaderException($"CzeTex function with name {entry.Key} should have been not null a name of sign not {entry.Value.sign}");
+            }
+
+            //Adds dynamically generated add and get functions into the tree structure
+            trie.AddFunction(entry.Key,
+                            (Action<List<string>>)this.generator.CreateAddSignFunction(sign),
+                            (Func<List<string>, Text>)this.generator.CreateGetSignFunction(sign));
+        }
+
+        /// <summary>
+        /// Finds function with corresponding name from JSON entry and stores it into tree structure.
+        /// </summary>
+        private void AddExistingFunction(KeyValuePair<string, JsonEntry> entry)
+        {
+            //Looking for a method in the PDF class with the same name as entry.value.addFunction
+            MethodInfo? method = typeof(PDF).GetMethod(entry.Value.addFunction!);
+
+            if (method == null)
+            {
+                throw new JSONLoaderException($"Method with name {entry.Value.addFunction} does not exists");
+            }
+
+            Delegate addMethod = Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method);
+
+            if (entry.Value.getFunction != null)
+            {
+                //Looking for a method in the PDF class wit the same name as entry.Value.getFunction
+                MethodInfo? getMethod = typeof(PDF).GetMethod(entry.Value.getFunction);
+
+                if (getMethod == null)
+                {
+                    throw new JSONLoaderException($"Method with name {entry.Value.getFunction} does not exists");
+                }
+
+                //Adds add and get method into the tree structure
+                Delegate getFunction = Delegate.CreateDelegate(typeof(Func<List<string>, Text>), pdf, getMethod);
+                trie.AddFunction(entry.Key,
+                                (Action<List<string>>)addMethod,
+                                (Func<List<string>, Text>)getFunction);
+            }
+            else
+            {
+                //Adds add method into the tree structure (get function is implicitly set as null)
+                trie.AddFunction(entry.Key,
+                                (Action<List<string>>)addMethod);
+            }
+        }
+
+        /// <summary>
+        /// Maps text functions to their corresponding code methods and stores this mapping in a tree structure.
+        /// </summary>
         private void AddFunctions()
         {
             foreach (KeyValuePair<string, JsonEntry> entry in mapping)
             {
                 if (entry.Value.dynamicallyGenerated)
                 {
-                    if (entry.Value.sign == null)
-                    {
-                        throw new Exception($"CzeTex function with name {entry.Key} should have assigned a sign");
-                    }
-
-                    FieldInfo? atribute = typeof(Signs).GetField(entry.Value.sign);
-
-                    if (atribute == null || atribute.FieldType != typeof(string))
-                    {
-                        throw new Exception($"CzeTex function with name {entry.Key} should have corrent a name of sign not {entry.Value.sign}");
-                    }
-
-                    string? sign = atribute.GetValue(null) as string;
-
-                    if (sign == null)
-                    {
-                        throw new Exception($"CzeTex function with name {entry.Key} should have been not null a name of sign not {entry.Value.sign}");
-                    }
-
-                    trie.AddFunction(entry.Key,
-                        (Action<List<string>>)this.generator.CreateAddSignFunction(sign),
-                        (Func<List<string>, Text>)this.generator.CreateGetSignFunction(sign));
+                    this.AddDynamicallyGeneratedFunction(entry);
                 }
                 else
                 {
-                    MethodInfo? method = typeof(PDF).GetMethod(entry.Value.addFunction!);
-
-                    if (method == null)
-                    {
-                        throw new Exception($"Method with name {entry.Value.addFunction} does not exists");
-                    }
-
-                    Delegate addFunction = Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method);
-                    if (entry.Value.getFunction != "null")
-                    {
-                        MethodInfo? getMethod = typeof(PDF).GetMethod(entry.Value.getFunction!);
-
-                        if (getMethod == null)
-                        {
-                            throw new Exception($"Method with name {entry.Value.getFunction} does not exists");
-                        }
-
-                        Delegate getFunction = Delegate.CreateDelegate(typeof(Func<List<string>, Text>), pdf, getMethod);
-                        trie.AddFunction(entry.Key, (Action<List<string>>)addFunction, (Func<List<string>, Text>)getFunction);
-                    }
-                    else
-                    {
-                        trie.AddFunction(entry.Key, (Action<List<string>>)addFunction);
-                    }
+                    this.AddExistingFunction(entry);
                 }
             }
         }

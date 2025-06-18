@@ -1,5 +1,8 @@
 namespace CzeTex
 {
+    /// <summary>
+    /// Class contains constants of signs of mathematical notation.
+    /// </summary>
     public static class Signs
     {
         public static string multiplicationDot = "\u22C5";

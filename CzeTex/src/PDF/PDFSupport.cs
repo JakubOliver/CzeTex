@@ -9,24 +9,18 @@ using iText.Layout.Element;
 
 namespace CzeTex
 {
+    /// <summary>
+    /// Characterise text based on font, size and special actions.
+    /// </summary>
     public class TextCharacteristics
     {
         protected PdfFont font;
         protected uint size;
-        protected bool special;
-        protected bool isList;
-        protected bool isListItem;
-        protected bool doNotAdd;
 
         public TextCharacteristics(PdfFont font, uint size)
         {
             this.font = font;
             this.size = size;
-
-            this.special = false;
-            this.isList = false;
-            this.isListItem = false;
-            this.doNotAdd = false;
         }
 
         public PdfFont Font
@@ -39,26 +33,9 @@ namespace CzeTex
             get { return this.size; }
         }
 
-        public bool IsSpecial()
-        {
-            return this.special;
-        }
-
-        public bool IsList()
-        {
-            return this.isList;
-        }
-
-        public bool IsListItem()
-        {
-            return this.isListItem;
-        }
-
-        public bool DoNotAdd()
-        {
-            return this.doNotAdd;
-        }
-
+        /// <summary>
+        /// Sets text's font and font size and returns it.
+        /// </summary>
         public Text Define(Text text)
         {
             text.SetFont(font);
@@ -66,39 +43,66 @@ namespace CzeTex
             return text;
         }
 
+        /// <summary>
+        /// Transforme text base on implementation of this function in different 
+        /// layers (instances of class TextCharacteristics and its children).
+        /// </summary>
         public virtual Text Special(Text text)
         {
             throw new Exception("Special is not defined");
         }
 
+        /// <summary>
+        /// Performs when layer is poped from characteristic stack.
+        /// Implementation is variable and is based on implmentation of children.
+        /// </summary>
         public virtual void End(Document document)
         {
             throw new Exception("End method is not defined");
         }
 
+        /// <summary>
+        /// Adds ListItem to the layer.
+        /// Implementation is variable and is based on implementation of children.
+        /// </summary>
         public virtual void Add(ListItem item)
         {
             throw new Exception("Add method is not defined");
         }
 
+        /// <summary>
+        /// Returns ListItem.
+        /// Implementation is variable and is based on implementation of children.
+        /// </summary>
         public virtual ListItem GetBack()
         {
             throw new Exception("GetBack method is not defined");
         }
     }
 
+    /// <summary>
+    /// Parent class for all descendants of TextCharacteristics which have 
+    /// implemented Special function.
+    /// </summary>
+    /// <remarks>
+    /// This class is mostly used only for recognition its descendants.
+    /// </remarks>
     public class SpecialTextCharacteristics : TextCharacteristics
     {
-        public SpecialTextCharacteristics(PdfFont font, uint size) : base(font, size)
-        {
-            this.special = true;
-        }
+        public SpecialTextCharacteristics(PdfFont font, uint size) : base(font, size) { }
     }
 
+    /// <summary>
+    /// Descendant of TextCharacteristics where all text at 
+    /// this layer is underlined.
+    /// </summary>
     public class UnderLineText : SpecialTextCharacteristics
     {
-        public UnderLineText(PdfFont font, uint size) : base(font, size){}
+        public UnderLineText(PdfFont font, uint size) : base(font, size) { }
 
+        /// <summary>
+        /// Text is set to be underlined.
+        /// </summary>
         public override Text Special(Text text)
         {
             text.SetFont(font);
@@ -108,27 +112,17 @@ namespace CzeTex
         }
     }
 
-    /*
-    public class DottedUnderlineText : TextCharacteristics
-    {
-        public DottedUnderlineText(PdfFont font, uint size) : base(font, size)
-        {
-            this.special = true;
-        }
-
-        public override Text Special(Text text)
-        {
-            text = Define(text);
-            text.SetUnderline(0.5f, -2, new DottedLine());
-            return text;
-        }
-    }
-    */
-
+    /// <summary>
+    /// Descendant of TextCharacteristics where all text at
+    /// this layer has line through itself.
+    /// </summary>
     public class LineThroughText : SpecialTextCharacteristics
     {
-        public LineThroughText(PdfFont font, uint size) : base(font, size){}
+        public LineThroughText(PdfFont font, uint size) : base(font, size) { }
 
+        /// <summary>
+        /// Text is modified to have a line through it.
+        /// </summary>
         public override Text Special(Text text)
         {
             text = Define(text);
@@ -137,15 +131,22 @@ namespace CzeTex
         }
     }
 
-    public class RisenText : SpecialTextCharacteristics
+    /// <summary>
+    /// Descendant of TextCharacteristics where all text
+    /// at this layer is risen.
+    /// </summary>
+    public class RisedText : SpecialTextCharacteristics
     {
         private uint rise;
 
-        public RisenText(PdfFont font, uint size, uint rise) : base(font, size)
+        public RisedText(PdfFont font, uint size, uint rise) : base(font, size)
         {
             this.rise = rise;
         }
 
+        /// <summary>
+        /// Text is modified to appear rised.
+        /// </summary>
         public override Text Special(Text text)
         {
             text = Define(text);
@@ -154,40 +155,59 @@ namespace CzeTex
         }
     }
 
+    /// <summary>
+    /// Parent class of all descendants of TextCharacteristics which
+    /// should not be added to the text.
+    /// </summary>
+    /// <remarks>
+    /// This class is mostly used only for recognition its descendants.
+    /// </remarks>
     public class DoNotAddTextCharacteristics : TextCharacteristics
     {
-        public DoNotAddTextCharacteristics(PdfFont font, uint size) : base(font, size)
-        {
-            this.doNotAdd = true;
-        }
+        public DoNotAddTextCharacteristics(PdfFont font, uint size) : base(font, size) { }
     }
 
+    /// <summary>
+    /// Descendant of TextCharacteristics class. Represents list block.
+    /// </summary>
     public class ListText : DoNotAddTextCharacteristics
     {
         List list;
 
         public ListText(PdfFont font, uint size) : base(font, size)
         {
-            this.isList = true;
             this.list = new List();
         }
 
+        /// <summary>
+        /// Adds ListItem to list.
+        /// </summary>
         public void AddItem(ListItem item)
         {
             list.Add(item);
         }
 
+        /// <summary>
+        /// Adds list to the document.
+        /// </summary>
         public override void End(Document document)
         {
             document.Add(list);
         }
 
+        /// <summary>
+        /// Adds ListItem to list.
+        /// </summary>
         public override void Add(ListItem item)
         {
             this.list.Add(item);
         }
     }
 
+    /// <summary>
+    /// Descendant of TextCharacteristics class. 
+    /// Represents list item in document.
+    /// </summary>
     public class ListItemText : DoNotAddTextCharacteristics
     {
         ListItem item;
@@ -199,10 +219,11 @@ namespace CzeTex
             this.paragraph = new Paragraph();
             this.paragraph.SetMarginTop(0);
             this.paragraph.SetMarginBottom(0);
-
-            this.isListItem = true;
         }
 
+        /// <summary>
+        /// Adds text to the list item.
+        /// </summary>
         public override Text Special(Text text)
         {
             text = Define(text);
@@ -212,6 +233,9 @@ namespace CzeTex
             return text;
         }
 
+        /// <summary>
+        /// Returns list item.
+        /// </summary>
         public override ListItem GetBack()
         {
             item.Add(paragraph);

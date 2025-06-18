@@ -1,59 +1,55 @@
 {
   "bold": {
     "addFunction": "AddBoldText",
-    "getFunction": "null"
+    "getFunction": null
   },
   "cursive": {
     "addFunction": "AddCursiveText",
-    "getFunction": "null"
+    "getFunction": null
   },
   "title": {
     "addFunction": "AddTitle",
-    "getFunction": "null"
+    "getFunction": null
   },
   "subtitle": {
     "addFunction": "AddSubTitle",
-    "getFunction": "null"
+    "getFunction": null
   },
   "subsubtitle": {
     "addFunction": "AddSubSubTitle",
-    "getFunction": "null"
+    "getFunction": null
   },
   "section": {
     "addFunction": "CreateParagraph",
-    "getFunction": "null"
+    "getFunction": null
   },
   "slash": {
     "addFunction": "AddSlash",
-    "getFunction": "null"
+    "getFunction": null
   },
   "newpage": {
     "addFunction": "AddNewPage",
-    "getFunction": "null"
+    "getFunction": null
   },
   "underline": {
     "addFunction": "AddUnderLineText",
-    "getFunction": "null"
+    "getFunction": null
   },
   "linethrough": {
     "addFunction": "AddLineThroughText",
-    "getFunction": "null"
+    "getFunction": null
   },
   "list": {
     "addFunction": "AddList",
-    "getFunction": "null"
+    "getFunction": null
   },
   "listitem": {
     "addFunction": "AddListItem",
-    "getFunction": "null"
+    "getFunction": null
   },
   "math": {
     "addFunction": "AddMathPart",
-    "getFunction": "null"
-  },
-  "add": {
-    "addFunction": "AddThis",
-    "getFunction": "null"
+    "getFunction": null
   },
   "cdot": {
     "dynamicallyGenerated" : true,
@@ -153,18 +149,18 @@
   },
   "pow": {
     "addFunction": "AddPower",
-    "getFunction": "null"
+    "getFunction": null
   },
   "infrac": {
     "addFunction": "AddInlineFraction",
-    "getFunction": "null"
+    "getFunction": null
   },
   "frac": {
     "addFunction": "AddFraction",
-    "getFunction": "null"
+    "getFunction": null
   },
   "x": {
     "addFunction": "RemoveFont",
-    "getFunction": "null"
+    "getFunction": null
   }
 }

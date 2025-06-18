@@ -1,23 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using iText;
-using iText.IO.Font;
-using iText.Kernel.Font;
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Draw;
-using iText.Layout;
 using iText.Layout.Element;
 
 namespace CzeTex
 {
+    /// <summary>
+    /// Generic node of one-way linklist.
+    /// </summary>
     public class Node<T>
     {
-        T value;
-        Node<T>? next;
+        private T value;
+        private Node<T>? next;
 
         public Node(T value)
         {
@@ -40,6 +34,10 @@ namespace CzeTex
             get { return this.next; }
         }
     }
+
+    /// <summary>
+    /// Generic stack.
+    /// </summary>
     public class Stack<T>
     {
         protected uint counter;
@@ -50,6 +48,9 @@ namespace CzeTex
             counter = 0;
         }
 
+        /// <summary>
+        /// Adds value to the stack.
+        /// </summary>
         public void Push(T value)
         {
             if (head == null)
@@ -64,6 +65,9 @@ namespace CzeTex
             counter++;
         }
 
+        /// <summary>
+        /// Removes node from top of stack and returns its value.
+        /// </summary>
         public virtual T Pop()
         {
             if (this.head == null)
@@ -78,6 +82,9 @@ namespace CzeTex
             return active.Value;
         }
 
+        /// <summary>
+        /// Returns node at the top of stack.
+        /// </summary>
         public Node<T> TopNode()
         {
             if (this.head == null)
@@ -88,14 +95,47 @@ namespace CzeTex
             return this.head;
         }
 
+        /// <summary>
+        /// Returns value of node at the top of stack.
+        /// </summary>
         public T Top()
         {
             return TopNode().Value;
         }
     }
 
+    /// <summary>
+    /// Universal CzeTex exception class.
+    /// </summary>
+    public class CzeTexException : Exception
+    {
+        public CzeTexException(string message) : base(message) { }
+    }
+
+    /// <summary>
+    /// Class for JSON related exceptions.
+    /// </summary>
+    public class JSONLoaderException : CzeTexException
+    {
+        public JSONLoaderException(string message) : base(message) { }
+    }
+
+    /// <summary>
+    /// Class for command line arguments related exceptions.
+    /// </summary>
+    public class InvalidArguments : CzeTexException
+    {
+        public InvalidArguments() : base("Command line arguments are invalid") { }
+    }
+
+    /// <summary>
+    /// Class of functions related to work with strungs.
+    /// </summary>
     public static class StringFunctions
     {
+        /// <summary>
+        /// Returns whether the text satisfy criteria for being CzeTex function.
+        /// </summary>
         public static bool IsFunction(string text)
         {
             if (text.Length == 0)
@@ -111,6 +151,9 @@ namespace CzeTex
             return false;
         }
 
+        /// <summary>
+        /// Returns part of string that is name of function.
+        /// </summary>
         public static string GetFunctionName(string word)
         {
             int end = 0;
@@ -123,29 +166,47 @@ namespace CzeTex
             return word[1..end];
         }
 
+        /// <summary>
+        /// Returns last character of string.
+        /// </summary>
         public static char LastChar(string word)
         {
             return word[word.Length - 1];
         }
 
+        /// <summary>
+        /// Returns last index of string.
+        /// </summary>
         public static int LastIndex(string word)
         {
             return word.Length - 1;
         }
 
+        /// <summary>
+        /// Returns last index of generic list.
+        /// </summary>
         public static int LastIndex<T>(List<T> list)
         {
             return list.Count - 1;
         }
 
+        /// <summary>
+        /// Returns last index of string array.
+        /// </summary>
         public static int LastIndex(string[] list)
         {
             return list.Length - 1;
         }
     }
 
+    /// <summary>
+    /// Class for functions checking CzeTex functions.
+    /// </summary>
     public static class CallerManager
     {
+        /// <summary>
+        /// Checks whether the calling function received correct number of parameters.
+        /// </summary>
         public static void CorrectParameters(List<string> list, int count, [CallerMemberName] string callerFunction = "")
         {
             if (list.Count != count)
@@ -155,6 +216,9 @@ namespace CzeTex
         }
     }
 
+    /// <summary>
+    /// Class for dynamically generating PDF functions.
+    /// </summary>
     public class FunctionGeneratorForPDF
     {
         PDF pdf;
@@ -164,11 +228,17 @@ namespace CzeTex
             this.pdf = pdf;
         }
 
+        /// <summary>
+        /// Returns dynamically generated AddSign function.
+        /// </summary>
         public Action<List<string>> CreateAddSignFunction(string sign, int numberOfParameters = 0)
         {
             return (List<string> list) => pdf.AddSign(sign, list, numberOfParameters);
         }
 
+        /// <summary>
+        /// Returns dynamically generated GetSign function.
+        /// </summary>
         public Func<List<string>, Text> CreateGetSignFunction(string sign, int numberOfParameters = 0)
         {
             return (List<string> list) => pdf.GetSign(sign, list, numberOfParameters);

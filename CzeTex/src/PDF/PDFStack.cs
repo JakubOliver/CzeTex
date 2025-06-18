@@ -1,15 +1,25 @@
 using System;
-using iText;
-using iText.IO.Font;
 using iText.Kernel.Font;
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
-using iText.Layout.Element;
-using Org.BouncyCastle.Crypto.Modes;
 
 namespace CzeTex
 {
+    /// <summary>
+    /// Stack for text generation.
+    /// </summary>
+    /// <remarks>
+    /// The appearance of the generated text is determined by the top layer of the 
+    /// CharacteristickStack (font, size, special mutation of text etc.).
+    /// <para>
+    /// A base layer with default font, size and without any special 
+    /// characteristic is pushed at the beginning.
+    /// </para>
+    /// <para>
+    /// If function that push to the stack provide only some 
+    /// characteristics then the remaining characteristics are 
+    /// copied from layer below. 
+    /// </para>
+    /// </remarks>
     public class CharacteristicsStack : Stack<TextCharacteristics>
     {
         private Document document;
@@ -18,6 +28,17 @@ namespace CzeTex
             this.document = document;
         }
 
+        /// <summary>
+        /// Adds new layer to the characteristic stack base on new font and font size.
+        /// </summary>
+        public void Push(PdfFont font, uint size)
+        {
+            Push(new TextCharacteristics(font, size));
+        }
+
+        /// <summary>
+        /// Adds new layer to the characteristic stack based only on new font.
+        /// </summary>
         public void Push(PdfFont font)
         {
             if (this.counter != 0)
@@ -30,6 +51,9 @@ namespace CzeTex
             }
         }
 
+        /// <summary>
+        /// Adds new layer to the characteristic stack base only on new size of font.
+        /// </summary>
         public void Push(uint size)
         {
             if (this.counter != 0)
@@ -42,16 +66,27 @@ namespace CzeTex
             }
         }
 
+        /// <summary>
+        /// Removes layer from the top of the stack and returns it.
+        /// </summary>
+        /// <remarks>
+        /// If the top layer has some ending function (operation which should be
+        /// called at the end of layer) then this function is called
+        /// in this block.
+        /// </remarks>
         public override TextCharacteristics Pop()
         {
             if (Top() is ListItemText)
             {
-                if (TopNode().Next == null || TopNode().Next?.Value is not ListText)
+                //This warning is unjustified because first condition checks for this error.
+                //So if TopNode().Next == null, then the rest will not be even evaluated.
+                if (TopNode().Next == null || TopNode().Next!.Value is not ListText)
                 {
-                    throw new Exception("List should comes before Listitem");
+                    throw new Exception("List should comes before List item");
                 }
 
-                TopNode().Next?.Value.Add(Top().GetBack()); //list item musí vždy mít po sobě list, takže nedojde k null dereference
+                //This warning is also unjustified based on the same reasoning.
+                TopNode().Next!.Value.Add(Top().GetBack()); 
             }
 
             if (Top() is ListText)
@@ -70,11 +105,6 @@ namespace CzeTex
         public uint Size
         {
             get { return Top().Size; }
-        }
-
-        public bool IsSpecial()
-        {
-            return Top().IsSpecial();
         }
     }
 }

@@ -3,6 +3,9 @@ using iText.Kernel.Font;
 
 namespace CzeTex
 {
+    /// <summary>
+    /// Class containing constants for text generation.
+    /// </summary>
     public static class Fonts
     {
         public static PdfFont defaultFont = PdfFontFactory.CreateFont("src/open-sans/OpenSans-Regular.ttf", PdfEncodings.IDENTITY_H);
