@@ -23,15 +23,15 @@ namespace CzeTex
         /// </summary>
         public void AddMathText(string text)
         {
-            this.AddText(new Text(text).SetFont(Fonts.mathFont));
+            this.AddText(new CzeTexText(text).SetFont(Fonts.mathFont));
         }
 
         /// <summary>
         /// Returns text in math font.
         /// </summary>
-        public Text GetMathText(string text)
+        public CzeTexText GetMathText(string text)
         {
-            Text mathText = new Text(text).SetFont(Fonts.mathFont);
+            CzeTexText mathText = new CzeTexText(text).SetFont(Fonts.mathFont);
             return mathText;
         }
 
@@ -48,7 +48,7 @@ namespace CzeTex
         /// <summary>
         /// Returns math sign and checks calling CzeTex function.
         /// </summary>
-        public Text GetSign(string sign, List<string> list, int numberOfParameters = 0)
+        public CzeTexText GetSign(string sign, List<string> list, int numberOfParameters = 0)
         {
             CallerManager.CorrectParameters(list, numberOfParameters);
 
@@ -63,7 +63,7 @@ namespace CzeTex
             CallerManager.CorrectParameters(list, 2);
 
             this.AddText(list[0]);
-            this.AddText(new Text(list[1]).SetFontSize(8).SetTextRise(5));
+            this.AddText(new CzeTexText(list[1]).SetFontSize(8).AddTextRise(5));
         }
 
         //pridat moznost davat mocniny do zlomky, zlomly do zlomlu atd.
@@ -75,7 +75,8 @@ namespace CzeTex
         {
             CallerManager.CorrectParameters(list, 2);
 
-            this.AddText(new Text(list[0]).SetTextRise(2), false);
+            CzeTexText text = new CzeTexText(list[0]);
+            this.AddText(new CzeTexText(list[0]).AddTextRise(2), false);
             this.AddText("/", false);
             this.AddText(list[1]);
         }
@@ -114,7 +115,7 @@ namespace CzeTex
                                 "does not have getFunction");
                         }
 
-                        paragraph.Add(((Func<List<string>, Text>)trie.getFunctions[idx]!)(new List<string>()));
+                        paragraph.Add(((Func<List<string>, CzeTexText>)trie.getFunctions[idx]!)(new List<string>()));
                     }
                     else
                     {
@@ -125,7 +126,7 @@ namespace CzeTex
                     {
                         //The iText library has autocropping enabled after every word, 
                         //so it is necessary to use non-printable characters instead of spaces
-                        paragraph.Add(new Text("\u00A0")); 
+                        paragraph.Add(new CzeTexText("\u00A0")); 
                     }
                 }
             }

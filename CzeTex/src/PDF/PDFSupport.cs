@@ -36,7 +36,7 @@ namespace CzeTex
         /// <summary>
         /// Sets text's font and font size and returns it.
         /// </summary>
-        public Text Define(Text text)
+        public CzeTexText Define(CzeTexText text)
         {
             text.SetFont(font);
             text.SetFontSize(size);
@@ -47,7 +47,7 @@ namespace CzeTex
         /// Transforme text base on implementation of this function in different 
         /// layers (instances of class TextCharacteristics and its children).
         /// </summary>
-        public virtual Text Special(Text text)
+        public virtual CzeTexText Special(CzeTexText text)
         {
             throw new Exception("Special is not defined");
         }
@@ -101,9 +101,9 @@ namespace CzeTex
         public UnderLineText(PdfFont font, uint size) : base(font, size) { }
 
         /// <summary>
-        /// Text is set to be underlined.
+        /// CzeTexText is set to be underlined.
         /// </summary>
-        public override Text Special(Text text)
+        public override CzeTexText Special(CzeTexText text)
         {
             text.SetFont(font);
             text.SetFontSize(size);
@@ -121,9 +121,9 @@ namespace CzeTex
         public LineThroughText(PdfFont font, uint size) : base(font, size) { }
 
         /// <summary>
-        /// Text is modified to have a line through it.
+        /// CzeTexText is modified to have a line through it.
         /// </summary>
-        public override Text Special(Text text)
+        public override CzeTexText Special(CzeTexText text)
         {
             text = Define(text);
             text.SetLineThrough();
@@ -145,12 +145,12 @@ namespace CzeTex
         }
 
         /// <summary>
-        /// Text is modified to appear rised.
+        /// CzeTexText is modified to appear rised.
         /// </summary>
-        public override Text Special(Text text)
+        public override CzeTexText Special(CzeTexText text)
         {
             text = Define(text);
-            text.SetTextRise(rise);
+            text.AddTextRise(rise);
             return text;
         }
     }
@@ -224,11 +224,11 @@ namespace CzeTex
         /// <summary>
         /// Adds text to the list item.
         /// </summary>
-        public override Text Special(Text text)
+        public override CzeTexText Special(CzeTexText text)
         {
             text = Define(text);
             paragraph.Add(text);
-            paragraph.Add(Define(new Text(" ")));
+            paragraph.Add(Define(new CzeTexText(" ")));
 
             return text;
         }
@@ -240,6 +240,64 @@ namespace CzeTex
         {
             item.Add(paragraph);
             return this.item;
+        }
+    }
+
+    /// <summary>
+    /// Wrapper for Text class which provides more functions.
+    /// </summary>
+    public class CzeTexText : Text
+    {
+        //Unfortunately the iText library uses floating-point numbers to 
+        //representation rise. Therefore even though I use non 
+        //floating-point numbers here, they will be casted.
+        protected float rise;
+
+        public CzeTexText(string text) : base(text)
+        {
+            this.rise = 0;
+        }
+
+        public float Rise
+        {
+            set { this.rise = value; }
+            get { return this.rise; }
+        }
+
+        /// <summary>
+        /// Adds to the text rise.
+        /// </summary>
+        public CzeTexText AddTextRise(float rise)
+        {
+            return this.SetTextRise(this.rise + rise);
+        }
+
+        /// <summary>
+        /// Sets the text rise.
+        /// </summary>
+        public override CzeTexText SetTextRise(float rise)
+        {
+            this.rise = rise;
+            base.SetTextRise(this.rise);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets font size.
+        /// </summary>
+        public override CzeTexText SetFontSize(float size)
+        {
+            base.SetFontSize(size);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets text font.
+        /// </summary>
+        public override CzeTexText SetFont(PdfFont font)
+        {
+            base.SetFont(font);
+            return this;
         }
     }
 }

@@ -239,7 +239,7 @@ namespace CzeTex
         /// <summary>
         /// Returns dynamically generated GetSign function.
         /// </summary>
-        public Func<List<string>, Text> CreateGetSignFunction(string sign, int numberOfParameters = 0)
+        public Func<List<string>, CzeTexText> CreateGetSignFunction(string sign, int numberOfParameters = 0)
         {
             return (List<string> list) => pdf.GetSign(sign, list, numberOfParameters);
         }

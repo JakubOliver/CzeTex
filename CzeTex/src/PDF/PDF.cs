@@ -104,13 +104,13 @@ namespace CzeTex{
         /// </summary>
         public void AddText(string text, bool addWhiteSpace = true)
         {
-            this.AddText(new Text(text), addWhiteSpace);
+            this.AddText(new CzeTexText(text), addWhiteSpace);
         }
 
         /// <summary>
         /// Adds text to document.
         /// </summary>
-        public void AddText(Text text, bool addWhiteSpace = true)
+        public void AddText(CzeTexText text, bool addWhiteSpace = true)
         {
             if (this.activeParagraph == null)
             {
@@ -134,7 +134,7 @@ namespace CzeTex{
 
             if (addWhiteSpace)
             {
-                this.activeParagraph.Add(this.stack.Top().Define(new Text(" ")));
+                this.activeParagraph.Add(this.stack.Top().Define(new CzeTexText(" ")));
             }
         }
 
