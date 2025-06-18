@@ -71,6 +71,86 @@
     "addFunction" : "AddImplicationSign",
     "getFunction" : "GetImplicationSign"
   },
+  "negation" : {
+    "addFunction" : "AddNegationSign",
+    "getFunction" : "GetNegationSign"
+  },
+  "in" : {
+    "addFunction" : "AddElementOfSign",
+    "getFunction" : "GetElementOfSign"
+  },
+  "notin" : {
+    "addFunction" : "AddNotElementOfSign",
+    "getFunction" : "GetNotElementOfSign"
+  },
+  "forall" : {
+    "addFunction" : "AddForAllSign",
+    "getFunction" : "GetForAllSign"
+  },
+  "exists" : {
+    "addFunction" : "AddExistsSign",
+    "getFunction" : "GetExistsSign"
+  },
+  "infinity" : {
+    "addFunction" : "AddInfinitySign",
+    "getFunction" : "GetInfinitySign"
+  },
+  "and" : {
+    "addFunction" : "AddLogicalAndSign",
+    "getFunction" : "GetLogicalAndSign"
+  },
+  "or" : {
+    "addFunction" : "AddLogicalOrSign",
+    "getFunction" : "GetLogicalOrSign"
+  },
+  "real" : {
+    "addFunction" : "AddRealNumbersSign",
+    "getFunction" : "GetRealNumbersSign"
+  },
+  "natural" : {
+    "addFunction" : "AddNaturalNumbersSign",
+    "getFunction" : "GetNaturalNumbersSign"
+  },
+  "integers" : {
+    "addFunction" : "AddIntegersSign",
+    "getFunction" : "GetIntegersSign"
+  },
+  "rational" : {
+    "addFunction" : "AddRationalNumbersSign",
+    "getFunction" : "GetRationalNumbersSign"
+  },
+  "complex" : {
+    "addFunction" : "AddComplexNumbersSign",
+    "getFunction" : "GetComplexNumbersSign"
+  },
+  "notequal" : {
+    "addFunction" : "AddNotEqualSign",
+    "getFunction" : "GetNotEqualSign"
+  },
+  "leq" : {
+    "addFunction" : "AddLessThanOrEqualSign",
+    "getFunction" : "GetLessThanOrEqualSign"
+  },
+  "geq" : {
+    "addFunction" : "AddGreaterThanOrEqualSign",
+    "getFunction" : "GetGreaterThanOrEqualSign"
+  },
+  "iff" : {
+    "addFunction" : "AddIfAndOnlyIfSign",
+    "getFunction" : "GetIfAndOnlyIfSign"
+  },
+  "epsilon" : {
+    "addFunction" : "AddEpsilonSign",
+    "getFunction" : "GetEpsilonSign"
+  },
+  "delta" : {
+    "addFunction" : "AddDeltaSign",
+    "getFunction" : "GetDeltaSign"
+  },
+  "pi" : {
+    "addFunction" : "AddPiSign",
+    "getFunction" : "GetPiSign"
+  },
   "pow": {
     "addFunction": "AddPower",
     "getFunction": "null"

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using iText;
 using iText.IO.Font;
@@ -140,6 +141,16 @@ namespace CzeTex
         public static int LastIndex(string[] list)
         {
             return list.Length - 1;
+        }
+    }
+
+    public static class CallerManager
+    {
+        public static void CorrectParameters(List<string> list, int count, [CallerMemberName] string callerFunction = ""){
+            if (list.Count != count)
+            {
+                throw new Exception($"Function {callerFunction} should have {count} parameters not {list.Count}");
+            }
         }
     }
 }

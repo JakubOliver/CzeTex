@@ -137,6 +137,23 @@ namespace CzeTex
         }
     }
 
+    public class RisenText : SpecialTextCharacteristics
+    {
+        private uint rise;
+
+        public RisenText(PdfFont font, uint size, uint rise) : base(font, size)
+        {
+            this.rise = rise;
+        }
+
+        public override Text Special(Text text)
+        {
+            text = Define(text);
+            text.SetTextRise(rise);
+            return text;
+        }
+    }
+
     public class DoNotAddTextCharacteristics : TextCharacteristics
     {
         public DoNotAddTextCharacteristics(PdfFont font, uint size) : base(font, size)

@@ -63,18 +63,24 @@ namespace CzeTex{
 
         public void AddTitle(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.CreateParagraph(list);
             this.stack.Push(20);
         }
 
         public void AddSubTitle(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.CreateParagraph(list);
             this.stack.Push(18);
         }
 
         public void AddSubSubTitle(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.CreateParagraph(list);
             this.stack.Push(16);
         }
@@ -114,37 +120,51 @@ namespace CzeTex{
 
         public void AddBoldText(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(Fonts.boldFont);
         }
 
         public void AddCursiveText(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(Fonts.cursiveFont);
         }
 
         public void AddSlash(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.AddText("/");
         }
 
         public void RemoveFont(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Pop();
         }
 
         public void AddNewPage(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.AddParagraph();
             document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         }
 
         public void AddUnderLineText(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(new UnderLineText(stack.Font, stack.Size));
         }
 
         public void AddLineThroughText(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(new LineThroughText(stack.Font, stack.Size));
         }
 
@@ -159,12 +179,16 @@ namespace CzeTex{
 
         public void AddList(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.CreateParagraph(list);
             this.stack.Push(new ListText(stack.Font, stack.Size));
         }
 
         public void AddListItem(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(new ListItemText(stack.Font, stack.Size));
         }
 
