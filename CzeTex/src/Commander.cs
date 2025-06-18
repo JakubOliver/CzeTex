@@ -157,6 +157,8 @@ namespace CzeTex
     {
         public string? addFunction { get; set; }
         public string? getFunction { get; set; }
+        public bool dynamicallyGenerated { get; set; }
+        public string? sign { get; set; }
     }
 
     public class SetupLoader
@@ -165,11 +167,13 @@ namespace CzeTex
         private Dictionary<string, JsonEntry> mapping;
         private Trie trie;
         private PDF pdf;
+        private FunctionGeneratorForPDF generator;
 
         public SetupLoader(Trie trie, PDF pdf)
         {
             this.trie = trie;
             this.pdf = pdf;
+            this.generator = new FunctionGeneratorForPDF(pdf);
 
             mapping = ReadJson();
             AddFunctions();
@@ -185,29 +189,57 @@ namespace CzeTex
         {
             foreach (KeyValuePair<string, JsonEntry> entry in mapping)
             {
-                MethodInfo? method = typeof(PDF).GetMethod(entry.Value.addFunction!);
-
-                if (method == null)
+                if (entry.Value.dynamicallyGenerated)
                 {
-                    throw new Exception($"Method with name {entry.Value.addFunction} does not exists");
-                }
-
-                Delegate addFunction = Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method);
-                if (entry.Value.getFunction != "null")
-                {
-                    MethodInfo? getMethod = typeof(PDF).GetMethod(entry.Value.getFunction!);
-
-                    if (getMethod == null)
+                    if (entry.Value.sign == null)
                     {
-                        throw new Exception($"Method with name {entry.Value.getFunction} does not exists");
+                        throw new Exception($"CzeTex function with name {entry.Key} should have assigned a sign");
                     }
 
-                    Delegate getFunction = Delegate.CreateDelegate(typeof(Func<List<string>, Text>), pdf, getMethod);
-                    trie.AddFunction(entry.Key, (Action<List<string>>)addFunction, (Func<List<string>, Text>)getFunction);
+                    FieldInfo? atribute = typeof(Signs).GetField(entry.Value.sign);
+
+                    if (atribute == null || atribute.FieldType != typeof(string))
+                    {
+                        throw new Exception($"CzeTex function with name {entry.Key} should have corrent a name of sign not {entry.Value.sign}");
+                    }
+
+                    string? sign = atribute.GetValue(null) as string;
+
+                    if (sign == null)
+                    {
+                        throw new Exception($"CzeTex function with name {entry.Key} should have been not null a name of sign not {entry.Value.sign}");
+                    }
+
+                    trie.AddFunction(entry.Key,
+                        (Action<List<string>>)this.generator.CreateAddSignFunction(sign),
+                        (Func<List<string>, Text>)this.generator.CreateGetSignFunction(sign));
                 }
                 else
                 {
-                    trie.AddFunction(entry.Key, (Action<List<string>>)addFunction);
+                    MethodInfo? method = typeof(PDF).GetMethod(entry.Value.addFunction!);
+
+                    if (method == null)
+                    {
+                        throw new Exception($"Method with name {entry.Value.addFunction} does not exists");
+                    }
+
+                    Delegate addFunction = Delegate.CreateDelegate(typeof(Action<List<string>>), pdf, method);
+                    if (entry.Value.getFunction != "null")
+                    {
+                        MethodInfo? getMethod = typeof(PDF).GetMethod(entry.Value.getFunction!);
+
+                        if (getMethod == null)
+                        {
+                            throw new Exception($"Method with name {entry.Value.getFunction} does not exists");
+                        }
+
+                        Delegate getFunction = Delegate.CreateDelegate(typeof(Func<List<string>, Text>), pdf, getMethod);
+                        trie.AddFunction(entry.Key, (Action<List<string>>)addFunction, (Func<List<string>, Text>)getFunction);
+                    }
+                    else
+                    {
+                        trie.AddFunction(entry.Key, (Action<List<string>>)addFunction);
+                    }
                 }
             }
         }

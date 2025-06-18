@@ -146,11 +146,32 @@ namespace CzeTex
 
     public static class CallerManager
     {
-        public static void CorrectParameters(List<string> list, int count, [CallerMemberName] string callerFunction = ""){
+        public static void CorrectParameters(List<string> list, int count, [CallerMemberName] string callerFunction = "")
+        {
             if (list.Count != count)
             {
                 throw new Exception($"Function {callerFunction} should have {count} parameters not {list.Count}");
             }
+        }
+    }
+
+    public class FunctionGeneratorForPDF
+    {
+        PDF pdf;
+
+        public FunctionGeneratorForPDF(PDF pdf)
+        {
+            this.pdf = pdf;
+        }
+
+        public Action<List<string>> CreateAddSignFunction(string sign, int numberOfParameters = 0)
+        {
+            return (List<string> list) => pdf.AddSign(sign, list, numberOfParameters);
+        }
+
+        public Func<List<string>, Text> CreateGetSignFunction(string sign, int numberOfParameters = 0)
+        {
+            return (List<string> list) => pdf.GetSign(sign, list, numberOfParameters);
         }
     }
 }

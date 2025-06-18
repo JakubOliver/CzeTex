@@ -56,100 +56,100 @@
     "getFunction": "null"
   },
   "cdot": {
-    "addFunction": "AddMultiplicationDot",
-    "getFunction": "GetMultiplicationDot"
+    "dynamicallyGenerated" : true,
+    "sign" : "multiplicationDot"
   },
   "multi": {
-    "addFunction": "AddMultiplicationSign",
-    "getFunction": "GetMultiplicationSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "multiplicationSign"
   },
   "division": {
-    "addFunction": "AddDivisionSign",
-    "getFunction": "GetDivisionSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "divisionSign"
   },
   "imply" : {
-    "addFunction" : "AddImplicationSign",
-    "getFunction" : "GetImplicationSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "implicationSign"
   },
   "negation" : {
-    "addFunction" : "AddNegationSign",
-    "getFunction" : "GetNegationSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "negationSign"
   },
   "in" : {
-    "addFunction" : "AddElementOfSign",
-    "getFunction" : "GetElementOfSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "elementOfSign"
   },
   "notin" : {
-    "addFunction" : "AddNotElementOfSign",
-    "getFunction" : "GetNotElementOfSign"
+   "dynamicallyGenerated" : true,
+    "sign" : "notElementOfSign"
   },
   "forall" : {
-    "addFunction" : "AddForAllSign",
-    "getFunction" : "GetForAllSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "forAllSign"
   },
   "exists" : {
-    "addFunction" : "AddExistsSign",
-    "getFunction" : "GetExistsSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "existsSign"
   },
   "infinity" : {
-    "addFunction" : "AddInfinitySign",
-    "getFunction" : "GetInfinitySign"
+    "dynamicallyGenerated" : true,
+    "sign" : "infinitySign"
   },
   "and" : {
-    "addFunction" : "AddLogicalAndSign",
-    "getFunction" : "GetLogicalAndSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "logicalAndSign"
   },
   "or" : {
-    "addFunction" : "AddLogicalOrSign",
-    "getFunction" : "GetLogicalOrSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "logicalOrSign"
   },
   "real" : {
-    "addFunction" : "AddRealNumbersSign",
-    "getFunction" : "GetRealNumbersSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "realNumbersSign"
   },
   "natural" : {
-    "addFunction" : "AddNaturalNumbersSign",
-    "getFunction" : "GetNaturalNumbersSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "naturalNumbersSign"
   },
   "integers" : {
-    "addFunction" : "AddIntegersSign",
-    "getFunction" : "GetIntegersSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "integerSign"
   },
   "rational" : {
-    "addFunction" : "AddRationalNumbersSign",
-    "getFunction" : "GetRationalNumbersSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "rationalNumberSign"
   },
   "complex" : {
-    "addFunction" : "AddComplexNumbersSign",
-    "getFunction" : "GetComplexNumbersSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "complexNumberSign"
   },
   "notequal" : {
-    "addFunction" : "AddNotEqualSign",
-    "getFunction" : "GetNotEqualSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "notEqualSign"
   },
   "leq" : {
-    "addFunction" : "AddLessThanOrEqualSign",
-    "getFunction" : "GetLessThanOrEqualSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "lessThanOrEqualSign"
   },
   "geq" : {
-    "addFunction" : "AddGreaterThanOrEqualSign",
-    "getFunction" : "GetGreaterThanOrEqualSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "greaterThanOrEqualSign"
   },
   "iff" : {
-    "addFunction" : "AddIfAndOnlyIfSign",
-    "getFunction" : "GetIfAndOnlyIfSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "ifAndOnlyIfSign"
   },
   "epsilon" : {
-    "addFunction" : "AddEpsilonSign",
-    "getFunction" : "GetEpsilonSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "epsilonSign"
   },
   "delta" : {
-    "addFunction" : "AddDeltaSign",
-    "getFunction" : "GetDeltaSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "deltaSign"
   },
   "pi" : {
-    "addFunction" : "AddPiSign",
-    "getFunction" : "GetPiSign"
+    "dynamicallyGenerated" : true,
+    "sign" : "piSign"
   },
   "pow": {
     "addFunction": "AddPower",
