@@ -17,7 +17,7 @@
             else
             {
                 //User provided incorrect number of arguments
-                throw new InvalidArguments(); 
+                throw new InvalidArgumentsException(); 
             }
         }
     }

@@ -19,6 +19,10 @@
     "addFunction": "AddSubSubTitle",
     "getFunction": null
   },
+  "gtitle" : {
+    "addFunction" : "GenericTitle",
+    "getFunction" : null
+  },
   "section": {
     "addFunction": "CreateParagraph",
     "getFunction": null

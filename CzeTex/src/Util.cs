@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using iText.Layout.Element;
 
@@ -123,23 +124,34 @@ namespace CzeTex
     /// <summary>
     /// Class for command line arguments related exceptions.
     /// </summary>
-    public class InvalidArguments : CzeTexException
+    public class InvalidArgumentsException : CzeTexException
     {
-        public InvalidArguments() : base("Command line arguments are invalid") { }
+        public InvalidArgumentsException() : base("Command line arguments are invalid") { }
     }
 
     /// <summary>
     /// Class for CzeTex functions related exceptions.
     /// </summary>
-    public class InvalidNumberOfParameters : CzeTexException
+    public class InvalidNumberOfParametersException : CzeTexException
     {
-        public InvalidNumberOfParameters(string message) : base(message) { }
+        public InvalidNumberOfParametersException(string message) : base(message) { }
     }
 
+    /// <summary>
+    /// Class for Trie related exceptions.
+    /// </summary>
     public class TrieExceptions : CzeTexException
     {
-        public TrieExceptions(string message) : base(message){ }
+        public TrieExceptions(string message) : base(message) { }
     }
+
+    /// <summary>
+    /// Class for parameters related exceptions.
+    /// </summary>
+    public class InvalidParametersException : CzeTexException
+    {
+        public InvalidParametersException(string message) : base(message) { }
+    } 
 
     /// <summary>
     /// Class of functions related to work with strungs.
@@ -225,8 +237,24 @@ namespace CzeTex
         {
             if (list.Count != count)
             {
-                throw new InvalidNumberOfParameters(
+                throw new InvalidNumberOfParametersException(
                     $"Function {callerFunction} should have {count} parameters not {list.Count}");
+            }
+        }
+
+        /// <summary>
+        /// Checks whether parameters are integers.
+        /// </summary>
+        public static void IsParameterUint(List<string> list,
+                                        [CallerMemberName] string callerFunction = "")
+        {
+            foreach (string parameter in list)
+            {
+                if (!uint.TryParse(parameter, out uint n))
+                {
+                    throw new InvalidParametersException(
+                        $"Parameter of function {callerFunction} should be a number");
+                }
             }
         }
     }
@@ -254,7 +282,8 @@ namespace CzeTex
         /// <summary>
         /// Returns dynamically generated GetSign function.
         /// </summary>
-        public Func<List<string>, CzeTexText> CreateGetSignFunction(string sign, int numberOfParameters = 0)
+        public Func<List<string>, CzeTexText> CreateGetSignFunction(string sign,
+                                                                    int numberOfParameters = 0)
         {
             return (List<string> list) => pdf.GetSign(sign, list, numberOfParameters);
         }

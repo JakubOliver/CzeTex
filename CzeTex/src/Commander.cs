@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
-using Org.BouncyCastle.Crypto.Parameters;
 
 namespace CzeTex
 {
+    /// <summary>
+    /// Class contains constants for Commander class.
+    /// </summary>
+    public static class CommanderConstants
+    {
+        public static char specialCharacter = '/';
+    }
+
     /// <summary>
     /// Is a centerpoint of CzeTex project, manages calls to another class and function.
     /// </summary>
@@ -14,7 +21,7 @@ namespace CzeTex
         private Trie trie;
         private SetupLoader setupLoader;
 
-        private List<string> parameteres;
+        private List<string> parameters;
         private List<string> parameter;
         private bool lookingForParameters;
 
@@ -34,7 +41,7 @@ namespace CzeTex
             setupLoader = new SetupLoader(trie, pdf, setupFile);
 
             lookingForParameters = false;
-            parameteres = new List<string>();
+            parameters = new List<string>();
             parameter = new List<string>();
             ReadContent();
 
@@ -57,7 +64,7 @@ namespace CzeTex
                         continue;
                     }
 
-                    if (words[wordsIndex][0] != '/')
+                    if (words[wordsIndex][0] != CommanderConstants.specialCharacter)
                     {
                         pdf.AddText(words[wordsIndex]);
                     }
@@ -74,7 +81,7 @@ namespace CzeTex
                                 ReadParameter();
                             }
 
-                            ((Action<List<string>>)trie.addFunctions[idx])(parameteres);
+                            ((Action<List<string>>)trie.addFunctions[idx])(parameters);
                         }
                         else
                         {
@@ -90,11 +97,11 @@ namespace CzeTex
         /// </summary>
         private void AddParameter(bool reset = false, bool split = false)
         {
-            string[] splited = string.Join(" ", this.parameter).Split(",");
+            string[] splitted = string.Join(" ", this.parameter).Split(",");
 
-            foreach (string p in splited)
+            foreach (string p in splitted)
             {
-                this.parameteres.Add(p);
+                this.parameters.Add(p);
             }
 
             if (reset)
@@ -108,7 +115,7 @@ namespace CzeTex
         /// </summary>
         private void ResetParameters()
         {
-            parameteres = new List<string>();
+            parameters = new List<string>();
             parameter = new List<string>();
         }
 
@@ -158,14 +165,14 @@ namespace CzeTex
         }
 
         /// <summary>
-        /// Checkes whether are parameters in the same string as function name.
+        /// Checks whether are parameters in the same string as function name.
         /// </summary>
         private bool ReadRestForParameter()
         {
             int start = 0;
             //This warning is unjustified because when this method is called
             //we already read part of this word, therefore is not null.
-            string word = this.words![this.wordsIndex]; 
+            string word = this.words![this.wordsIndex];
             int length = word.Length;
 
             while (start < length && word[start] != '(')

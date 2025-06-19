@@ -57,6 +57,7 @@ namespace CzeTex{
             }
 
             this.activeParagraph = new Paragraph();
+            this.activeParagraph.SetMultipliedLeading(Fonts.defaultSpacing);
         }
 
         /// <summary>
@@ -102,6 +103,29 @@ namespace CzeTex{
 
             this.CreateParagraph(list);
             this.stack.Push(16);
+        }
+
+        /// <summary>
+        /// Starts title part with font size based on parameters.
+        /// </summary>
+        public void GenericTitle(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 1);
+            CallerManager.IsParameterUint(list);
+
+            uint size = Convert.ToUInt32(list[0]);
+            size = 20 - (size * 2);
+
+            if (size < Fonts.defaultSize)
+            {
+                throw new InvalidParametersException(
+                    "Generic title is too small");
+            }
+
+            list.RemoveAt(0);
+
+            this.CreateParagraph(list);
+            this.stack.Push(size);
         }
 
         /// <summary>
