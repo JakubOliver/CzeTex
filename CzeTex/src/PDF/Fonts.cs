@@ -9,16 +9,26 @@ namespace CzeTex
     /// </summary>
     public static class Fonts
     {
-        public static PdfFont defaultFont =
-            PdfFontFactory.CreateFont("src/open-sans/OpenSans-Regular.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont boldFont =
-            PdfFontFactory.CreateFont("src/open-sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont cursiveFont =
-            PdfFontFactory.CreateFont("src/open-sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont boldCursiveFont =
-            PdfFontFactory.CreateFont("src/open-sans/OpenSans-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
+        public static bool usingSans = true;
+
+        public static PdfFont sansDefaultFont =
+            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Regular.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont sansBoldFont =
+            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont sansCursiveFont =
+            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont sansBoldCursiveFont =
+            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont serifDefaultFont =
+            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-Regular.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont serifBoldFont =
+            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-Bold.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont serifCursiveFont =
+            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-Italic.ttf", PdfEncodings.IDENTITY_H);
+        public static PdfFont serifBoldCursiveFont =
+            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
         public static PdfFont mathFont =
-            PdfFontFactory.CreateFont("src/open-sans/MathFonts/LibertinusMath-Regular.ttf", PdfEncodings.IDENTITY_H);
+            PdfFontFactory.CreateFont("src/fonts/math/LibertinusMath-Regular.ttf", PdfEncodings.IDENTITY_H);
         public static Color linkColor = ColorConstants.BLUE;
         public static uint defaultSize = 11;
         public static uint defaultTitleSizeDifference = 2;

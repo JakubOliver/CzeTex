@@ -1,17 +1,17 @@
 /title() Programátorská dokumentace /x
 
 /section
-V repositáři můžete najít 2 projekty, /bold() CzeTex /x a /bold() CzeTex.Tests, /x kde /bold() CzeTex /x je samotný program a /bold() CzeTex.Tests /x je projekt, který spouští testy.
+V repositáři můžete najít 2 projekty, /bold() CzeTex /x a /bold() CzeTex.Tests /xc kde /bold() CzeTex /x je samotný program a /bold() CzeTex.Tests /x je projekt, který spouští testy.
 
 /subtitle() CzeTex /x
 
 /section
-Projekt i zdrojový kód je rozdělen do dvou částí. První se zabývá zpracováním vstupních souborů, vystavěním pomocných datových struktur nebo poskytují pomocné metody. Druhá část se zabývá generováním výsledného .pdf souboru pomocí knihovny /bold iText. /x
+Projekt i zdrojový kód je rozdělen do dvou částí. První se zabývá zpracováním vstupních souborů, vystavěním pomocných datových struktur nebo poskytují pomocné metody. Druhá část se zabývá generováním výsledného .pdf souboru pomocí knihovny /bold iText /xd
 
 /gtitle(3) První část /x
 
 /section
-Do první části bychom mohl zahrnout následující soubory /bold() Commander.cs, Files.cs, SetupLoader.cs, Trie.cs /x a /bold() Util.cs. /x
+Do první části bychom mohl zahrnout následující soubory /bold() Commander.cs, Files.cs, SetupLoader.cs, Trie.cs /x a /bold() Util.cs /xd
 Pojďme si tyto soubory a jejich obsah projít jednotlivě.
 
 /gtitle(4) Commander.cs /x
@@ -20,7 +20,7 @@ Pojďme si tyto soubory a jejich obsah projít jednotlivě.
 V souboru /bold() Commander.cs /x můžeme najít stejnojmennou třídu, která představuje centrum celého programu, volá dílčí funkce a třídy a udržuje koherentnost celého běhu. Zpracovává obsah načtený ze vstupního souboru, volá třídu pro zpracování setup .json souboru. 
 
 /section
-Pro zpracování vstupního souboru se využívá metoda /bold ReadContent, /x která detekuje speciální znak, v základu /slash() , a následně extrahuje funkce a jejich parametry z textu, vyhledá v pomocné datové struktuře /bold trie /x odkaz na příslušnou funkci a zavolají.
+Pro zpracování vstupního souboru se využívá metoda /bold ReadContent /xc která detekuje speciální znak, v základu /slash() , a následně extrahuje funkce a jejich parametry z textu, vyhledá v pomocné datové struktuře /bold trie /x odkaz na příslušnou funkci a zavolají.
 
 /section 
 Třída obsahuje několik funkcí jako /bold ReadRestForParameter, ReadParameter atd., /x které se navzájem doplňují v různých případech pro korektní vyhledání parametrů textových CzeTex funkcí.
@@ -31,22 +31,22 @@ Třída obsahuje několik funkcí jako /bold ReadRestForParameter, ReadParameter
 Dalším souborem je /bold Files.cs /x obsahující stejnojmennou třídu, která zabezpečuje vyhledání souboru podle poskytnutého parametru od uživatele a následné korektní otevření, načtení obsahu a uzavření.
 
 /section 
-Mimo těchto funkcionalit nabízí třída Files také možnosti generování cestu k umístění výsledného .pdf souboru v metodě /bold GetPdfPath /x nebo metodu /bold GetBaseName, /x která vrací jméno bez přípony vstupního souboru a další. 
+Mimo těchto funkcionalit nabízí třída Files také možnosti generování cestu k umístění výsledného .pdf souboru v metodě /bold GetPdfPath /x nebo metodu /bold GetBaseName /xc která vrací jméno bez přípony vstupního souboru a další. 
 
 /gtitle(4 ) SetupLoader.cs /x
 
 /section
-Dalším souborem je /bold SetupLoader.cs /x obsahující 2 třídy /bold JsonEntry /x a /bold SetupLoader. /x
+Dalším souborem je /bold SetupLoader.cs /x obsahující 2 třídy /bold JsonEntry /x a /bold SetupLoader /xd
 
 /section
 Jak už název napovídá /bold JsonEntry /x reprezentuje jeden záznam v setup .json souboru. Má atributy pro /bold addFunction, getFunction /x zda je má být funkce dynamicky generována a potom případně znak pro dynamicky generované funkce.
 
 /section
 Třída /bold SetupLoader /x načítá z setup JSON souboru mapování podle kterého bude následně přiřazovat konkrétní textové CzeTex funkce k jejich kódovým ekvivalentům. 
-Jak už bylo zmíněno, tak si funkce můžeme rozdělit na dynamicky generované a již předvytvořené. V metodě /bold AddFunctions /x procházíme přes všechny záznamy v JSON souborů, tedy již vytvořené instance třídy JsonEntry. A následně rozhodujeme, zda má být funkce dynamicky generované nebo ne, dle příznaky v /bold dynamicallyGenerated. /x 
+Jak už bylo zmíněno, tak si funkce můžeme rozdělit na dynamicky generované a již předvytvořené. V metodě /bold AddFunctions /x procházíme přes všechny záznamy v JSON souborů, tedy již vytvořené instance třídy JsonEntry. A následně rozhodujeme, zda má být funkce dynamicky generované nebo ne, dle příznaky v /bold dynamicallyGenerated /xd 
 
 /section
-Když vyhodnotíme, že daná funkce musí být ještě vytvořená, tak přejdeme do větvě programu v metodě /bold AddDynamicallyGeneratedFunction, /x kde příslušné funkce pro vytvoření delegátů pro add a get funkce. A následně dané funkce přidáme to /bold trie /x stromu. Pozn: Tyto dynamické funkce jsou využívané pouze pro funkce zobrazující nějaký znak, proto jsou silně spjaté s generací těchto funkcí. Ale možné rozšíření je jednoduché pouze by bylo potřeba volat jinou funkci pro delegáty.
+Když vyhodnotíme, že daná funkce musí být ještě vytvořená, tak přejdeme do větvě programu v metodě /bold AddDynamicallyGeneratedFunction /xc kde příslušné funkce pro vytvoření delegátů pro add a get funkce. A následně dané funkce přidáme to /bold trie /x stromu. Pozn: Tyto dynamické funkce jsou využívané pouze pro funkce zobrazující nějaký znak, proto jsou silně spjaté s generací těchto funkcí. Ale možné rozšíření je jednoduché pouze by bylo potřeba volat jinou funkci pro delegáty.
 
 /section
 Pro funkce, které se nacházejí v kódu, vyhodnotíme zda má daná funkce mít pouze svou add a get funkci nebo pouze add, následně už pomocí funkce /bold CreateDelegate /x a potřebnými parametry vytvoříme delegáty pro tyto funkce a obdobně jako při dynamických funkcí je přidáme do /bold trie /x stromu. 
@@ -95,7 +95,7 @@ Tyto 2 soubory jsou si dost podobné poněvadž každý z nich obsahuje jednu t�
 Soubor /bold PDFSupport.cs /x obsahuje jak už název naznačuje shluk podpůrných tříd a metod, tedy hlavně třídy pro různé vrstvy testu nebo wrapper pro iText třídy pro text, který rozšiřuje funkcionalitu knihovní třídy.
 
 /section
-Máme jednu rodičovskou třídu /bold TextCharacteristics, /x která představuje takovou obecnou charakterizaci textu, font, velikost textu atd. Dále existuje několik tříd, které z této třídy dědí a následně implementují jednu nebo i více z virtuálních metod, jako je například metoda Special, Add atd. Následně tyto metody pozměňují nějakým způsobem vzhled výsledného textu. Např. třída UnderLineText si uzpůsobuje metodu Special tak, že přidává textu podtržení. 
+Máme jednu rodičovskou třídu /bold TextCharacteristics /xc která představuje takovou obecnou charakterizaci textu, font, velikost textu atd. Dále existuje několik tříd, které z této třídy dědí a následně implementují jednu nebo i více z virtuálních metod, jako je například metoda Special, Add atd. Následně tyto metody pozměňují nějakým způsobem vzhled výsledného textu. Např. třída UnderLineText si uzpůsobuje metodu Special tak, že přidává textu podtržení. 
 
 /section 
 Aby byla struktura dědění trochu víc přehlednější, tak potomci, kteří mají podobnou charakteristiku tak jim je nastaven předek, který tuto charakteristiku na stavuje a následně je možné je podle tohoto předka v kódu filtrovat. Pro názornost předvedu příklad na třídě UnderLineText: /bold TextCharacteristics /x /math /imply /x /bold SpecialTextCharacteristics /x /math /imply /x /bold UnderLineText /x neboli z TextCharacteristics dědí SpecialTextCharacteristics, která shlukuje všechny funkce s implementovanou speciální metodou a následně až potom z ní dědí třída UnderLineText. 
@@ -114,7 +114,7 @@ Zásobník je implementován tak, že není potřeba vždy definovat plně každ
 /gtitle(4) PDF.cs a PDFMath.cs /x
 
 /section
-Posledními soubory jsou /bold PDF.cs /x a /bold PDFMath.cs, /x které obsahují třídu /bold PDF /x obsahující funguje pro generování .pdf souboru. Třída je rozdělená tak, že v souboru PDFMath.cs jsou matematické funkce a v PDF.cs jsou všeobecné funkce k generování.
+Posledními soubory jsou /bold PDF.cs /x a /bold PDFMath.cs /xc které obsahují třídu /bold PDF /x obsahující funguje pro generování .pdf souboru. Třída je rozdělená tak, že v souboru PDFMath.cs jsou matematické funkce a v PDF.cs jsou všeobecné funkce k generování.
 
 /section
 Tedy v souboru /bold PDF.cs /x a následně v třídě /bold PDF /x dochází již při volání konstruktoru k vytvoření kostru .pdf souboru a následně pomocí volání funkcí namapovaných na textové CzeTex funkce dochází k upravování .pdf souboru. Můžeme tady najít metody jak pro vytvoření textu, přidání nadpisu, vytvoření seznamu atd. 

@@ -62,6 +62,15 @@ namespace CzeTex
         }
 
         /// <summary>
+        /// Performs when layer is popped from characteristic stack.
+        /// Implementation is variable and is based on implementation of children.
+        /// </summary>
+        public virtual void End()
+        {
+            throw new Exception("End method is not defined");
+        }
+
+        /// <summary>
         /// Adds ListItem to the layer.
         /// Implementation is variable and is based on implementation of children.
         /// </summary>
@@ -77,6 +86,23 @@ namespace CzeTex
         public virtual ListItem GetBack()
         {
             throw new Exception("GetBack method is not defined");
+        }
+    }
+
+    /// <summary>
+    /// Text characteristics layer for storing information 
+    /// about the change of serif.
+    /// </summary>
+    public class SerifTextCharacteristics : TextCharacteristics
+    {
+        public SerifTextCharacteristics(PdfFont font, uint size) : base(font, size) { }
+
+        /// <summary>
+        /// Changes fonts serif settings.
+        /// </summary>
+        public override void End()
+        {
+            Fonts.usingSans = !Fonts.usingSans;
         }
     }
 

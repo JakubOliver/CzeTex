@@ -63,7 +63,7 @@ namespace CzeTex
             }
             else
             {
-                Push(new TextCharacteristics(Fonts.defaultFont, size));
+                Push(new TextCharacteristics(Fonts.sansDefaultFont, size));
             }
         }
 
@@ -91,6 +91,11 @@ namespace CzeTex
             }
 
             if (Top() is ListText)
+            {
+                Top().End(document);
+            }
+
+            if (Top() is SerifTextCharacteristics)
             {
                 Top().End(document);
             }

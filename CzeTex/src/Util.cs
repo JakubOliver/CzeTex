@@ -151,7 +151,15 @@ namespace CzeTex
     public class InvalidParametersException : CzeTexException
     {
         public InvalidParametersException(string message) : base(message) { }
-    } 
+    }
+
+    /// <summary>
+    /// Class for removing from paragraph related exceptions.
+    /// </summary>
+    public class RemovingFromParagraphException : CzeTexException
+    {
+        public RemovingFromParagraphException(string message) : base(message) { }
+    }
 
     /// <summary>
     /// Class of functions related to work with strings.

@@ -7,6 +7,10 @@
     "addFunction": "AddCursiveText",
     "getFunction": null
   },
+  "serif" : {
+    "addFunction" : "SwitchSerif",
+    "getFunction" : null
+  },
   "title": {
     "addFunction": "AddTitle",
     "getFunction": null
@@ -165,6 +169,30 @@
   },
   "link": {
     "addFunction" : "AddLink",
+    "getFunction" : null
+  },
+  "offset" : {
+    "addFunction" : "AddOffset",
+    "getFunction" : null
+  },
+  "newline" : {
+    "addFunction" : "AddNewLine",
+    "getFunction" : null
+  },
+  "xc" : {
+    "addFunction" : "AddEndingComma",
+    "getFunction" : null
+  },
+  "xd" : {
+    "addFunction" : "AddEndingDot",
+    "getFunction" : null
+  },
+  "xq" : {
+    "addFunction" : "AddEndingQuestionMark",
+    "getFunction" : null
+  },
+  "xe" : {
+    "addFunction" : "AddEndingExclamationMark",
     "getFunction" : null
   },
   "x": {

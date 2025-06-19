@@ -25,10 +25,10 @@ namespace CzeTex{
             writer = new PdfWriter(outputPath);
             pdf = new PdfDocument(writer);
             document = new Document(pdf);
-            document.SetFont(Fonts.defaultFont);
+            document.SetFont(Fonts.sansDefaultFont);
 
             stack = new CharacteristicsStack(document);
-            stack.Push(Fonts.defaultFont);
+            stack.Push(Fonts.sansDefaultFont);
 
             this.trie = trie;
         }
@@ -174,7 +174,15 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(Fonts.boldCursiveFont);
+            if (Fonts.usingSans)
+            {
+                this.stack.Push(Fonts.sansBoldCursiveFont);
+            }
+            else
+            {
+                this.stack.Push(Fonts.serifBoldCursiveFont);
+            }
+            
         }
 
         /// <summary>
@@ -184,13 +192,20 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (this.stack.IsFontInStack(Fonts.cursiveFont))
+            if (this.stack.IsFontInStack(Fonts.sansCursiveFont))
             {
                 this.AddBoldCursiveText(list);
             }
             else
             {
-                this.stack.Push(Fonts.boldFont);
+                if (Fonts.usingSans)
+                {
+                    this.stack.Push(Fonts.sansBoldFont);
+                }
+                else
+                {
+                    this.stack.Push(Fonts.serifBoldFont);
+                }
             }
         }
 
@@ -201,14 +216,70 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (this.stack.IsFontInStack(Fonts.boldFont))
+            if (this.stack.IsFontInStack(Fonts.sansBoldFont))
             {
                 this.AddBoldCursiveText(list);
             }
             else
             {
-                this.stack.Push(Fonts.cursiveFont);
+                if (Fonts.usingSans)
+                {
+                    this.stack.Push(Fonts.sansCursiveFont);
+                }
+                else
+                {
+                    this.stack.Push(Fonts.serifCursiveFont);
+                }
             }
+        }
+
+        /// <summary>
+        /// Changes serif of text font.
+        /// </summary>
+        public void SwitchSerif(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 0);
+
+            if (Fonts.usingSans)
+            {
+                if (this.stack.Font == Fonts.sansBoldFont)
+                {
+                    this.stack.Push(Fonts.serifCursiveFont);
+                }
+                else if (this.stack.Font == Fonts.sansCursiveFont)
+                {
+                    this.stack.Push(Fonts.serifCursiveFont);
+                }
+                else if (this.stack.Font == Fonts.sansBoldCursiveFont)
+                {
+                    this.stack.Push(Fonts.serifBoldCursiveFont);
+                }
+                else
+                {
+                    this.stack.Push(Fonts.serifDefaultFont);
+                }
+            }
+            else
+            {
+                if (this.stack.Font == Fonts.serifBoldFont)
+                {
+                    this.stack.Push(Fonts.sansBoldFont);
+                }
+                else if (this.stack.Font == Fonts.serifCursiveFont)
+                {
+                    this.stack.Push(Fonts.sansCursiveFont);
+                }
+                else if (this.stack.Font == Fonts.serifBoldCursiveFont)
+                {
+                    this.stack.Push(Fonts.sansBoldCursiveFont);
+                }
+                else
+                {
+                    this.stack.Push(Fonts.sansDefaultFont);
+                }
+            }
+
+            Fonts.usingSans = !Fonts.usingSans;
         }
 
         /// <summary>
@@ -296,6 +367,94 @@ namespace CzeTex{
             text.SetAction(PdfAction.CreateURI(list[1]));
 
             this.AddText(text);
+        }
+
+        /// <summary>
+        /// Removes last from active paragraph.
+        /// </summary>
+        public void RemoveLastText()
+        {
+            if (this.activeParagraph == null)
+            {
+                throw new RemovingFromParagraphException(
+                    "Cannot remove last text from paragraph when" +
+                    "active paragraph does not exist");
+            }
+
+            int numberOfChild = this.activeParagraph.GetChildren().Count;
+            if (numberOfChild == 0)
+            {
+                throw new RemovingFromParagraphException(
+                    "Cannot remove last text from empty paragraph");
+            }
+
+            this.activeParagraph.GetChildren().RemoveAt(numberOfChild - 1);
+        }
+
+        /// <summary>
+        /// Changes whitespace to sign at the end of font layer.
+        /// </summary>
+        public void AddEndingSign(List<string> list, string sign)
+        {
+            CallerManager.CorrectParameters(list, 0);
+
+            this.RemoveLastText();
+            this.RemoveFont(list);
+            this.AddText(sign);
+        }
+
+        /// <summary>
+        /// Changes whitespace to comma at the end of font layer.
+        /// </summary>
+        public void AddEndingComma(List<string> list)
+        {
+            this.AddEndingSign(list, ",");
+        }
+
+        /// <summary>
+        /// Changes whitespace to dot at the end of font layer.
+        /// </summary>
+        public void AddEndingDot(List<string> list)
+        {
+            this.AddEndingSign(list, ".");
+        }
+
+        /// <summary>
+        /// Changes whitespace to question mark at the 
+        /// end of font layer.
+        /// </summary>
+        public void AddEndingQuestionMark(List<string> list)
+        {
+            this.AddEndingSign(list, "?");
+        }
+
+        /// <summary>
+        /// Changes whitespace to exclamation mark at
+        /// the end of font layer.
+        /// </summary>
+        public void AddEndingExclamationMark(List<string> list)
+        {
+            this.AddEndingSign(list, "!");
+        }
+
+        /// <summary>
+        /// Adds offset from previous paragraph.
+        /// </summary>
+        public void AddOffset(List<string> list)
+        {
+            this.CreateParagraph(list);
+            //This warning is unjustified, because in method 
+            //CreateParagraph is always activeParagraph
+            //not equal to null.
+            this.activeParagraph!.SetMarginTop(50);
+        }
+
+        /// <summary>
+        /// Adds line break to the text.
+        /// </summary>
+        public void AddNewLine(List<string> list)
+        {
+            this.AddText("\n");
         }
     }
 }
