@@ -5,10 +5,10 @@
 
 #moje
 poznamky.txt
-CzeTex/output/*
-!CzeTex/output/.gitkeep
+CzeTex/output/
 CzeTex/examples/*.pdf
 !docs/*.pdf
+.vscode
 
 # User-specific files
 *.rsuser

@@ -71,7 +71,7 @@ Posledním souborem v první sekci je /bold Trie.cs /x obsahující implementaci
 Mimo samotného stromu obsahuje třída také 2 pole, jedno pro add funkce a druhé pro get funkce. Bijekce na stromě je tvořená následovně: posloupnost písmenek od kořene stromu do vrcholu musí odpovídat názvu CzeTex funkce. Z toho nám plynou určitá omezení pro názvy CzeTex funkcí. Strom je budovaný pouze z písmenek malé anglické abecedy, tedy ani funkce nemůžou používat jinou množiny znaků. Aby se jednalo o bijekci, tak musí platit, že každá funkce má odlišné jméno, to nám vyřeší už vstupní setup JSON soubor, poněvadž v něm nemůžou existovat 2 záznamy se stejným klíčem a v našem případě klíče odpovídají názvu CzeTex funkce. 
 
 /section
-Když najdeme vrchol jehož posloupnost znaků na cestě od kořene je stejná jako jméno CzeTex funkce, pak bude v daném vrcholu uložený neznaménkové číslo odpovídající indexu v polech add a get funkcí. Pozn: I když nějaká funkce nemusí mít get funkci, tak je dané políčko nastavené na null, tedy můžeme mít pouze jeden index pro 2 pole a vše bude fungovat korektně. 
+Když najdeme vrchol jehož posloupnost znaků na cestě od kořene je stejná jako jméno CzeTex funkce, pak bude v daném vrcholu uložený unsigned číslo odpovídající indexu v polech add a get funkcí. Pozn: I když nějaká funkce nemusí mít get funkci, tak je dané políčko nastavené na null, tedy můžeme mít pouze jeden index pro 2 pole a vše bude fungovat korektně. 
 
 /section 
 Volba této metody ukládání delegátů na funkce nám zabezpečí, že dokážeme najít potřebné mapování v lineární čase vůči délce názvu CzeTex funkce. Na rozdíl od lineárního času vůči počtu prvků, pokud bychom vždy museli projít všechny funkce. A zároveň se vyhneme nepříznivé horní asymptotické hranici, se kterou bychom se mohli setkat pokud bychom využívali hashování a také díky tomu, že známe universum ze kterého všechny názvy funkcí pochází, tak by bylo i zbytečné. 
@@ -102,3 +102,27 @@ Aby byla struktura dědění trochu víc přehlednější, tak potomci, kteří 
 
 /section
 Jak už bylo zmíněno výše v tomto souboru můžeme také najít třídu, která dědí z knihovní třídy Text, a rozšiřuje její funkcionalitu. A to převážně v ohledu nastavení "pozdvihnutí" textu, poněvadž knihovní třída má tuto funkcionalitu ne úplně nejlépe implementovanou.
+
+/gtitle(4) PDFStack.cs /x
+
+/section
+V souboru /bold PDFStack.cs /x najdeme třídu CharacteristicsStack, tedy implementaci zásobníku, která jaké své prvky uchovává charakteristiku textu. Kde se následně pro charakterizaci aktuálního textu využívá vrchní vrstva. 
+
+/section
+Zásobník je implementován tak, že není potřeba vždy definovat plně každou vrstvu poněvadž pokud například nová vrstva definuje pouze font, potom se velikost písma okopíruje z předchozí vrstvy (pokud bychom přidávali neúplnou charakteristiku do prázdného zásobníku, tak se nastaví výchozí parametry pro chybějící části). 
+
+/gtitle(4) PDF.cs a PDFMath.cs /x
+
+/section
+Posledními soubory jsou /bold PDF.cs /x a /bold PDFMath.cs, /x které obsahují třídu /bold PDF /x obsahující funguje pro generování .pdf souboru. Třída je rozdělená tak, že v souboru PDFMath.cs jsou matematické funkce a v PDF.cs jsou všeobecné funkce k generování.
+
+/section
+Tedy v souboru /bold PDF.cs /x a následně v třídě /bold PDF /x dochází již při volání konstruktoru k vytvoření kostru .pdf souboru a následně pomocí volání funkcí namapovaných na textové CzeTex funkce dochází k upravování .pdf souboru. Můžeme tady najít metody jak pro vytvoření textu, přidání nadpisu, vytvoření seznamu atd. 
+
+/section
+V soubory /bold PDFMath.cs /x jak už bylo zmíněno najdeme matematicky zaměřené textové funkce. Tedy najdeme tu metody, které se využívají k přidání matematické notace a využívají je např. delegáti pro znakové dynamicky generované funkce.
+
+/section
+/section
+
+/gtitle(2) /bold BLIŽŠÍ INFORMACE KE VŠEM TŘÍDÁM, METODÁM ATD. SI MŮŽETE PŘEČÍST PŘÍMO V OKOMENTOVANÉM ZDROJOVÉM KÓDU. /x /x

@@ -80,7 +80,7 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
-            this.stack.Push(20);
+            this.stack.Push(Fonts.defaultTitleSize);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
-            this.stack.Push(18);
+            this.stack.Push(Fonts.defaultSubTitleSize);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
-            this.stack.Push(16);
+            this.stack.Push(Fonts.defaultSubSubTitleSize);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace CzeTex{
             CallerManager.IsParameterUint(list);
 
             uint size = Convert.ToUInt32(list[0]);
-            size = 20 - (size * 2);
+            size = Fonts.defaultTitleSize - (size * 2);
 
             if (size < Fonts.defaultSize)
             {
@@ -238,7 +238,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.AddParagraph();
+            this.CreateParagraph(list);
             document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         }
 

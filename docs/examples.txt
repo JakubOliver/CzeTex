@@ -1,0 +1,49 @@
+/title Příklady použití /x
+
+/section
+Jak už bylo zmíněno v sekci pri uživatele hlavní způsob jak ovlivnit chod programu je pozměnění vstupních souborů.
+
+/subtitle Setup JSON soubor /x
+
+/section
+Jednou z možností jak pozměnit program je, že předefinování jeho mapování CzeTex textových funkcí a těch kódových. 
+
+/section
+Výchozí nastavení mapování je CzeTex/Setup.json, ale je předpřipravená verze s českou lokalizací. Tu najdete v CzeTex/examples a jmenuje se nastaveni.json a soubor proNastaveni.txt využívá jeho mapování. 
+
+/section
+Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /bold dotnet run examples/proNastaveni.txt examples/nastaveni.json /x
+
+/subtitle Vytváření vstupního souboru /x
+
+/section
+Projekt obsahuje desítky příkazů a nepovažuji za příznačné zde udělat vyčerpávající výčet všech, poněvadž s jiným setup souborem by byli nepoužitelné. Proto zde spíš ukážu myšlenku tvorby. Všechny příkazy potom najdete v konkrétním setup souboru, který bude chtít použít, který bude nejspíše pro většinu výchozí CzeTex/Setup.json.
+
+/section
+/bold Poznámka: všechny příkazy zde budu ukazovat s mezerou mezi speciálním znakem textem příznakem, kvůli technickým důvodům, ale pro správné fungování je potřeba ve vstupním souboru psát bez mezery /x
+
+/gtitle(3) Nepárové příkazy /x
+
+/section
+Mezi nepárové příkazy patří mimo jiné například příkaz /bold /slash section /x který vytvoří nový paragraf. Pozn: Každý text musí být v nějakém bloku nebo paragrafu. 
+
+/gtitle(3) Párové příkazy /x
+/section 
+Mezi párové příkazy patří například vytvoření bloku tučného písma, tedy /bold /slash bold /x toto je tučný text /bold /slash x /x by byl tučný text. Můžete si povšimnout, že párové příkazy jsou ukončené generickým znakem /bold /slash x /x z toho plyne, že se nemohou příkazy překrývat (ten který začne později se dříve ukončí).
+
+/newpage
+
+/gtitle(3) Příkazy s parametry /x
+/section
+Některé příkazy mají parametry, podle kterých se mění jejich funkčnost nebo vzhled. Například funkce /bold /slash pow /x má 2 parametry, základ a exponent. 
+
+/section 
+Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypadal následovně: /bold /slash math /x S = 4 /bold /slash multi /slash pi /slash multi /slash pow(r,2) /slash x /x .
+
+/section
+/math S = 4 /multi /pi /multi /pow(r,2) /x
+
+/section
+/section
+
+/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE EXAMPLES NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU /x /x

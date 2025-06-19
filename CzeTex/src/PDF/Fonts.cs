@@ -21,6 +21,12 @@ namespace CzeTex
             PdfFontFactory.CreateFont("src/open-sans/MathFonts/LibertinusMath-Regular.ttf", PdfEncodings.IDENTITY_H);
         public static Color linkColor = ColorConstants.BLUE;
         public static uint defaultSize = 11;
+        public static uint defaultTitleSizeDifference = 2;
+        public static uint defaultTitleSize = 20;
+        public static uint defaultSubTitleSize =
+            defaultTitleSize - defaultTitleSizeDifference;
+        public static uint defaultSubSubTitleSize =
+            defaultTitleSize - 2 * defaultTitleSizeDifference;
         public static float defaultSpacing = 1.25f;
     }
 }
