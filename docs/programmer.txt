@@ -1,0 +1,52 @@
+/title() Programátorská dokumentace /x
+
+/section
+V repositáři můžete najít 2 projekty, /bold() CzeTex /x a /bold() CzeTex.Tests, /x kde /bold() CzeTex /x je samotný program a /bold() CzeTex.Tests /x je projekt, který spouští testy.
+
+/subtitle() CzeTex /x
+
+/section
+Projekt i zdrojový kód je rozdělen do dvou částí. První se zabývá zpracováním vstupních souborů, vystavěním pomocných datových struktur nebo poskytují pomocné metody. Druhá část se zabývá generováním výsledného .pdf souboru pomocí knihovny /bold iText. /x
+
+/subsubtitle() První část /x
+
+/section
+Do první části bychom mohl zahrnout následující soubory /bold() Commander.cs, Files.cs, SetupLoader.cs, Trie.cs /x a /bold() Util.cs. /x
+Pojďme si tyto soubory a jejich obsah projít jednotlivě.
+
+/gtitle(4) Commander.cs /x
+
+/section() 
+V souboru /bold() Commander.cs /x můžeme najít stejnojmennou třídu, která představuje centrum celého programu, volá dílčí funkce a třídy a udržuje koherentnost celého běhu. Zpracovává obsah načtený ze vstupního souboru, volá třídu pro zpracování setup .json souboru. 
+
+/section
+Pro zpracování vstupního souboru se využívá metoda /bold ReadContent, /x která detekuje speciální znak, v základu /slash() , a následně extrahuje funkce a jejich parametry z textu, vyhledá v pomocné datové struktuře /bold trie /x odkaz na příslušnou funkci a zavolají.
+
+/section 
+Třída obsahuje několik funkcí jako /bold ReadRestForParameter, ReadParameter atd., /x které se navzájem doplňují v různých případech pro korektní vyhledání parametrů textových CzeTex funkcí.
+
+/gtitle( 4) Files.cs /x
+
+/section( )
+Dalším souborem je /bold Files.cs /x obsahující stejnojmennou třídu, která zabezpečuje vyhledání souboru podle poskytnutého parametru od uživatele a následné korektní otevření, načtení obsahu a uzavření.
+
+/section 
+Mimo těchto funkcionalit nabízí třída Files také možnosti generování cestu k umístění výsledného .pdf souboru v metodě /bold GetPdfPath /x nebo metodu /bold GetBaseName, /x která vrací jméno bez přípony vstupního souboru a další. 
+
+/gtitle(4 ) SetupLoader.cs /x
+
+/section
+Dalším souborem je /bold SetupLoader.cs /x obsahující 2 třídy /bold JsonEntry /x a /bold SetupLoader. /x
+
+/section
+Jak už název napovídá /bold JsonEntry /x reprezentuje jeden záznam v setup .json souboru. Má atributy pro /bold addFunction, getFunction /x zda je má být funkce dynamicky generována a potom případně znak pro dynamicky generované funkce.
+
+/section
+Třída /bold SetupLoader /x načítá z setup JSON souboru mapování podle kterého bude následně přiřazovat konkrétní textové CzeTex funkce k jejich kódovým ekvivalentům. 
+Jak už bylo zmíněno, tak si funkce můžeme rozdělit na dynamicky generované a již předvytvořené. V metodě /bold AddFunctions /x procházíme přes všechny záznamy v JSON souborů, tedy již vytvořené instance třídy JsonEntry. A následně rozhodujeme, zda má být funkce dynamicky generované nebo ne, dle příznaky v /bold dynamicallyGenerated. /x 
+
+/section
+Když vyhodnotíme, že daná funkce musí být ještě vytvořená, tak přejdeme do větvě programu v metodě /bold AddDynamicallyGeneratedFunction, /x kde příslušné funkce pro vytvoření delegátů pro add a get funkce. A následně dané funkce přidáme to /bold trie /x stromu. Pozn: Tyto dynamické funkce jsou využívané pouze pro funkce zobrazující nějaký znak, proto jsou silně spjaté s generací těchto funkcí. Ale možné rozšíření je jednoduché pouze by bylo potřeba volat jinou funkci pro delegáty.
+
+/section
+Pro funkce, které se nacházejí v kódu, vyhodnotíme zda má daná funkce mít pouze svou add a get funkci nebo pouze add, následně už pomocí funkce /bold CreateDelegate /x a potřebnými parametry vytvoříme delegáty pro tyto funkce a obdobně jako při dynamických funkcí je přidáme do /bold trie /x stromu. 

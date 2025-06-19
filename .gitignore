@@ -8,6 +8,7 @@ poznamky.txt
 CzeTex/output/*
 !CzeTex/output/.gitkeep
 CzeTex/examples/*.pdf
+!docs/*.pdf
 
 # User-specific files
 *.rsuser
