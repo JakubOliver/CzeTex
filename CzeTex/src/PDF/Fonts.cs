@@ -15,7 +15,7 @@ namespace CzeTex
             PdfFontFactory.CreateFont("src/open-sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
         public static PdfFont cursiveFont =
             PdfFontFactory.CreateFont("src/open-sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont boldcursiveFont =
+        public static PdfFont boldCursiveFont =
             PdfFontFactory.CreateFont("src/open-sans/OpenSans-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
         public static PdfFont mathFont =
             PdfFontFactory.CreateFont("src/open-sans/MathFonts/LibertinusMath-Regular.ttf", PdfEncodings.IDENTITY_H);

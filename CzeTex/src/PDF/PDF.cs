@@ -174,7 +174,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(Fonts.boldcursiveFont);
+            this.stack.Push(Fonts.boldCursiveFont);
         }
 
         /// <summary>

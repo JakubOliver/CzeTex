@@ -10,7 +10,7 @@ namespace CzeTex
     /// </summary>
     /// <remarks>
     /// The appearance of the generated text is determined by the top layer of the 
-    /// CharacteristickStack (font, size, special mutation of text etc.).
+    /// CharacteristicStack (font, size, special mutation of text etc.).
     /// <para>
     /// A base layer with default font, size and without any special 
     /// characteristic is pushed at the beginning.

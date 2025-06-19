@@ -10,7 +10,7 @@ using iText.Layout.Element;
 namespace CzeTex
 {
     /// <summary>
-    /// Characterise text based on font, size and special actions.
+    /// Characterize text based on font, size and special actions.
     /// </summary>
     public class TextCharacteristics
     {
@@ -44,7 +44,7 @@ namespace CzeTex
         }
 
         /// <summary>
-        /// Transforme text base on implementation of this function in different 
+        /// Transforms text base on implementation of this function in different 
         /// layers (instances of class TextCharacteristics and its children).
         /// </summary>
         public virtual CzeTexText Special(CzeTexText text)
@@ -53,8 +53,8 @@ namespace CzeTex
         }
 
         /// <summary>
-        /// Performs when layer is poped from characteristic stack.
-        /// Implementation is variable and is based on implmentation of children.
+        /// Performs when layer is popped from characteristic stack.
+        /// Implementation is variable and is based on implementation of children.
         /// </summary>
         public virtual void End(Document document)
         {
@@ -135,17 +135,17 @@ namespace CzeTex
     /// Descendant of TextCharacteristics where all text
     /// at this layer is risen.
     /// </summary>
-    public class RisedText : SpecialTextCharacteristics
+    public class RaisedText : SpecialTextCharacteristics
     {
         private uint rise;
 
-        public RisedText(PdfFont font, uint size, uint rise) : base(font, size)
+        public RaisedText(PdfFont font, uint size, uint rise) : base(font, size)
         {
             this.rise = rise;
         }
 
         /// <summary>
-        /// CzeTexText is modified to appear rised.
+        /// CzeTexText is modified to appear raised.
         /// </summary>
         public override CzeTexText Special(CzeTexText text)
         {

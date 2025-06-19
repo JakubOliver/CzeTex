@@ -7,7 +7,7 @@ using iText.Layout.Element;
 namespace CzeTex
 {
     /// <summary>
-    /// Generic node of one-way linklist.
+    /// Generic node of one-way link list.
     /// </summary>
     public class Node<T>
     {
@@ -154,7 +154,7 @@ namespace CzeTex
     } 
 
     /// <summary>
-    /// Class of functions related to work with strungs.
+    /// Class of functions related to work with strings.
     /// </summary>
     public static class StringFunctions
     {

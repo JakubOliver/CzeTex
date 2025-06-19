@@ -8,7 +8,7 @@ V repositáři můžete najít 2 projekty, /bold() CzeTex /x a /bold() CzeTex.Te
 /section
 Projekt i zdrojový kód je rozdělen do dvou částí. První se zabývá zpracováním vstupních souborů, vystavěním pomocných datových struktur nebo poskytují pomocné metody. Druhá část se zabývá generováním výsledného .pdf souboru pomocí knihovny /bold iText. /x
 
-/subsubtitle() První část /x
+/gtitle(3) První část /x
 
 /section
 Do první části bychom mohl zahrnout následující soubory /bold() Commander.cs, Files.cs, SetupLoader.cs, Trie.cs /x a /bold() Util.cs. /x
@@ -50,3 +50,55 @@ Když vyhodnotíme, že daná funkce musí být ještě vytvořená, tak přejde
 
 /section
 Pro funkce, které se nacházejí v kódu, vyhodnotíme zda má daná funkce mít pouze svou add a get funkci nebo pouze add, následně už pomocí funkce /bold CreateDelegate /x a potřebnými parametry vytvoříme delegáty pro tyto funkce a obdobně jako při dynamických funkcí je přidáme do /bold trie /x stromu. 
+
+/gtitle(4) Util.cs /x
+
+/section
+Tento soubor obsahuje nemalé množství různých pomocných tříd/funkcí, které jsou využívané v ostatních částech kódu. Můžeme zne najít implementace generického zásobníku a k němu příslušné implementaci generického vrcholu spojového seznamu. 
+
+/section
+Také zde můžeme najít custom třídy pro chybové hlášky, které dávají spolu s textem chybové hlášky lepší představu uživateli, kde udělal chybu při psaní CzeTex textu. Následně se zde nachází také různé statické třídy, které obsahují funkce pro práci se stringy nebo parametry.
+
+/section
+V neposlední řadě tu také najdeme třídy /bold FunctionGeneratorForPDF /x která obsahuje metody pro generování delegátů pro jak add tak get dynamicky generované funkce, jejichž využití jsme již popsali výše.
+
+/gtitle( 4 ) Trie.cs /x
+
+/section
+Posledním souborem v první sekci je /bold Trie.cs /x obsahující implementaci /bold trie /x stromu, také známý jako písmenkový strom, který se využívá pro vytvoření bijekce mezi CzeTex textovými funkce a funkce provádějící konkrétní kód. 
+
+/section
+Mimo samotného stromu obsahuje třída také 2 pole, jedno pro add funkce a druhé pro get funkce. Bijekce na stromě je tvořená následovně: posloupnost písmenek od kořene stromu do vrcholu musí odpovídat názvu CzeTex funkce. Z toho nám plynou určitá omezení pro názvy CzeTex funkcí. Strom je budovaný pouze z písmenek malé anglické abecedy, tedy ani funkce nemůžou používat jinou množiny znaků. Aby se jednalo o bijekci, tak musí platit, že každá funkce má odlišné jméno, to nám vyřeší už vstupní setup JSON soubor, poněvadž v něm nemůžou existovat 2 záznamy se stejným klíčem a v našem případě klíče odpovídají názvu CzeTex funkce. 
+
+/section
+Když najdeme vrchol jehož posloupnost znaků na cestě od kořene je stejná jako jméno CzeTex funkce, pak bude v daném vrcholu uložený neznaménkové číslo odpovídající indexu v polech add a get funkcí. Pozn: I když nějaká funkce nemusí mít get funkci, tak je dané políčko nastavené na null, tedy můžeme mít pouze jeden index pro 2 pole a vše bude fungovat korektně. 
+
+/section 
+Volba této metody ukládání delegátů na funkce nám zabezpečí, že dokážeme najít potřebné mapování v lineární čase vůči délce názvu CzeTex funkce. Na rozdíl od lineárního času vůči počtu prvků, pokud bychom vždy museli projít všechny funkce. A zároveň se vyhneme nepříznivé horní asymptotické hranici, se kterou bychom se mohli setkat pokud bychom využívali hashování a také díky tomu, že známe universum ze kterého všechny názvy funkcí pochází, tak by bylo i zbytečné. 
+
+/section
+Poznámka: rozšíření jména CzeTex funkcí na i velké znaky Anglické abecedy by nebyl žádný velký problém v kódu, pouze by bylo potřeba pozměnit konstanty ve třídě /bold TrieConstants /x kde by se /bold smallestAvailableCharacter /x přehodil na 'A' a /bold numberOfChildren /x na 58. Což by bohužel mimo velkých znaků přidalo i speciální znaky, což jsem považoval za žádoucí a zároveň by strom zbytečně bobtnal, poněvadž při přidání pouze jednoho potomka k jednomu vrcholu by bylo v paměti vyhrazeno místo pro dalších 57. Což u řídkého stromu je zbytečné.
+
+/gtitle(3) Druhá část /x
+
+/section
+Druhá část zdrojového kódu se zabývá generováním PDF a věcí kolem toho. A znovu se skládá s několika souborů.
+
+/gtitle(4) Fonts.cs a Signs.cs /x
+
+/section
+Tyto 2 soubory jsou si dost podobné poněvadž každý z nich obsahuje jednu třídy, která obsahuje konstanty. Tech třída Fonts obsahuje různé fonty, výchozí velkost textu nebo velikost odsazení mezi odstavci či řádky. Třída Signs na druhou stranu obsahuje konstanty reprezentující různé speciální znaky jako je např. znak pro děleno, implikace, kvantifikátory atd.
+
+/gtitle(4) PDFSupport.cs /x
+
+/section
+Soubor /bold PDFSupport.cs /x obsahuje jak už název naznačuje shluk podpůrných tříd a metod, tedy hlavně třídy pro různé vrstvy testu nebo wrapper pro iText třídy pro text, který rozšiřuje funkcionalitu knihovní třídy.
+
+/section
+Máme jednu rodičovskou třídu /bold TextCharacteristics, /x která představuje takovou obecnou charakterizaci textu, font, velikost textu atd. Dále existuje několik tříd, které z této třídy dědí a následně implementují jednu nebo i více z virtuálních metod, jako je například metoda Special, Add atd. Následně tyto metody pozměňují nějakým způsobem vzhled výsledného textu. Např. třída UnderLineText si uzpůsobuje metodu Special tak, že přidává textu podtržení. 
+
+/section 
+Aby byla struktura dědění trochu víc přehlednější, tak potomci, kteří mají podobnou charakteristiku tak jim je nastaven předek, který tuto charakteristiku na stavuje a následně je možné je podle tohoto předka v kódu filtrovat. Pro názornost předvedu příklad na třídě UnderLineText: /bold TextCharacteristics /x /math /imply /x /bold SpecialTextCharacteristics /x /math /imply /x /bold UnderLineText /x neboli z TextCharacteristics dědí SpecialTextCharacteristics, která shlukuje všechny funkce s implementovanou speciální metodou a následně až potom z ní dědí třída UnderLineText. 
+
+/section
+Jak už bylo zmíněno výše v tomto souboru můžeme také najít třídu, která dědí z knihovní třídy Text, a rozšiřuje její funkcionalitu. A to převážně v ohledu nastavení "pozdvihnutí" textu, poněvadž knihovní třída má tuto funkcionalitu ne úplně nejlépe implementovanou.

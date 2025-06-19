@@ -66,8 +66,6 @@ namespace CzeTex
             this.AddText(new CzeTexText(list[1]).SetFontSize(8).AddTextRise(5));
         }
 
-        //pridat moznost davat mocniny do zlomky, zlomly do zlomlu atd.
-
         /// <summary>
         /// Adds inline fraction into text.
         /// </summary>
@@ -124,7 +122,7 @@ namespace CzeTex
 
                     if (j != StringFunctions.LastIndex(textSplit))
                     {
-                        //The iText library has autocropping enabled after every word, 
+                        //The iText library has auto cropping enabled after every word, 
                         //so it is necessary to use non-printable characters instead of spaces
                         paragraph.Add(new CzeTexText("\u00A0")); 
                     }
@@ -162,7 +160,7 @@ namespace CzeTex
             this.activeParagraph!.Add(fraction);
             this.AddText(" ");
 
-            this.stack.Push(new RisedText(this.stack.Font, this.stack.Size, 10));
+            this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, 10));
         }
     }
 }
