@@ -1,0 +1,23 @@
+/title Princip maxima /x
+
+/math
+/subtitle Věta (Princip maxima pro spojisté funkce). /x 
+/section
+Nechť I je kompaktní interval a f: I /imply /real je spojitá funkce. Potom f nabývá na intervalu I svého maxima i minima.
+
+/section
+Důkaz: Dokážeme nabývání maxima, případ minima je obdobný. Označme S = sup(f(I)).
+
+/section
+Naším cílem bude dokázat, že S je reálné, a navíc existuje bod M /in I, v němž nabývá f hodnotu S, a tím pádem v M nabývá f svého maxima.
+
+/section
+Podle definice suprema /forall /epsilon > 0 /exists x /in I: f(x) /in U ( S, /epsilon ). Explicitněji řečeno, pokud S /in /real tak platí S - /epsilon < f(x) /leq S, a pokud S = + /infinity(),tak platí /frac(1,/epsilon) < f(x). /forall n /in /natural uvažme v předchozí nerovnosti /epsilon = /frac(1,n) a volme /subindex(x,n) tak, aby platilo /newline f( /subindex(x,n) ) /in U( S, /frac(1,n) ). Z této volby posloupnosti /subindex(x,n) pak plyne, že f( /subindex(x, n) ) /imply S. 
+
+/section 
+...
+/x
+
+/offset
+/section
+Převzato ze skript matematické analýzy I.

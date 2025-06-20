@@ -1,0 +1,23 @@
+/title Vzorce pro výpočet objemu útvarů v prostoru /x
+
+/math
+
+/section
+Koule: V = /frac(4,3) /times /pi /times /pow(r,3)
+
+/section
+Krychle: V = /pow(a,3) 
+
+/section
+Kvádr: V = l /times w /times h
+
+/section
+Válec: V = /pi /times v /times /pow(/pi,2)
+
+/section
+Kužel: V = /pi /cdot /infrac(h, 3) /cdot /pow(r,2)
+
+/section 
+Jehlan: V = (l /cdot w /cdot h) /division 3
+
+/x

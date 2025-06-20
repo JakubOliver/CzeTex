@@ -39,10 +39,10 @@ Mezi párové příkazy patří například vytvoření bloku tučného písma, 
 Některé příkazy mají parametry, podle kterých se mění jejich funkčnost nebo vzhled. Například funkce /bold /slash pow /x má 2 parametry, základ a exponent. 
 
 /section 
-Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypadal následovně: /newline /bold /slash math /x S = 4 /bold /slash multi /slash pi /slash multi /slash pow(r,2) /slash x /x .
+Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypadal následovně: /newline /bold /slash math /x S = 4 /bold /slash times /slash pi /slash times /slash pow(r,2) /slash x /x .
 
 /section
-/math S = 4 /multi /pi /multi /pow(r,2) /x
+/math S = 4 /times /pi /times /pow(r,2) /x
 
 /offset
 /x

@@ -99,7 +99,7 @@
     "dynamicallyGenerated" : true,
     "sign" : "multiplicationDot"
   },
-  "multi": {
+  "times": {
     "_description" : "Adds multiplication cross sign. #nonPairFunction",
     "dynamicallyGenerated" : true,
     "sign" : "multiplicationSign"
@@ -217,6 +217,11 @@
   "pow": {
     "_description" : "Adds power to the text, takes 2 parameters (base and exponent). #nonPairFunction #hasParameter-2",
     "addFunction": "AddPower",
+    "getFunction": null
+  },
+  "subindex" : {
+    "_description" : "Adds sign with subindex to the text, takes 2 parameters (sign and index). #nonPairFunction #hasParameter-2",
+    "addFunction": "AddSubindex",
     "getFunction": null
   },
   "infrac": {

@@ -66,7 +66,21 @@ namespace CzeTex
             //Method ParagraphIsSet checks whether the activeParagraph
             //is null, therefore the warning is unjustified.
             this.AddParameterToParagraph(this.activeParagraph!, list[0], true);
-            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, 5);
+            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, 5, true);
+        }
+
+        /// <summary>
+        /// Adds mathematical symbolic for subindex.
+        /// </summary>
+        public void AddSubindex(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 2);
+            CallerManager.ParagraphIsSet(this.activeParagraph);
+
+            //Method ParagraphIsSet checks whether the activeParagraph
+            //is null, therefore the warning is unjustified.
+            this.AddParameterToParagraph(this.activeParagraph!, list[0], true);
+            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, -3, true);
         }
 
         /// <summary>
@@ -81,14 +95,15 @@ namespace CzeTex
             //is null, therefore the warning is unjustified.
             this.AddParameterToParagraph(this.activeParagraph!, list[0], true, 2);
             this.AddText("/", false);
-            this.AddParameterToParagraph(this.activeParagraph!, list[1], true);
+            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, -2, true);
         }
 
         /// <summary>
         /// Decodes and adds parameters into their respective function paragraphs.
         /// </summary>
         public Paragraph AddParameterToParagraph(Paragraph paragraph, string parameter,
-                                                bool addStraight = false, float rise = 0)
+                                                bool addStraight = false, float rise = 0,
+                                                bool addWhiteSpace = false)
         {
             string[] parameterSplit = parameter.Split();
 
@@ -101,8 +116,8 @@ namespace CzeTex
                     int idx = trie.FindFunction(functionName);
                     if (trie.getFunctions[idx] == null)
                     {
-                        throw new Exception($"Function {functionName}" +
-                            "does not have getFunction");
+                        throw new InvalidParametersException(
+                            $"Function {functionName} does not have getFunction.");
                     }
 
                     textToAdd = ((Func<List<string>, CzeTexText>)trie.getFunctions[idx]!)(new List<string>());
@@ -115,7 +130,7 @@ namespace CzeTex
                 textToAdd.AddTextRise(rise);
                 if (addStraight)
                 {
-                    this.AddText(textToAdd, false);
+                    this.AddText(textToAdd, addWhiteSpace);
                 }
                 else
                 {
@@ -150,8 +165,8 @@ namespace CzeTex
             cell.SetTextAlignment(TextAlignment.CENTER);
             cell.SetBorder(Border.NO_BORDER);
             cell.SetMarginTop(0);
-            cell.SetMarginBottom(0.3f);
             cell.SetPadding(0);
+            cell.SetPaddingTop(0.5f);
 
             Paragraph paragraph = new Paragraph();
             paragraph.SetMarginBottom(0);
@@ -161,7 +176,7 @@ namespace CzeTex
 
             for (int i = 0; i < repetition; i++)
             {
-                this.AddParameterToParagraph(paragraph, text, rise: -Fonts.defaultSize);
+                this.AddParameterToParagraph(paragraph, text, rise: -(Fonts.defaultSize + 1));
             }
 
             cell.Add(paragraph);
@@ -185,17 +200,12 @@ namespace CzeTex
             Cell numerator = this.SetFractionPart(list[0]);
             fraction.AddCell(numerator);
 
-            //Cell fractionLine = this.SetCell("—", length);
-            //fraction.AddCell(fractionLine);
-
             Cell denominator = this.SetFractionPart(list[1]);
             denominator.SetBorderBottom(new SolidBorder(1));
             fraction.AddCell(denominator);
 
             this.activeParagraph!.Add(fraction);
             this.AddText(" ");
-
-            //this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, 10));
         }
     }
 }

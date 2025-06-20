@@ -6,7 +6,7 @@
 #moje
 poznamky.txt
 CzeTex/output/
-CzeTex/examples/*.pdf
+*.pdf
 !docs/*.pdf
 .vscode
 

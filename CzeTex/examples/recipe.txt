@@ -1,0 +1,57 @@
+/justify
+/title Recept na klasický hospodský guláš /x
+
+/section
+Tradiční guláš z hovězí kližky a poctivé dávky cibule, který nepotřebuje zahustit moukou. 
+Vyžaduje více času, ale odvděčí se plnou chutí a rozpadajícím se masem. S knedlíkem a pár kolečky syrové cibule patří mezi hospodskou klasiku.
+
+/offset
+
+/gtitle(2) Suroviny /x
+
+/list
+/listitem 500g hovězího masa na guláš /x
+/listitem 500g cibule /x
+/listitem 3 lžíce sádla /x
+/listitem 2 lžíce sladké mleté papriky /x
+/listitem 4 stroužky česneku /x
+/listitem 1 lžička mletého nebo drceného kmínu /x
+/listitem 1 malý rajčatový protlak /x
+/listitem mletý černý pepř /x
+/listitem sůl /x
+/listitem 1 lžíce majoránky /x
+/listitem voda na podlévání /x
+/listitem cibule na ozdobu /x
+/x
+
+/offset
+
+/gtitle(2) Postup přípravy /x
+
+/section 
+Cibuli oloupeme a nakrájíme nadrobno. V kastrole rozehřejeme sádlo a cibuli na něm restujeme dohněda, trvá to asi 15 minut.
+
+/section
+Na cibuli přidáme papriku, dobře promícháme a postupujeme rychle, aby paprika nezhořkla. Následně přidáme kousky masa, ze všech stran je opečeme a dobře mícháme (guláš se má přichytávat ke dnu hrnce, ale ne připalovat). Když je maso opečené, osolíme (cca 10 špetek) a opepříme.
+
+/section
+Přidáme rajčatový protlak, dobře promícháme a zalijeme malým množstvím vody - asi 2 dl. Do základu přisypeme kmín, prolisovaný česnek a necháme dusit na co nejnižší teplotě.
+
+/section
+Guláš stále hlídáme a občas mícháme. Přiléváme vodu po menších částech, protože jak již bylo řečeno, měl by se přichytávat, ovšem nikoli připalovat.
+
+/newpage
+
+/section
+Po cca hodině a půl maso ochutnáme a pokud je měkké, přidáme v dlaních rozemnutou majoránku a povaříme ještě 10 minut.
+
+/section
+Guláš nemusíme (a ani bychom neměli) zahušťovat, postaral se o to rozvařený cibulový základ. Jediné povolené zahušťovadlo je v případě potřeby chlebová strouhanka.
+
+/section
+Podáváme posypané čerstvě nakrájenou cibulí, nejlépe s houskovým knedlíkem, případně s bramboráčky nebo těstovinami.
+
+/offset
+
+/section
+Převzato z /link(toprecepty.cz,https://www.toprecepty.cz/recept/4007-klasicky-hospodsky-gulas-vidensky/)

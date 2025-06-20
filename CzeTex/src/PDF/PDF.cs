@@ -115,9 +115,10 @@ namespace CzeTex{
             CallerManager.IsParameterUint(list);
 
             uint size = Convert.ToUInt32(list[0]);
-            size = Fonts.defaultTitleSize - (size * 2);
+            size = Fonts.defaultTitleSize - (size * Fonts.defaultTitleSizeDifference);
 
-            if (size < Fonts.defaultSize)
+            //Seconds checks whether the size overflow.
+            if (size < Fonts.defaultSize || size > Fonts.defaultTitleSize)
             {
                 throw new InvalidParametersException(
                     "Generic title is too small");
@@ -193,7 +194,8 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (this.stack.IsFontInStack(Fonts.sansCursiveFont))
+            if (this.stack.IsFontInStack(Fonts.sansCursiveFont) || 
+                this.stack.IsFontInStack(Fonts.serifCursiveFont))
             {
                 this.AddBoldCursiveText(list);
             }
@@ -217,7 +219,8 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (this.stack.IsFontInStack(Fonts.sansBoldFont))
+            if (this.stack.IsFontInStack(Fonts.sansBoldFont) ||
+                this.stack.IsFontInStack(Fonts.serifBoldFont))
             {
                 this.AddBoldCursiveText(list);
             }
@@ -449,6 +452,8 @@ namespace CzeTex{
         /// </summary>
         public void AddEndingComma(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.AddEndingSign(list, ",");
         }
 
@@ -457,6 +462,8 @@ namespace CzeTex{
         /// </summary>
         public void AddEndingDot(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.AddEndingSign(list, ".");
         }
 
@@ -466,6 +473,8 @@ namespace CzeTex{
         /// </summary>
         public void AddEndingQuestionMark(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.AddEndingSign(list, "?");
         }
 
@@ -475,6 +484,8 @@ namespace CzeTex{
         /// </summary>
         public void AddEndingExclamationMark(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+            
             this.AddEndingSign(list, "!");
         }
 
@@ -483,6 +494,8 @@ namespace CzeTex{
         /// </summary>
         public void AddOffset(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.CreateParagraph(list);
             //This warning is unjustified, because in method 
             //CreateParagraph is always activeParagraph
@@ -495,6 +508,8 @@ namespace CzeTex{
         /// </summary>
         public void AddNewLine(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.AddText("\n");
         }
     }

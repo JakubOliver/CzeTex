@@ -253,7 +253,7 @@ namespace CzeTex
             if (list.Count != count)
             {
                 throw new InvalidNumberOfParametersException(
-                    $"Function {callerFunction} should have {count} parameters not {list.Count}");
+                    $"Function {callerFunction} should have {count} parameters not {list.Count}.");
             }
         }
 
