@@ -205,7 +205,7 @@
     "getFunction": null
   },
   "frac": {
-    "_description" : "Adds fraction to the text, takes 2 parameters (numerator and denominator). #nonPairFunction #hasParameter-2",
+    "_description" : "Adds fraction to the text, takes 2 parameters (numerator and denominator). #PairFunction #hasParameter-2",
     "addFunction": "AddFraction",
     "getFunction": null
   },

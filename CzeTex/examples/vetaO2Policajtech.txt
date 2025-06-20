@@ -14,5 +14,5 @@ lim x /imply /infinity = L /iff /forall /epsilon > 0 /exists /delta > 0 /forall 
 
 /section
 /math
-/frac(/delta,/infinity) = /pi /cdot /epsilon /iff /exists y /in /complex /forall z /in /rational : y /geq z /and y /leq z /imply y /notequal /pow(z,10) /x
+Ahoj /frac(/delta,/infinity) = /pi /cdot /epsilon /iff /exists y /in /complex /forall z /in /rational : y /geq z /and y /leq z /imply y /notequal /pow(z,10) /newline /infrac(/pi,/delta) /newline /pow(/pi,/delta) /x 
 /x

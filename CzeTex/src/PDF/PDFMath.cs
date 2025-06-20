@@ -61,9 +61,12 @@ namespace CzeTex
         public void AddPower(List<string> list)
         {
             CallerManager.CorrectParameters(list, 2);
+            CallerManager.ParagraphIsSet(this.activeParagraph);
 
-            this.AddText(list[0]);
-            this.AddText(new CzeTexText(list[1]).SetFontSize(8).AddTextRise(5));
+            //Method ParagraphIsSet checks whether the activeParagraph
+            //is null, therefore the warning is unjustified.
+            this.AddParameterToParagraph(this.activeParagraph!, list[0], true);
+            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, 5);
         }
 
         /// <summary>
@@ -72,11 +75,69 @@ namespace CzeTex
         public void AddInlineFraction(List<string> list)
         {
             CallerManager.CorrectParameters(list, 2);
+            CallerManager.ParagraphIsSet(this.activeParagraph);
 
-            CzeTexText text = new CzeTexText(list[0]);
-            this.AddText(new CzeTexText(list[0]).AddTextRise(2), false);
+            //Method ParagraphIsSet checks whether the activeParagraph
+            //is null, therefore the warning is unjustified.
+            this.AddParameterToParagraph(this.activeParagraph!, list[0], true, 2);
             this.AddText("/", false);
-            this.AddText(list[1]);
+            this.AddParameterToParagraph(this.activeParagraph!, list[1], true);
+        }
+
+        /// <summary>
+        /// Decodes and adds parameters into their respective function paragraphs.
+        /// </summary>
+        public Paragraph AddParameterToParagraph(Paragraph paragraph, string parameter,
+                                                bool addStraight = false, float rise = 0)
+        {
+            string[] parameterSplit = parameter.Split();
+
+            for (int j = 0; j < parameterSplit.Length; j++)
+            {
+                CzeTexText textToAdd;
+                if (StringFunctions.IsFunction(parameterSplit[j]))
+                {
+                    string functionName = StringFunctions.GetFunctionName(parameterSplit[j]);
+                    int idx = trie.FindFunction(functionName);
+                    if (trie.getFunctions[idx] == null)
+                    {
+                        throw new Exception($"Function {functionName}" +
+                            "does not have getFunction");
+                    }
+
+                    textToAdd = ((Func<List<string>, CzeTexText>)trie.getFunctions[idx]!)(new List<string>());
+                }
+                else
+                {
+                    textToAdd = this.GetMathText(parameterSplit[j]);
+                }
+
+                textToAdd.AddTextRise(rise);
+                if (addStraight)
+                {
+                    this.AddText(textToAdd, false);
+                }
+                else
+                {
+                    paragraph.Add(textToAdd);
+                }
+
+                if (j != StringFunctions.LastIndex(parameterSplit))
+                {
+                    if (addStraight)
+                    {
+                        this.AddText("");
+                    }
+                    else
+                    {
+                        //The iText library has auto cropping enabled after every word in the cell, 
+                        //so it is necessary to use non-printable characters instead of spaces
+                        paragraph.Add(new CzeTexText("\u00A0"));
+                    }
+                }
+            }
+
+            return paragraph;
         }
 
         /// <summary>
@@ -100,33 +161,7 @@ namespace CzeTex
 
             for (int i = 0; i < repetition; i++)
             {
-                string[] textSplit = text.Split();
-
-                for (int j = 0; j < textSplit.Length; j++)
-                {
-                    if (StringFunctions.IsFunction(textSplit[j]))
-                    {
-                        int idx = trie.FindFunction(StringFunctions.GetFunctionName(textSplit[j]));
-                        if (trie.getFunctions[idx] == null)
-                        {
-                            throw new Exception($"Function {StringFunctions.GetFunctionName(textSplit[j])}" +
-                                "does not have getFunction");
-                        }
-
-                        paragraph.Add(((Func<List<string>, CzeTexText>)trie.getFunctions[idx]!)(new List<string>()));
-                    }
-                    else
-                    {
-                        paragraph.Add(this.GetMathText(textSplit[j]));
-                    }
-
-                    if (j != StringFunctions.LastIndex(textSplit))
-                    {
-                        //The iText library has auto cropping enabled after every word, 
-                        //so it is necessary to use non-printable characters instead of spaces
-                        paragraph.Add(new CzeTexText("\u00A0")); 
-                    }
-                }
+                this.AddParameterToParagraph(paragraph, text, rise: -Fonts.defaultSize);
             }
 
             cell.Add(paragraph);
@@ -154,13 +189,13 @@ namespace CzeTex
             //fraction.AddCell(fractionLine);
 
             Cell denominator = this.SetFractionPart(list[1]);
-            denominator.SetBorderTop(new SolidBorder(1));
+            denominator.SetBorderBottom(new SolidBorder(1));
             fraction.AddCell(denominator);
 
             this.activeParagraph!.Add(fraction);
             this.AddText(" ");
 
-            this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, 10));
+            //this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, 10));
         }
     }
 }

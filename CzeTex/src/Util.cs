@@ -162,6 +162,13 @@ namespace CzeTex
     }
 
     /// <summary>
+    /// Class for incorrect adding to paragraph related exceptions.
+    /// </summary>
+    public class AddingToNonExistingParagraphException : CzeTexException {
+        public AddingToNonExistingParagraphException(string message) : base(message) { }
+    }
+
+    /// <summary>
     /// Class of functions related to work with strings.
     /// </summary>
     public static class StringFunctions
@@ -263,6 +270,19 @@ namespace CzeTex
                     throw new InvalidParametersException(
                         $"Parameter of function {callerFunction} should be a number");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Checks whether paragraph exists.
+        /// </summary>
+        public static void ParagraphIsSet(Paragraph? paragraph,
+                                        [CallerMemberName] string callerFunction = "")
+        {
+            if (paragraph == null)
+            {
+                throw new AddingToNonExistingParagraphException(
+                    $"Paragraph needs to be set before calling {callerFunction}");
             }
         }
     }

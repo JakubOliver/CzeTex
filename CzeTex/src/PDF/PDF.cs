@@ -283,6 +283,14 @@ namespace CzeTex{
         }
 
         /// <summary>
+        /// Starts raised part of text.
+        /// </summary>
+        public void AddRaisedText(uint rise)
+        {
+            this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, rise));
+        }
+
+        /// <summary>
         /// Adds / character to document.
         /// </summary>
         public void AddSlash(List<string> list)
