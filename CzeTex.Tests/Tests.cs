@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace CzeTex.Tests
 {
-    public class UnitTest2
+    public class Tests
     {
         public static string startOfScript = "run --project ../CzeTex/CzeTex.csproj ";
         public static string textExamples = "../CzeTex.Tests/examples/";
@@ -112,6 +112,18 @@ namespace CzeTex.Tests
         {
             Process proc = this.RunScript($"{textExamples}listItemNoList.txt");
             Assert.Equal(134, proc.ExitCode);
+        }
+
+        [Fact]
+        public void CanReadFile()
+        {
+            Assert.Equal("Hello, World!", new Files(new string[] { "examples", "example1.txt" }).LoadFile()[0]);
+        }
+
+        [Fact]
+        public void FileDoesNotExist()
+        {
+            Assert.Throws<System.IO.FileNotFoundException>(() => new Files(new string[] { "examples", "neexistuje.txt" }));
         }
 
         [Fact]
