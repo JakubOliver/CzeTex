@@ -1,0 +1,277 @@
+{
+  "bold": {
+    "_description" : "Starts section with bold text. #pairFunction",
+    "addFunction": "AddBold",
+    "getFunction": null
+  },
+  "cursive": {
+    "_description" : "Starts section with cursive text. #pairFunction",
+    "addFunction": "AddCursiveText",
+    "getFunction": null
+  },
+  "serif" : {
+    "_description" : "Starts section where the serif is changed. (sans -> serif or serif -> sans) #pairFunction",
+    "addFunction" : "SwitchSerif",
+    "getFunction" : null
+  },
+  "title": {
+    "_description" : "Starts title section. #pairFunction",
+    "addFunction": "AddTitle",
+    "getFunction": null
+  },
+  "subtitle": {
+    "_description" : "Starts subtitle section. #pairFunction",
+    "addFunction": "AddSubTitle",
+    "getFunction": null
+  },
+  "subsubtitle": {
+    "_description" : "Starts subsubtitle section. #pairFunction",
+    "addFunction": "AddSubSubTitle",
+    "getFunction": null
+  },
+  "gtitle" : {
+    "_description" : "Starts title section based on 1 parameter (1 - title, 2 - subtitle, 3 - subsubtitle...) #pairFunction #hasParameter-1",
+    "addFunction" : "GenericTitle",
+    "getFunction" : null
+  },
+  "section": {
+    "_description" : "Starts new paragraph. #nonPairFunction",
+    "addFunction": "CreateParagraph",
+    "getFunction": null
+  },
+  "left" : {
+    "_description" : "Starts left aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentLeft",
+    "getFunction" : null
+  },
+  "right" : {
+    "_description" : "Starts right aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentRight",
+    "getFunction" : null
+  },
+  "center" : {
+    "_description" : "Starts center aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentCenter",
+    "getFunction" : null
+  },
+  "justify" : {
+    "_description" : "Starts justified aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentJustified",
+    "getFunction" : null
+  },
+  "slash": {
+    "_description" : "Adds '/' to the text. #nonPairFunction",
+    "addFunction": "AddSlash",
+    "getFunction": null
+  },
+  "newpage": {
+    "_description" : "Adds new page to document and additional text starts at new page. #nonPairFunction",
+    "addFunction": "AddNewPage",
+    "getFunction": null
+  },
+  "underline": {
+    "_description" : "Adds section with underline text. #pairFunction",
+    "addFunction": "AddUnderLineText",
+    "getFunction": null
+  },
+  "linethrough": {
+    "_description" : "Adds section with line through text. #pairFunction",
+    "addFunction": "AddLineThroughText",
+    "getFunction": null
+  },
+  "list": {
+    "_description" : "Starts list element. #pairFunction",
+    "addFunction": "AddList",
+    "getFunction": null
+  },
+  "listitem": {
+    "_description" : "Starts list item element in the list (has to start in list element). #pairFunction",
+    "addFunction": "AddListItem",
+    "getFunction": null
+  },
+  "math": {
+    "_description" : "Starts section with math font. #pairFunction",
+    "addFunction": "AddMathPart",
+    "getFunction": null
+  },
+  "cdot": {
+    "_description" : "Adds multiplication dot sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "multiplicationDot"
+  },
+  "times": {
+    "_description" : "Adds multiplication cross sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "multiplicationSign"
+  },
+  "division": {
+    "_description" : "Adds multiplication division sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "divisionSign"
+  },
+  "imply" : {
+    "_description" : "Adds multiplication implication sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "implicationSign"
+  },
+  "negation" : {
+    "_description" : "Adds multiplication negation sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "negationSign"
+  },
+  "in" : {
+    "_description" : "Adds multiplication element of sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "elementOfSign"
+  },
+  "notin" : {
+    "_description" : "Adds multiplication not element of sign. #nonPairFunction",
+   "dynamicallyGenerated" : true,
+    "sign" : "notElementOfSign"
+  },
+  "forall" : {
+    "_description" : "Adds multiplication for all sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "forAllSign"
+  },
+  "exists" : {
+    "_description" : "Adds multiplication exists sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "existsSign"
+  },
+  "infinity" : {
+    "_description" : "Adds multiplication infinity sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "infinitySign"
+  },
+  "and" : {
+    "_description" : "Adds multiplication logical and sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "logicalAndSign"
+  },
+  "or" : {
+    "_description" : "Adds multiplication logical or sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "logicalOrSign"
+  },
+  "real" : {
+    "_description" : "Adds multiplication real numbers sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "realNumbersSign"
+  },
+  "natural" : {
+    "_description" : "Adds multiplication natural numbers sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "naturalNumbersSign"
+  },
+  "integers" : {
+    "_description" : "Adds multiplication integers sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "integerSign"
+  },
+  "rational" : {
+    "_description" : "Adds multiplication rational numbers sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "rationalNumberSign"
+  },
+  "complex" : {
+    "_description" : "Adds multiplication complex numbers sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "complexNumberSign"
+  },
+  "notequal" : {
+    "_description" : "Adds multiplication not equal sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "notEqualSign"
+  },
+  "leq" : {
+    "_description" : "Adds multiplication less than or equal sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "lessThanOrEqualSign"
+  },
+  "geq" : {
+    "_description" : "Adds multiplication greater than or equal sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "greaterThanOrEqualSign"
+  },
+  "iff" : {
+    "_description" : "Adds multiplication if and only if sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "ifAndOnlyIfSign"
+  },
+  "epsilon" : {
+    "_description" : "Adds multiplication epsilon sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "epsilonSign"
+  },
+  "delta" : {
+    "_description" : "Adds multiplication delta sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "deltaSign"
+  },
+  "pi" : {
+    "_description" : "Adds multiplication pi sign. #nonPairFunction",
+    "dynamicallyGenerated" : true,
+    "sign" : "piSign"
+  },
+  "pow": {
+    "_description" : "Adds power to the text, takes 2 parameters (base and exponent). #nonPairFunction #hasParameter-2",
+    "addFunction": "AddPower",
+    "getFunction": null
+  },
+  "subindex" : {
+    "_description" : "Adds sign with subindex to the text, takes 2 parameters (sign and index). #nonPairFunction #hasParameter-2",
+    "addFunction": "AddSubindex",
+    "getFunction": null
+  },
+  "infrac": {
+    "_description" : "Adds inline fraction to the text, takes 2 parameters (numerator and denominator). #nonPairFunction #hasParameter-2",
+    "addFunction": "AddInlineFraction",
+    "getFunction": null
+  },
+  "frac": {
+    "_description" : "Adds fraction to the text, takes 2 parameters (numerator and denominator). #nonPairFunction #hasParameter-2",
+    "addFunction": "AddFraction",
+    "getFunction": null
+  },
+  "link": {
+    "_description" : "Adds hyper link to the text, takes 2 parameters (text to show, URI link). #nonPairFunction #hasParameter-2",
+    "addFunction" : "AddLink",
+    "getFunction" : null
+  },
+  "offset" : {
+    "_description" : "Adds vertical offset to the text. #nonPairFunction",
+    "addFunction" : "AddOffset",
+    "getFunction" : null
+  },
+  "newline" : {
+    "_description" : "Ends line and next text will be on new line. #nonPairFunction",
+    "addFunction" : "AddNewLine",
+    "getFunction" : null
+  },
+  "xc" : {
+    "_description" : "Ends layer with comma. #nonPairFunction",
+    "addFunction" : "AddEndingComma",
+    "getFunction" : null
+  },
+  "xd" : {
+    "_description" : "Ends layer with dot. #nonPairFunction",
+    "addFunction" : "AddEndingDot",
+    "getFunction" : null
+  },
+  "xq" : {
+    "_description" : "Ends layer with question mark. #nonPairFunction",
+    "addFunction" : "AddEndingQuestionMark",
+    "getFunction" : null
+  },
+  "xe" : {
+    "_description" : "Ends layer with exclamation mark. #nonPairFunction",
+    "addFunction" : "AddEndingExclamationMark",
+    "getFunction" : null
+  },
+  "x": {
+    "_description" : "Ends layer with white space. #nonPairFunction",
+    "addFunction": "RemoveFont",
+    "getFunction": null
+  }
+}

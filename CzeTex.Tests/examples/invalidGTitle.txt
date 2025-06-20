@@ -1,0 +1,1 @@
+/gtitle(1000) Toto je uz moc /x

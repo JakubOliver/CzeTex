@@ -1,0 +1,18 @@
+/section()
+
+/math (x /times y) /division z /x
+
+/section
+
+/math (x /cdot y) /division z /x
+
+/section
+
+/math /pow( x, y) /x
+
+/section
+
+/math /infrac( x, y) /x
+
+/section
+/frac( x /cdot y , y)
