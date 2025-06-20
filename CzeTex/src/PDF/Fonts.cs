@@ -1,6 +1,8 @@
 using iText.IO.Font;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace CzeTex
 {
@@ -38,5 +40,10 @@ namespace CzeTex
         public static uint defaultSubSubTitleSize =
             defaultTitleSize - 2 * defaultTitleSizeDifference;
         public static float defaultSpacing = 1.25f;
+        public static TextAlignment alignmentLeft = TextAlignment.LEFT;
+        public static TextAlignment alignmentCenter = TextAlignment.CENTER;
+        public static TextAlignment alignmentRight = TextAlignment.RIGHT;
+        public static TextAlignment alignmentJustified = TextAlignment.JUSTIFIED;
+        public static TextAlignment defaultAlignment = alignmentLeft;
     }
 }

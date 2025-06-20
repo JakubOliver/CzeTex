@@ -1,3 +1,4 @@
+/justify
 /title() Programátorská dokumentace /x
 
 /section
@@ -122,7 +123,9 @@ Tedy v souboru /bold PDF.cs /x a následně v třídě /bold PDF /x dochází ji
 /section
 V soubory /bold PDFMath.cs /x jak už bylo zmíněno najdeme matematicky zaměřené textové funkce. Tedy najdeme tu metody, které se využívají k přidání matematické notace a využívají je např. delegáti pro znakové dynamicky generované funkce.
 
-/section
-/section
+/offset
+/x
 
+/center
 /gtitle(2) /bold BLIŽŠÍ INFORMACE KE VŠEM TŘÍDÁM, METODÁM ATD. SI MŮŽETE PŘEČÍST PŘÍMO V OKOMENTOVANÉM ZDROJOVÉM KÓDU. /x /x
+/x

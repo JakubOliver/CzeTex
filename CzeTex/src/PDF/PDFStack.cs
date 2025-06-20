@@ -2,6 +2,7 @@ using System;
 using iText.Kernel.Font;
 using iText.Layout;
 using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace CzeTex
 {
@@ -32,9 +33,9 @@ namespace CzeTex
         /// <summary>
         /// Adds new layer to the characteristic stack base on new font and font size.
         /// </summary>
-        public void Push(PdfFont font, uint size)
+        public void Push(PdfFont font, uint size, TextAlignment alignment)
         {
-            Push(new TextCharacteristics(font, size));
+            Push(new TextCharacteristics(font, size, alignment));
         }
 
         /// <summary>
@@ -44,11 +45,11 @@ namespace CzeTex
         {
             if (this.counter != 0)
             {
-                Push(new TextCharacteristics(font, Top().Size));
+                Push(new TextCharacteristics(font, Top().Size, Top().Alignment));
             }
             else
             {
-                Push(new TextCharacteristics(font, Fonts.defaultSize));
+                Push(new TextCharacteristics(font, Fonts.defaultSize, Fonts.defaultAlignment));
             }
         }
 
@@ -59,11 +60,26 @@ namespace CzeTex
         {
             if (this.counter != 0)
             {
-                Push(new TextCharacteristics(Top().Font, size));
+                Push(new TextCharacteristics(Top().Font, size, Top().Alignment));
             }
             else
             {
-                Push(new TextCharacteristics(Fonts.sansDefaultFont, size));
+                Push(new TextCharacteristics(Fonts.sansDefaultFont, size, Fonts.defaultAlignment));
+            }
+        }
+
+        /// <summary>
+        /// Adds new layer to the characteristics stack base only on new alignment of font.
+        /// </summary>
+        public void Push(TextAlignment alignment)
+        {
+            if (this.counter != 0)
+            {
+                Push(new TextCharacteristics(Top().Font, Top().Size, alignment));
+            }
+            else
+            {
+                Push(new TextCharacteristics(Fonts.sansDefaultFont, Fonts.defaultSize, alignment));
             }
         }
 
@@ -87,7 +103,7 @@ namespace CzeTex
                 }
 
                 //This warning is also unjustified based on the same reasoning.
-                TopNode().Next!.Value.Add(Top().GetBack()); 
+                TopNode().Next!.Value.Add(Top().GetBack());
             }
 
             if (Top() is ListText)
@@ -128,6 +144,11 @@ namespace CzeTex
         public uint Size
         {
             get { return Top().Size; }
+        }
+        
+        public TextAlignment Alignment
+        {
+            get { return Top().Alignment; }
         }
     }
 }

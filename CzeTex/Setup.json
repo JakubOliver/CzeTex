@@ -39,6 +39,26 @@
     "addFunction": "CreateParagraph",
     "getFunction": null
   },
+  "left" : {
+    "_description" : "Starts left aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentLeft",
+    "getFunction" : null
+  },
+  "right" : {
+    "_description" : "Starts right aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentRight",
+    "getFunction" : null
+  },
+  "center" : {
+    "_description" : "Starts center aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentCenter",
+    "getFunction" : null
+  },
+  "justify" : {
+    "_description" : "Starts justified aligned section (alignment is determined at the beginning of section). #pairFunction",
+    "addFunction" : "AddAlignmentJustified",
+    "getFunction" : null
+  },
   "slash": {
     "_description" : "Adds '/' to the text. #nonPairFunction",
     "addFunction": "AddSlash",
@@ -205,7 +225,7 @@
     "getFunction": null
   },
   "frac": {
-    "_description" : "Adds fraction to the text, takes 2 parameters (numerator and denominator). #PairFunction #hasParameter-2",
+    "_description" : "Adds fraction to the text, takes 2 parameters (numerator and denominator). #nonPairFunction #hasParameter-2",
     "addFunction": "AddFraction",
     "getFunction": null
   },

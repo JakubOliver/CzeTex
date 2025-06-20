@@ -1,3 +1,4 @@
+/justify
 /title() Uživatelská dokumentace /x
 
 /subtitle() Spouštění /x
@@ -22,3 +23,4 @@ Jediná další možnost personalizace programu se skrývá právě v druhém pa
 
 /section()
 /bold() Doporučení: Setup soubory musí mít přesnou strukturu a správné odkazy na interní funkce, proto se doporučuje, aby se při vytváření personalizovaných setup souborů využila kopie globálního a pouze upravili klíčová slova dle vlastní preferencí. /x
+/x

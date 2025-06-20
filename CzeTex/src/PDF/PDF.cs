@@ -58,6 +58,7 @@ namespace CzeTex{
 
             this.activeParagraph = new Paragraph();
             this.activeParagraph.SetMultipliedLeading(Fonts.defaultSpacing);
+            this.activeParagraph.SetTextAlignment(this.stack.Alignment);
         }
 
         /// <summary>
@@ -287,7 +288,39 @@ namespace CzeTex{
         /// </summary>
         public void AddRaisedText(uint rise)
         {
-            this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, rise));
+            this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, this.stack.Alignment, rise));
+        }
+
+        /// <summary>
+        /// Starts left aligned part of text.
+        /// </summary>
+        public void AddAlignmentLeft(List<string> list)
+        {
+            this.stack.Push(Fonts.alignmentLeft);
+        }
+
+        /// <summary>
+        /// Starts right aligned part of text.
+        /// </summary>
+        public void AddAlignmentRight(List<string> list)
+        {
+            this.stack.Push(Fonts.alignmentRight);
+        }
+
+        /// <summary>
+        /// Starts center aligned part of text.
+        /// </summary>
+        public void AddAlignmentCenter(List<string> list)
+        {
+            this.stack.Push(Fonts.alignmentCenter);
+        }
+
+        /// <summary>
+        /// Starts justified aligned part of text.
+        /// </summary>
+        public void AddAlignmentJustified(List<string> list)
+        {
+            this.stack.Push(Fonts.alignmentJustified);
         }
 
         /// <summary>
@@ -328,7 +361,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(new UnderLineText(stack.Font, stack.Size));
+            this.stack.Push(new UnderLineText(stack.Font, stack.Size, stack.Alignment));
         }
 
         /// <summary>
@@ -338,7 +371,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(new LineThroughText(stack.Font, stack.Size));
+            this.stack.Push(new LineThroughText(stack.Font, stack.Size, stack.Alignment));
         }
 
         /// <summary>
@@ -349,7 +382,7 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
-            this.stack.Push(new ListText(stack.Font, stack.Size));
+            this.stack.Push(new ListText(stack.Font, stack.Size, stack.Alignment));
         }
 
         /// <summary>
@@ -359,7 +392,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(new ListItemText(stack.Font, stack.Size));
+            this.stack.Push(new ListItemText(stack.Font, stack.Size, stack.Alignment));
         }
 
         /// <summary>

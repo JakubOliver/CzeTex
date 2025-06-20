@@ -6,6 +6,7 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace CzeTex
 {
@@ -16,11 +17,13 @@ namespace CzeTex
     {
         protected PdfFont font;
         protected uint size;
+        protected TextAlignment alignment;
 
-        public TextCharacteristics(PdfFont font, uint size)
+        public TextCharacteristics(PdfFont font, uint size, TextAlignment alignment)
         {
             this.font = font;
             this.size = size;
+            this.alignment = alignment;
         }
 
         public PdfFont Font
@@ -31,6 +34,11 @@ namespace CzeTex
         public uint Size
         {
             get { return this.size; }
+        }
+
+        public TextAlignment Alignment
+        {
+            get { return this.alignment; }
         }
 
         /// <summary>
@@ -95,7 +103,8 @@ namespace CzeTex
     /// </summary>
     public class SerifTextCharacteristics : TextCharacteristics
     {
-        public SerifTextCharacteristics(PdfFont font, uint size) : base(font, size) { }
+        public SerifTextCharacteristics(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment) { }
 
         /// <summary>
         /// Changes fonts serif settings.
@@ -115,7 +124,8 @@ namespace CzeTex
     /// </remarks>
     public class SpecialTextCharacteristics : TextCharacteristics
     {
-        public SpecialTextCharacteristics(PdfFont font, uint size) : base(font, size) { }
+        public SpecialTextCharacteristics(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment) { }
     }
 
     /// <summary>
@@ -124,7 +134,8 @@ namespace CzeTex
     /// </summary>
     public class UnderLineText : SpecialTextCharacteristics
     {
-        public UnderLineText(PdfFont font, uint size) : base(font, size) { }
+        public UnderLineText(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment) { }
 
         /// <summary>
         /// CzeTexText is set to be underlined.
@@ -144,7 +155,8 @@ namespace CzeTex
     /// </summary>
     public class LineThroughText : SpecialTextCharacteristics
     {
-        public LineThroughText(PdfFont font, uint size) : base(font, size) { }
+        public LineThroughText(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment) { }
 
         /// <summary>
         /// CzeTexText is modified to have a line through it.
@@ -165,7 +177,8 @@ namespace CzeTex
     {
         private uint rise;
 
-        public RaisedText(PdfFont font, uint size, uint rise) : base(font, size)
+        public RaisedText(PdfFont font, uint size, TextAlignment alignment, uint rise) 
+            : base(font, size, alignment)
         {
             this.rise = rise;
         }
@@ -190,7 +203,8 @@ namespace CzeTex
     /// </remarks>
     public class DoNotAddTextCharacteristics : TextCharacteristics
     {
-        public DoNotAddTextCharacteristics(PdfFont font, uint size) : base(font, size) { }
+        public DoNotAddTextCharacteristics(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment) { }
     }
 
     /// <summary>
@@ -200,7 +214,8 @@ namespace CzeTex
     {
         List list;
 
-        public ListText(PdfFont font, uint size) : base(font, size)
+        public ListText(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment)
         {
             this.list = new List();
         }
@@ -239,7 +254,8 @@ namespace CzeTex
         ListItem item;
         Paragraph paragraph;
 
-        public ListItemText(PdfFont font, uint size) : base(font, size)
+        public ListItemText(PdfFont font, uint size, TextAlignment alignment) 
+            : base(font, size, alignment)
         {
             this.item = new ListItem();
             this.paragraph = new Paragraph();

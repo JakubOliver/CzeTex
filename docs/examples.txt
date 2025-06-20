@@ -1,3 +1,4 @@
+/justify
 /title Příklady použití /x
 
 /section
@@ -12,7 +13,7 @@ Jednou z možností jak pozměnit program je, že předefinování jeho mapován
 Výchozí nastavení mapování je CzeTex/Setup.json, ale je předpřipravená verze s českou lokalizací. Tu najdete v CzeTex/examples a jmenuje se nastaveni.json a soubor proNastaveni.txt využívá jeho mapování. 
 
 /section
-Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /bold dotnet run examples/proNastaveni.txt examples/nastaveni.json /x
+Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /newline /bold dotnet run examples/proNastaveni.txt examples/nastaveni.json /x
 
 /subtitle Vytváření vstupního souboru /x
 
@@ -38,12 +39,14 @@ Mezi párové příkazy patří například vytvoření bloku tučného písma, 
 Některé příkazy mají parametry, podle kterých se mění jejich funkčnost nebo vzhled. Například funkce /bold /slash pow /x má 2 parametry, základ a exponent. 
 
 /section 
-Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypadal následovně: /bold /slash math /x S = 4 /bold /slash multi /slash pi /slash multi /slash pow(r,2) /slash x /x .
+Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypadal následovně: /newline /bold /slash math /x S = 4 /bold /slash multi /slash pi /slash multi /slash pow(r,2) /slash x /x .
 
 /section
 /math S = 4 /multi /pi /multi /pow(r,2) /x
 
-/section
-/section
+/offset
+/x
 
-/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE EXAMPLES NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU /x /x
+/center
+/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE EXAMPLES, DEFINICE FUNKCÍ V Setup.json NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU. /x /x
+/x
