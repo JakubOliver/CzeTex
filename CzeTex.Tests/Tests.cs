@@ -150,7 +150,7 @@ namespace CzeTex.Tests
         [Fact]
         public void ParagraphIsNotSet()
         {
-            Process proc = this.RunScript($"{textExamples}ParagraphIsNotSet.txt");
+            Process proc = this.RunScript($"{textExamples}paragraphIsNotSet.txt");
             Assert.Equal(134, proc.ExitCode);
         }
 
