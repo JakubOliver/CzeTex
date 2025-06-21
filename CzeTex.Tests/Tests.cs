@@ -59,6 +59,18 @@ namespace CzeTex.Tests
         [InlineData("../CzeTex.Tests/examples/combinations.txt")]
         [InlineData("../CzeTex.Tests/examples/link.txt")]
         [InlineData("../CzeTex.Tests/examples/math2.txt")]
+        [InlineData("../CzeTex.Tests/examples/boldPow.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters1.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters2.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters3.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters4.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters5.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters6.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters7.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters8.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters9.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters10.txt")]
+        [InlineData("../CzeTex.Tests/examples/parameters11.txt")]
         public void OnlyInput(string input)
         {
             Process proc = this.RunScript(input);
@@ -70,6 +82,27 @@ namespace CzeTex.Tests
         {
             Process proc = this.RunScript("examples/proNastaveni.txt", "examples/nastaveni.json");
             Assert.Equal(0, proc.ExitCode);
+        }
+
+        [Fact]
+        public void InvalidInput()
+        {
+            Process proc = this.RunScript($"{textExamples}neexistuje.txt");
+            Assert.Equal(134, proc.ExitCode);
+        }
+
+        [Fact]
+        public void InvalidInputAndSetup()
+        {
+            Process proc = this.RunScript($"{textExamples}neexistuje.txt {textExamples}neexistuje.json");
+            Assert.Equal(134, proc.ExitCode);
+        }
+
+        [Fact]
+        public void InvalidSetup()
+        {
+            Process proc = this.RunScript($"{textExamples}dobre.txt {textExamples}neexistuje.json");
+            Assert.Equal(134, proc.ExitCode);
         }
 
         [Fact]
