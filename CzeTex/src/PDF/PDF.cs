@@ -20,6 +20,7 @@ namespace CzeTex{
         private Trie trie;
 
         private Paragraph? activeParagraph;
+
         public PDF(string outputPath, Trie trie)
         {
             writer = new PdfWriter(outputPath);
@@ -176,7 +177,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (Fonts.usingSans)
+            if (this.stack.Sans)
             {
                 this.stack.Push(Fonts.sansBoldCursiveFont);
             }
@@ -201,7 +202,7 @@ namespace CzeTex{
             }
             else
             {
-                if (Fonts.usingSans)
+                if (this.stack.Sans)
                 {
                     this.stack.Push(Fonts.sansBoldFont);
                 }
@@ -226,7 +227,7 @@ namespace CzeTex{
             }
             else
             {
-                if (Fonts.usingSans)
+                if (this.stack.Sans)
                 {
                     this.stack.Push(Fonts.sansCursiveFont);
                 }
@@ -244,7 +245,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (Fonts.usingSans)
+            if (this.stack.Sans)
             {
                 if (this.stack.Font == Fonts.sansBoldFont)
                 {
@@ -283,7 +284,7 @@ namespace CzeTex{
                 }
             }
 
-            Fonts.usingSans = !Fonts.usingSans;
+            this.stack.Sans = !this.stack.Sans;
         }
 
         /// <summary>

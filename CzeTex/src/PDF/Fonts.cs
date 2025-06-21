@@ -12,7 +12,6 @@ namespace CzeTex
     public static class Fonts
     {
         public static bool usingSans = true;
-
         public static PdfFont sansDefaultFont =
             PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Regular.ttf", PdfEncodings.IDENTITY_H);
         public static PdfFont sansBoldFont =

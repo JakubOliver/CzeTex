@@ -25,9 +25,12 @@ namespace CzeTex
     public class CharacteristicsStack : Stack<TextCharacteristics>
     {
         private Document document;
+        private bool usingSans;
+
         public CharacteristicsStack(Document document) : base()
         {
             this.document = document;
+            this.usingSans = Fonts.usingSans;
         }
 
         /// <summary>
@@ -113,12 +116,15 @@ namespace CzeTex
 
             if (Top() is SerifTextCharacteristics)
             {
-                Top().End(document);
+                Sans = !Sans;
             }
 
             return base.Pop();
         }
 
+        /// <summary>
+        /// Checks whether the fonts is in stack.
+        /// </summary>
         public bool IsFontInStack(PdfFont font)
         {
             Node<TextCharacteristics>? node = this.head;
@@ -145,10 +151,16 @@ namespace CzeTex
         {
             get { return Top().Size; }
         }
-        
+
         public TextAlignment Alignment
         {
             get { return Top().Alignment; }
+        }
+        
+        public bool Sans
+        {
+            get { return this.usingSans; }
+            set { this.usingSans = value; }
         }
     }
 }

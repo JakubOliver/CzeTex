@@ -45,7 +45,8 @@ namespace CzeTex
         /// </summary>
         private Dictionary<string, JsonEntry> ReadJson()
         {
-            string content = File.ReadAllText(path);
+            Files file = new Files(path);
+            string content = file.LoadFileIntoOneString();
             return JsonSerializer.Deserialize<Dictionary<string, JsonEntry>>(content)!;
         }
 

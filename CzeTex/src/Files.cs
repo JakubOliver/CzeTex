@@ -87,6 +87,11 @@ namespace CzeTex
             return content;
         }
 
+        public string LoadFileIntoOneString()
+        {
+            return File.ReadAllText(path);
+        }
+
         /// <summary>
         /// Returns concatenated path based on OS directory separator character
         /// </summary>
