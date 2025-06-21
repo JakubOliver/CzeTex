@@ -110,7 +110,8 @@ namespace CzeTex
     /// </summary>
     public class CzeTexException : Exception
     {
-        public CzeTexException(string message) : base(message) { }
+        public CzeTexException(string message) 
+            : base(message) { }
     }
 
     /// <summary>
@@ -118,7 +119,8 @@ namespace CzeTex
     /// </summary>
     public class JSONLoaderException : CzeTexException
     {
-        public JSONLoaderException(string message) : base(message) { }
+        public JSONLoaderException(string message) 
+            : base(message) { }
     }
 
     /// <summary>
@@ -126,7 +128,8 @@ namespace CzeTex
     /// </summary>
     public class InvalidArgumentsException : CzeTexException
     {
-        public InvalidArgumentsException() : base("Command line arguments are invalid") { }
+        public InvalidArgumentsException() 
+            : base("Command line arguments are invalid") { }
     }
 
     /// <summary>
@@ -134,7 +137,8 @@ namespace CzeTex
     /// </summary>
     public class InvalidNumberOfParametersException : CzeTexException
     {
-        public InvalidNumberOfParametersException(string message) : base(message) { }
+        public InvalidNumberOfParametersException(string message) 
+            : base(message) { }
     }
 
     /// <summary>
@@ -142,7 +146,8 @@ namespace CzeTex
     /// </summary>
     public class TrieExceptions : CzeTexException
     {
-        public TrieExceptions(string message) : base(message) { }
+        public TrieExceptions(string message) 
+            : base(message) { }
     }
 
     /// <summary>
@@ -150,7 +155,8 @@ namespace CzeTex
     /// </summary>
     public class InvalidParametersException : CzeTexException
     {
-        public InvalidParametersException(string message) : base(message) { }
+        public InvalidParametersException(string message) 
+            : base(message) { }
     }
 
     /// <summary>
@@ -158,14 +164,16 @@ namespace CzeTex
     /// </summary>
     public class RemovingFromParagraphException : CzeTexException
     {
-        public RemovingFromParagraphException(string message) : base(message) { }
+        public RemovingFromParagraphException(string message) 
+            : base(message) { }
     }
 
     /// <summary>
     /// Class for incorrect adding to paragraph related exceptions.
     /// </summary>
     public class AddingToNonExistingParagraphException : CzeTexException {
-        public AddingToNonExistingParagraphException(string message) : base(message) { }
+        public AddingToNonExistingParagraphException(string message) 
+            : base(message) { }
     }
 
     /// <summary>
@@ -245,23 +253,30 @@ namespace CzeTex
     public static class CallerManager
     {
         /// <summary>
-        /// Checks whether the calling function received correct number of parameters.
+        /// Checks whether the calling function received 
+        /// correct number of parameters.
         /// </summary>
-        public static void CorrectParameters(List<string> list, int count,
-                                            [CallerMemberName] string callerFunction = "")
+        public static void CorrectParameters(
+            List<string> list,
+            int count,
+            [CallerMemberName] string callerFunction = ""
+        )
         {
             if (list.Count != count)
             {
                 throw new InvalidNumberOfParametersException(
-                    $"Function {callerFunction} should have {count} parameters not {list.Count}.");
+                    $"Function {callerFunction} should have" +
+                    "{count} parameters not {list.Count}.");
             }
         }
 
         /// <summary>
         /// Checks whether parameters are integers.
         /// </summary>
-        public static void IsParameterUint(List<string> list,
-                                        [CallerMemberName] string callerFunction = "")
+        public static void IsParameterUint(
+            List<string> list,
+            [CallerMemberName] string callerFunction = ""
+        )
         {
             foreach (string parameter in list)
             {
@@ -276,8 +291,10 @@ namespace CzeTex
         /// <summary>
         /// Checks whether paragraph exists.
         /// </summary>
-        public static void ParagraphIsSet(Paragraph? paragraph,
-                                        [CallerMemberName] string callerFunction = "")
+        public static void ParagraphIsSet(
+            Paragraph? paragraph,
+            [CallerMemberName] string callerFunction = ""
+        )
         {
             if (paragraph == null)
             {
@@ -302,18 +319,21 @@ namespace CzeTex
         /// <summary>
         /// Returns dynamically generated AddSign function.
         /// </summary>
-        public Action<List<string>> CreateAddSignFunction(string sign, int numberOfParameters = 0)
+        public Action<List<string>>
+            CreateAddSignFunction(string sign, int numberOfParameters = 0)
         {
-            return (List<string> list) => pdf.AddSign(sign, list, numberOfParameters);
+            return (List<string> list) =>
+                pdf.AddSign(sign, list, numberOfParameters);
         }
 
         /// <summary>
         /// Returns dynamically generated GetSign function.
         /// </summary>
-        public Func<List<string>, CzeTexText> CreateGetSignFunction(string sign,
-                                                                    int numberOfParameters = 0)
+        public Func<List<string>, CzeTexText>
+            CreateGetSignFunction(string sign,int numberOfParameters = 0)
         {
-            return (List<string> list) => pdf.GetSign(sign, list, numberOfParameters);
+            return (List<string> list) =>
+                pdf.GetSign(sign, list, numberOfParameters);
         }
     }
 }

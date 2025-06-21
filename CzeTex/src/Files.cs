@@ -8,7 +8,7 @@ namespace CzeTex
     /// </summary>
     public static class FilesConstants
     {
-        public static int lengthOfTxtExtension = 3;
+        public const int lengthOfTxtExtension = 3;
     }
 
     /// <summary>
@@ -23,7 +23,8 @@ namespace CzeTex
             this.path = this.GetPath(path);
         }
 
-        public Files(string path) : this(path.Split(System.IO.Path.DirectorySeparatorChar)) { }
+        public Files(string path) :
+            this(path.Split(System.IO.Path.DirectorySeparatorChar)) { }
 
         public string Path
         {
@@ -39,7 +40,8 @@ namespace CzeTex
 
             if (debug)
             {
-                return System.IO.Path.Combine(new string[] { Directory.GetCurrentDirectory(), "..", "..", "..", FilePath });
+                return System.IO.Path.Combine(new string[]
+                    { Directory.GetCurrentDirectory(), "..", "..", "..", FilePath });
             }
             else
             {
@@ -72,7 +74,8 @@ namespace CzeTex
         {
             int length = this.path.Length;
 
-            return this.path[0..(length - FilesConstants.lengthOfTxtExtension)] + "pdf";
+            return this.path[0..(length - FilesConstants.lengthOfTxtExtension)]
+                + "pdf";
         }
 
         /// <summary>
@@ -121,7 +124,8 @@ namespace CzeTex
                 return this.ConcatPath(path);
             }
 
-            throw new System.IO.FileNotFoundException($"File {this.ConcatPath(path)} not found");
+            throw new System.IO.FileNotFoundException(
+                $"File {this.ConcatPath(path)} not found");
         }
 
         /// <summary>

@@ -8,11 +8,12 @@ namespace CzeTex
     /// </summary>
     public static class CommanderConstants
     {
-        public static char specialCharacter = '/';
+        public const char specialCharacter = '/';
     }
 
     /// <summary>
-    /// Is a centerpoint of CzeTex project, manages calls to another class and function.
+    /// Is a centerpoint of CzeTex project, manages calls 
+    /// to another class and function.
     /// </summary>
     public class Commander
     {
@@ -70,7 +71,8 @@ namespace CzeTex
                     }
                     else
                     {
-                        string functionName = StringFunctions.GetFunctionName(words[wordsIndex]);
+                        string functionName =
+                            StringFunctions.GetFunctionName(words[wordsIndex]);
 
                         int idx = trie.FindFunction(functionName);
 
@@ -81,11 +83,13 @@ namespace CzeTex
                                 ReadParameter();
                             }
 
-                            ((Action<List<string>>)trie.addFunctions[idx])(parameters);
+                            ((Action<List<string>>)trie.addFunctions[idx])
+                                (parameters);
                         }
                         else
                         {
-                            ((Action<List<string>>)trie.addFunctions[idx])(new List<string>());
+                            ((Action<List<string>>)trie.addFunctions[idx])
+                                (new List<string>());
                         }
                     }
                 }
@@ -213,7 +217,8 @@ namespace CzeTex
 
             if (words == null || wordsIndex >= words.Length)
             {
-                throw new Exception("Parameters of functions should be at the same line as the function");
+                throw new Exception("Parameters of functions" +
+                    "should be at the same line as the function");
             }
 
             string word = words[wordsIndex];

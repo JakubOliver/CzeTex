@@ -10,8 +10,8 @@ namespace CzeTex
     /// Stack for text generation.
     /// </summary>
     /// <remarks>
-    /// The appearance of the generated text is determined by the top layer of the 
-    /// CharacteristicStack (font, size, special mutation of text etc.).
+    /// The appearance of the generated text is determined by the top layer of 
+    /// the CharacteristicStack (font, size, special mutation of text etc.).
     /// <para>
     /// A base layer with default font, size and without any special 
     /// characteristic is pushed at the beginning.
@@ -34,9 +34,14 @@ namespace CzeTex
         }
 
         /// <summary>
-        /// Adds new layer to the characteristic stack base on new font and font size.
+        /// Adds new layer to the characteristic stack base 
+        /// on new font and font size.
         /// </summary>
-        public void Push(PdfFont font, uint size, TextAlignment alignment)
+        public void Push(
+            PdfFont font,
+            uint size,
+            TextAlignment alignment
+        )
         {
             Push(new TextCharacteristics(font, size, alignment));
         }
@@ -48,11 +53,19 @@ namespace CzeTex
         {
             if (this.counter != 0)
             {
-                Push(new TextCharacteristics(font, Top().Size, Top().Alignment));
+                Push(new TextCharacteristics(
+                    font,
+                    Top().Size,
+                    Top().Alignment
+                ));
             }
             else
             {
-                Push(new TextCharacteristics(font, Fonts.defaultSize, Fonts.defaultAlignment));
+                Push(new TextCharacteristics(
+                    font,
+                    Fonts.defaultSize,
+                    Fonts.defaultAlignment
+                ));
             }
         }
 
@@ -63,11 +76,19 @@ namespace CzeTex
         {
             if (this.counter != 0)
             {
-                Push(new TextCharacteristics(Top().Font, size, Top().Alignment));
+                Push(new TextCharacteristics(
+                    Top().Font,
+                    size,
+                    Top().Alignment
+                ));
             }
             else
             {
-                Push(new TextCharacteristics(Fonts.sansDefaultFont, size, Fonts.defaultAlignment));
+                Push(new TextCharacteristics(
+                    Fonts.sansDefaultFont,
+                    size,
+                    Fonts.defaultAlignment
+                ));
             }
         }
 
@@ -78,12 +99,28 @@ namespace CzeTex
         {
             if (this.counter != 0)
             {
-                Push(new TextCharacteristics(Top().Font, Top().Size, alignment));
+                Push(new TextCharacteristics(
+                    Top().Font,
+                    Top().Size,
+                    alignment
+                ));
             }
             else
             {
-                Push(new TextCharacteristics(Fonts.sansDefaultFont, Fonts.defaultSize, alignment));
+                Push(new TextCharacteristics(
+                    Fonts.sansDefaultFont,
+                    Fonts.defaultSize,
+                    alignment
+                ));
             }
+        }
+
+        /// <summary>
+        /// Changes serif of text.
+        /// </summary>
+        private void ChangeSerif()
+        {
+            Sans = !Sans;
         }
 
         /// <summary>
@@ -98,9 +135,11 @@ namespace CzeTex
         {
             if (Top() is ListItemText)
             {
-                //This warning is unjustified because first condition checks for this error.
-                //So if TopNode().Next == null, then the rest will not be even evaluated.
-                if (TopNode().Next == null || TopNode().Next!.Value is not ListText)
+                //This warning is unjustified because first condition checks 
+                // for this error. So if TopNode().Next == null, then the 
+                // rest will not be even evaluated.
+                if (TopNode().Next == null ||
+                    TopNode().Next!.Value is not ListText)
                 {
                     throw new Exception("List should comes before List item");
                 }
@@ -116,7 +155,7 @@ namespace CzeTex
 
             if (Top() is SerifTextCharacteristics)
             {
-                Sans = !Sans;
+                this.ChangeSerif();
             }
 
             return base.Pop();

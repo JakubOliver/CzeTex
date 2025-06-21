@@ -11,7 +11,8 @@
             }
             else if (args.Length == 2)
             {
-                //Input file with CzeTex text and custom setup json file are provided
+                //Input file with CzeTex text and 
+                //custom setup json file are provided
                 Commander commander = new Commander(args[0], args[1]);
             }
             else

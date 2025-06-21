@@ -23,7 +23,9 @@ namespace CzeTex
         /// </summary>
         public void AddMathText(string text)
         {
-            this.AddText(new CzeTexText(text).SetFont(Fonts.mathFont));
+            this.AddText(
+                new CzeTexText(text).SetFont(Fonts.mathFont)
+            );
         }
 
         /// <summary>
@@ -31,14 +33,16 @@ namespace CzeTex
         /// </summary>
         public CzeTexText GetMathText(string text)
         {
-            CzeTexText mathText = new CzeTexText(text).SetFont(Fonts.mathFont);
+            CzeTexText mathText =
+                new CzeTexText(text).SetFont(Fonts.mathFont);
             return mathText;
         }
 
         /// <summary>
         /// Adds math sign and checks calling CzeTex function.
         /// </summary>
-        public void AddSign(string sign, List<string> list, int numberOfParameters = 0)
+        public void AddSign(string sign, List<string> list,
+                            int numberOfParameters = 0)
         {
             CallerManager.CorrectParameters(list, numberOfParameters);
 
@@ -48,7 +52,8 @@ namespace CzeTex
         /// <summary>
         /// Returns math sign and checks calling CzeTex function.
         /// </summary>
-        public CzeTexText GetSign(string sign, List<string> list, int numberOfParameters = 0)
+        public CzeTexText GetSign(string sign, List<string> list,
+                                  int numberOfParameters = 0)
         {
             CallerManager.CorrectParameters(list, numberOfParameters);
 
@@ -65,8 +70,19 @@ namespace CzeTex
 
             //Method ParagraphIsSet checks whether the activeParagraph
             //is null, therefore the warning is unjustified.
-            this.AddParameterToParagraph(this.activeParagraph!, list[0], true);
-            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, 5, true);
+            this.AddParameterToParagraph(
+                this.activeParagraph!,
+                list[0],
+                addDirectly: true
+            );
+            
+            this.AddParameterToParagraph(
+                this.activeParagraph!,
+                list[1],
+                addDirectly: true,
+                rise: 5,
+                addWhiteSpace: true
+            );
         }
 
         /// <summary>
@@ -79,8 +95,19 @@ namespace CzeTex
 
             //Method ParagraphIsSet checks whether the activeParagraph
             //is null, therefore the warning is unjustified.
-            this.AddParameterToParagraph(this.activeParagraph!, list[0], true);
-            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, -3, true);
+            this.AddParameterToParagraph(
+                this.activeParagraph!,
+                list[0],
+                addDirectly: true
+            );
+
+            this.AddParameterToParagraph(
+                this.activeParagraph!,
+                list[1],
+                addDirectly: true,
+                rise: -3,
+                addWhiteSpace: true
+            );
         }
 
         /// <summary>
@@ -93,17 +120,34 @@ namespace CzeTex
 
             //Method ParagraphIsSet checks whether the activeParagraph
             //is null, therefore the warning is unjustified.
-            this.AddParameterToParagraph(this.activeParagraph!, list[0], true, 2);
+            this.AddParameterToParagraph(
+                this.activeParagraph!,
+                list[0],
+                addDirectly: true,
+                rise: 2
+            );
+
             this.AddText("/", false);
-            this.AddParameterToParagraph(this.activeParagraph!, list[1], true, -2, true);
+
+            this.AddParameterToParagraph(
+                this.activeParagraph!,
+                list[1],
+                addDirectly: true,
+                rise: -2,
+                addWhiteSpace: true
+            );
         }
 
         /// <summary>
         /// Decodes and adds parameters into their respective function paragraphs.
         /// </summary>
-        public Paragraph AddParameterToParagraph(Paragraph paragraph, string parameter,
-                                                bool addStraight = false, float rise = 0,
-                                                bool addWhiteSpace = false)
+        public Paragraph AddParameterToParagraph(
+            Paragraph paragraph,
+            string parameter,
+            bool addDirectly = false,
+            float rise = 0,
+            bool addWhiteSpace = false
+        )
         {
             string[] parameterSplit = parameter.Split();
 
@@ -112,15 +156,20 @@ namespace CzeTex
                 CzeTexText textToAdd;
                 if (StringFunctions.IsFunction(parameterSplit[j]))
                 {
-                    string functionName = StringFunctions.GetFunctionName(parameterSplit[j]);
+                    string functionName =
+                        StringFunctions.GetFunctionName(parameterSplit[j]);
+
                     int idx = trie.FindFunction(functionName);
+
                     if (trie.getFunctions[idx] == null)
                     {
                         throw new InvalidParametersException(
                             $"Function {functionName} does not have getFunction.");
                     }
 
-                    textToAdd = ((Func<List<string>, CzeTexText>)trie.getFunctions[idx]!)(new List<string>());
+                    //Calls get function for respective CzeTex text function.
+                    textToAdd = ((Func<List<string>, CzeTexText>)
+                        trie.getFunctions[idx]!)(new List<string>());
                 }
                 else
                 {
@@ -128,7 +177,8 @@ namespace CzeTex
                 }
 
                 textToAdd.AddTextRise(rise);
-                if (addStraight)
+                
+                if (addDirectly)
                 {
                     this.AddText(textToAdd, addWhiteSpace);
                 }
@@ -139,14 +189,15 @@ namespace CzeTex
 
                 if (j != StringFunctions.LastIndex(parameterSplit))
                 {
-                    if (addStraight)
+                    if (addDirectly)
                     {
                         this.AddText("");
                     }
                     else
                     {
-                        //The iText library has auto cropping enabled after every word in the cell, 
-                        //so it is necessary to use non-printable characters instead of spaces
+                        //The iText library has auto cropping enabled after 
+                        //every word in the cell, so it is necessary to use 
+                        // non-printable characters instead of spaces
                         paragraph.Add(new CzeTexText("\u00A0"));
                     }
                 }
@@ -176,7 +227,11 @@ namespace CzeTex
 
             for (int i = 0; i < repetition; i++)
             {
-                this.AddParameterToParagraph(paragraph, text, rise: -(Fonts.defaultSize + 1));
+                this.AddParameterToParagraph(
+                    paragraph,
+                    text,
+                    rise: -(Fonts.defaultSize + 1)
+                );
             }
 
             cell.Add(paragraph);

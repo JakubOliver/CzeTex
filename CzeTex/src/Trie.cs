@@ -8,8 +8,8 @@ namespace CzeTex{
     /// </summary>
     public static class TrieConstants
     {
-        public static int numberOfChildren = 26;
-        public static char smallestAvailableCharacter = 'a';
+        public const int numberOfChildren = 26;
+        public const char smallestAvailableCharacter = 'a';
     }
 
     /// <summary>
@@ -33,13 +33,15 @@ namespace CzeTex{
     /// A trie tree that stores the indices of functions in arrays in its nodes.
     /// </summary>
     /// <remarks>
-    /// This trie is built only with nodes representing lowercase English letters, from this part comes the restriction that
+    /// This trie is built only with nodes representing lowercase English letters, 
+    /// from this part comes the restriction that
     /// CzeTex function names can be only made from lowercase letters.
     /// <para>
     /// Bijection between the name of CzeTex function and trie is the following: 
-    ///     the function name corresponds to the sequence of letters along the path from the root 
-    ///     to the function node (node representing last character of function name), 
-    ///     therefore cannot exists two CzeTex functions with the same name. 
+    ///     the function name corresponds to the sequence of letters along the path 
+    ///     from the root to the function node (node representing last character 
+    ///     of function name), therefore cannot exists two CzeTex functions 
+    ///     with the same name. 
     /// </para>
     /// </remarks>
     public class Trie
@@ -78,8 +80,10 @@ namespace CzeTex{
                     current.CreateChildren();
                 }
 
-                //This warning is unjustified because current.children is is initialized in CreateChildren function.
-                //Therefore if current.children did not exist, then it was created in previous if statement.
+                //This warning is unjustified because current.children is is 
+                //initialized in CreateChildren function.
+                //Therefore if current.children did not exist, 
+                // then it was created in previous if statement.
                 //So I disabled the warning.
                 if (current.children![idx] == null)
                 {
@@ -95,7 +99,11 @@ namespace CzeTex{
         /// <summary>
         /// Add into the function node index of add and get function in respective arrays.
         /// </summary>
-        public void AddFunction(string name, Action<List<string>> addFunction, Func<List<string>, Text>? getFunction = null)
+        public void AddFunction(
+            string name,
+            Action<List<string>> addFunction,
+            Func<List<string>, Text>? getFunction = null
+        )
         {
             TrieNode current = GetFunctionNode(name);
 
@@ -128,10 +136,14 @@ namespace CzeTex{
             foreach (char c in name)
             {
                 idx = GetIdx(c);
-                if (current.children == null || idx < 0 ||
-                    idx > TrieConstants.numberOfChildren || current.children[idx] == null)
+                if (current.children == null ||
+                    idx < 0 ||
+                    idx > TrieConstants.numberOfChildren ||
+                    current.children[idx] == null
+                )
                 {
-                    throw new TrieExceptions($"Given CzeTex function {name} does not exist!");
+                    throw new TrieExceptions(
+                        $"Given CzeTex function {name} does not exist!");
                 }
 
                 current = current.children[idx];
@@ -154,7 +166,8 @@ namespace CzeTex{
             {
                 if (node.children[i] != null)
                 {
-                    Console.WriteLine("{0}", (char)(i + TrieConstants.smallestAvailableCharacter));
+                    Console.WriteLine("{0}",
+                        (char)(i + TrieConstants.smallestAvailableCharacter));
                     DFS(node.children[i]);
                 }
             }

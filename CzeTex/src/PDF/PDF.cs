@@ -116,7 +116,8 @@ namespace CzeTex{
             CallerManager.IsParameterUint(list);
 
             uint size = Convert.ToUInt32(list[0]);
-            size = Fonts.defaultTitleSize - (size * Fonts.defaultTitleSizeDifference);
+            size = Fonts.defaultTitleSize -
+                   (size * Fonts.defaultTitleSizeDifference);
 
             //Seconds checks whether the size overflow.
             if (size < Fonts.defaultSize || size > Fonts.defaultTitleSize)
@@ -146,7 +147,8 @@ namespace CzeTex{
         {
             if (this.activeParagraph == null)
             {
-                throw new Exception("No active paragraph. Create a paragraph first.");
+                throw new Exception(
+                    "No active paragraph. Create a paragraph first.");
             }
 
             if (this.stack.Top() is DoNotAddTextCharacteristics)
@@ -166,7 +168,9 @@ namespace CzeTex{
 
             if (addWhiteSpace)
             {
-                this.activeParagraph.Add(this.stack.Top().Define(new CzeTexText(" ")));
+                this.activeParagraph.Add(
+                    this.stack.Top().Define(new CzeTexText(" "))
+                );
             }
         }
 
@@ -292,7 +296,12 @@ namespace CzeTex{
         /// </summary>
         public void AddRaisedText(uint rise)
         {
-            this.stack.Push(new RaisedText(this.stack.Font, this.stack.Size, this.stack.Alignment, rise));
+            this.stack.Push(new RaisedText(
+                this.stack.Font,
+                this.stack.Size,
+                this.stack.Alignment,
+                rise
+            ));
         }
 
         /// <summary>
@@ -300,6 +309,8 @@ namespace CzeTex{
         /// </summary>
         public void AddAlignmentLeft(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(Fonts.alignmentLeft);
         }
 
@@ -308,6 +319,8 @@ namespace CzeTex{
         /// </summary>
         public void AddAlignmentRight(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(Fonts.alignmentRight);
         }
 
@@ -316,6 +329,8 @@ namespace CzeTex{
         /// </summary>
         public void AddAlignmentCenter(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(Fonts.alignmentCenter);
         }
 
@@ -324,6 +339,8 @@ namespace CzeTex{
         /// </summary>
         public void AddAlignmentJustified(List<string> list)
         {
+            CallerManager.CorrectParameters(list, 0);
+
             this.stack.Push(Fonts.alignmentJustified);
         }
 
@@ -365,7 +382,11 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(new UnderLineText(stack.Font, stack.Size, stack.Alignment));
+            this.stack.Push(new UnderLineText(
+                stack.Font,
+                stack.Size,
+                stack.Alignment
+            ));
         }
 
         /// <summary>
@@ -375,7 +396,11 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(new LineThroughText(stack.Font, stack.Size, stack.Alignment));
+            this.stack.Push(new LineThroughText(
+                stack.Font,
+                stack.Size,
+                stack.Alignment
+            ));
         }
 
         /// <summary>
@@ -386,7 +411,11 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
-            this.stack.Push(new ListText(stack.Font, stack.Size, stack.Alignment));
+            this.stack.Push(new ListText(
+                stack.Font,
+                stack.Size,
+                stack.Alignment
+            ));
         }
 
         /// <summary>
@@ -396,7 +425,11 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.stack.Push(new ListItemText(stack.Font, stack.Size, stack.Alignment));
+            this.stack.Push(new ListItemText(
+                stack.Font,
+                stack.Size,
+                stack.Alignment
+            ));
         }
 
         /// <summary>
@@ -427,6 +460,7 @@ namespace CzeTex{
             }
 
             int numberOfChild = this.activeParagraph.GetChildren().Count;
+
             if (numberOfChild == 0)
             {
                 throw new RemovingFromParagraphException(
@@ -498,6 +532,7 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
+            
             //This warning is unjustified, because in method 
             //CreateParagraph is always activeParagraph
             //not equal to null.

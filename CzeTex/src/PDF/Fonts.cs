@@ -11,38 +11,70 @@ namespace CzeTex
     /// </summary>
     public static class Fonts
     {
-        public static bool usingSans = true;
-        public static PdfFont sansDefaultFont =
-            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Regular.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont sansBoldFont =
-            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Bold.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont sansCursiveFont =
-            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-Italic.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont sansBoldCursiveFont =
-            PdfFontFactory.CreateFont("src/fonts/sans/OpenSans-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont serifDefaultFont =
-            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-Regular.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont serifBoldFont =
-            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-Bold.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont serifCursiveFont =
-            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-Italic.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont serifBoldCursiveFont =
-            PdfFontFactory.CreateFont("src/fonts/serif/LibertinusSerif-BoldItalic.ttf", PdfEncodings.IDENTITY_H);
-        public static PdfFont mathFont =
-            PdfFontFactory.CreateFont("src/fonts/math/LibertinusMath-Regular.ttf", PdfEncodings.IDENTITY_H);
-        public static Color linkColor = ColorConstants.BLUE;
-        public static uint defaultSize = 11;
-        public static uint defaultTitleSizeDifference = 2;
-        public static uint defaultTitleSize = 20;
-        public static uint defaultSubTitleSize =
+        public const bool usingSans = true;
+
+        public static readonly PdfFont sansDefaultFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/sans/OpenSans-Regular.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont sansBoldFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/sans/OpenSans-Bold.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont sansCursiveFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/sans/OpenSans-Italic.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont sansBoldCursiveFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/sans/OpenSans-BoldItalic.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont serifDefaultFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/serif/LibertinusSerif-Regular.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont serifBoldFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/serif/LibertinusSerif-Bold.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont serifCursiveFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/serif/LibertinusSerif-Italic.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont serifBoldCursiveFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/serif/LibertinusSerif-BoldItalic.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+        public static readonly PdfFont mathFont =
+            PdfFontFactory.CreateFont(
+                "src/fonts/math/LibertinusMath-Regular.ttf",
+                PdfEncodings.IDENTITY_H
+            );
+
+        public static readonly Color linkColor = ColorConstants.BLUE;
+
+        public const uint defaultSize = 11;
+        public const uint defaultTitleSizeDifference = 2;
+        public const uint defaultTitleSize = 20;
+        public const uint defaultSubTitleSize =
             defaultTitleSize - defaultTitleSizeDifference;
-        public static uint defaultSubSubTitleSize =
+        public const uint defaultSubSubTitleSize =
             defaultTitleSize - 2 * defaultTitleSizeDifference;
-        public static float defaultSpacing = 1.25f;
-        public static TextAlignment alignmentLeft = TextAlignment.LEFT;
-        public static TextAlignment alignmentCenter = TextAlignment.CENTER;
-        public static TextAlignment alignmentRight = TextAlignment.RIGHT;
-        public static TextAlignment alignmentJustified = TextAlignment.JUSTIFIED;
-        public static TextAlignment defaultAlignment = alignmentLeft;
+
+        public const float defaultSpacing = 1.25f;
+        
+        public const TextAlignment alignmentLeft = TextAlignment.LEFT;
+        public const TextAlignment alignmentCenter = TextAlignment.CENTER;
+        public const TextAlignment alignmentRight = TextAlignment.RIGHT;
+        public const TextAlignment alignmentJustified = TextAlignment.JUSTIFIED;
+        public const TextAlignment defaultAlignment = alignmentLeft;
     }
 }
