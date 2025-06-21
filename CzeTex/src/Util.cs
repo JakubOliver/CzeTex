@@ -171,7 +171,8 @@ namespace CzeTex
     /// <summary>
     /// Class for incorrect adding to paragraph related exceptions.
     /// </summary>
-    public class AddingToNonExistingParagraphException : CzeTexException {
+    public class AddingToNonExistingParagraphException : CzeTexException
+    {
         public AddingToNonExistingParagraphException(string message) 
             : base(message) { }
     }

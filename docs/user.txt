@@ -21,6 +21,9 @@ Pozn: pokud by i tak byl nějaký problém s balíčky, tak je možné je doinst
 Program nemá žádná dodatečné interaktivní ovládání. Uživatel může chod programu upravovat při volání programu pomocí dvou vstupních parametrů. 
 Jediná další možnost personalizace programu se skrývá právě v druhém parametru, poněvadž si může uživatel vytvořit své vlastní textové CzeTex funkce, která následně může v textu využívat. 
 
+/section
+Detailnější informace o psaní vstupních souborů v CzeTex syntaxi si můžete přečíst v části dokumentace zabývající se /bold příklady použití /xd
+
 /section()
 /bold() Doporučení: Setup soubory musí mít přesnou strukturu a správné odkazy na interní funkce, proto se doporučuje, aby se při vytváření personalizovaných setup souborů využila kopie globálního a pouze upravili klíčová slova dle vlastní preferencí. /x
 /x

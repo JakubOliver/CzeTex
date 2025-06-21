@@ -118,7 +118,7 @@ namespace CzeTex
                 return GetRelativePath(path, true);
             }
 
-            //Try absolute path (at lest from home)
+            //Try absolute path (at least path from home)
             if (File.Exists(this.ConcatPath(path)))
             {
                 return this.ConcatPath(path);

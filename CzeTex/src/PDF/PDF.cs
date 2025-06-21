@@ -3,6 +3,7 @@ using iText.Kernel.Pdf.Action;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
 
@@ -189,7 +190,7 @@ namespace CzeTex{
             {
                 this.stack.Push(Fonts.serifBoldCursiveFont);
             }
-            
+
         }
 
         /// <summary>
@@ -199,7 +200,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            if (this.stack.IsFontInStack(Fonts.sansCursiveFont) || 
+            if (this.stack.IsFontInStack(Fonts.sansCursiveFont) ||
                 this.stack.IsFontInStack(Fonts.serifCursiveFont))
             {
                 this.AddBoldCursiveText(list);
@@ -351,7 +352,7 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.AddText("/");
+            this.AddText("/", false);
         }
 
         /// <summary>
@@ -520,7 +521,7 @@ namespace CzeTex{
         public void AddEndingExclamationMark(List<string> list)
         {
             CallerManager.CorrectParameters(list, 0);
-            
+
             this.AddEndingSign(list, "!");
         }
 
@@ -532,7 +533,7 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.CreateParagraph(list);
-            
+
             //This warning is unjustified, because in method 
             //CreateParagraph is always activeParagraph
             //not equal to null.
@@ -547,6 +548,16 @@ namespace CzeTex{
             CallerManager.CorrectParameters(list, 0);
 
             this.AddText("\n");
+        }
+
+        /// <summary>
+        /// Adds whitespace to the text.
+        /// </summary>
+        public void AddWhitespace(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 0);
+
+            this.AddText("");
         }
     }
 }

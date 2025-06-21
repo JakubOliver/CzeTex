@@ -249,6 +249,11 @@
     "addFunction" : "AddNewLine",
     "getFunction" : null
   },
+  "wspace" : {
+    "_description" : "Adds whitespace to the text. #nonPairFunction",
+    "addFunction" : "AddWhitespace",
+    "getFunction" : null
+  },
   "xc" : {
     "_description" : "Ends layer with comma. #nonPairFunction",
     "addFunction" : "AddEndingComma",

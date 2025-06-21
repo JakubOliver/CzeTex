@@ -7,10 +7,10 @@ Jak už bylo zmíněno v sekci pri uživatele hlavní způsob jak ovlivnit chod 
 /subtitle Setup JSON soubor /x
 
 /section
-Jednou z možností jak pozměnit program je, že předefinování jeho mapování CzeTex textových funkcí a těch kódových. 
+Jednou z možností jak pozměnit program je předefinování jeho mapování CzeTex textových funkcí na ty kódové. 
 
 /section
-Výchozí nastavení mapování je CzeTex/Setup.json, ale je předpřipravená verze s českou lokalizací. Tu najdete v CzeTex/examples a jmenuje se nastaveni.json a soubor proNastaveni.txt využívá jeho mapování. 
+Výchozím nastavení mapování je CzeTex/Setup.json, ale je předpřipravená i verze s českou lokalizací (neobsahuje všechny funkce pro demonstraci, že není potřeba implementovat vše). Tu najdete v složce CzeTex/examples a jmenuje se nastaveni.json a soubor proNastaveni.txt využívá jeho mapování. 
 
 /section
 Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /newline /bold dotnet run examples/proNastaveni.txt examples/nastaveni.json /x
@@ -18,19 +18,27 @@ Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /
 /subtitle Vytváření vstupního souboru /x
 
 /section
-Projekt obsahuje desítky příkazů a nepovažuji za příznačné zde udělat vyčerpávající výčet všech, poněvadž s jiným setup souborem by byli nepoužitelné. Proto zde spíš ukážu myšlenku tvorby. Všechny příkazy potom najdete v konkrétním setup souboru, který bude chtít použít, který bude nejspíše pro většinu výchozí CzeTex/Setup.json.
+Projekt obsahuje desítky příkazů a nepovažuji za příznačné zde udělat vyčerpávající výčet všech, poněvadž s jiným setup souborem by byli nepoužitelné. Proto zde spíš ukážu myšlenku tvorby. Všechny příkazy potom najdete v konkrétním setup souboru, který budete chtít použít, například výchozí CzeTex/Setup.json.
 
 /section
-/bold Poznámka: všechny příkazy zde budu ukazovat s mezerou mezi speciálním znakem textem příznakem, kvůli technickým důvodům, ale pro správné fungování je potřeba ve vstupním souboru psát bez mezery /x
+/bold
+Každý příkaz musí začínat speciálním znakem /slash /wspace a následně pokračovat názvem příkazu. Různé příkazy mají různé specifika viz dále.
+/x
 
 /gtitle(3) Nepárové příkazy /x
 
 /section
 Mezi nepárové příkazy patří mimo jiné například příkaz /bold /slash section /x který vytvoří nový paragraf. Pozn: Každý text musí být v nějakém bloku nebo paragrafu. 
 
+/section
+V Setup.json jsou tyto příkazy označené /bold #nonPairFunction /xd
+
 /gtitle(3) Párové příkazy /x
 /section 
 Mezi párové příkazy patří například vytvoření bloku tučného písma, tedy /bold /slash bold /x toto je tučný text /bold /slash x /x by byl tučný text. Můžete si povšimnout, že párové příkazy jsou ukončené generickým znakem /bold /slash x /x z toho plyne, že se nemohou příkazy překrývat (ten který začne později se dříve ukončí).
+
+/section
+V Setup.json jsou tyto příkazy označené /bold #pairFunction /xd
 
 /newpage
 
@@ -43,6 +51,9 @@ Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypa
 
 /section
 /math S = 4 /times /pi /times /pow(r,2) /x
+
+/section
+V Setup.json jsou tyto příkazy označené /bold #hasParameter /xd
 
 /offset
 /x
