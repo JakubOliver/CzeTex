@@ -85,8 +85,6 @@ je /underline vnitrozemský stát /x ve /linethrough východní /x
 /section
 Poznámka: jak můžeme vidět na příkladu dodatečné mezery nepozmění výsledný text, ten je generován pouze podle příkazů a textu. Dokonce příkazy jako /slash slash, odpovídající znaku /slash , nevytvoří za sebou ani mezeru.
 
-/newpage
-
 /gtitle(3) Změna nepatkového na patkový font (a naopak) a zarovnání textu /xc
 
 /section
@@ -96,9 +94,7 @@ Poznámka: jak můžeme vidět na příkladu dodatečné mezery nepozmění výs
 /tab /tab /slash size(15) /newline
 /tab /tab /slash section /newline
 /tab /tab Oficiálním názvem státu podle ústavy je Česká republika; jednoslovný název Česko se v ústavě nevyskytuje, je však součástí oficiální databáze OSN coby jednoslovný název státu. /newline
-/tab /tab /slash x /newline
-/tab /slash x /newline
-/slash x
+/slash x /slash x /slash x 
 /x
 
 /x
@@ -107,9 +103,7 @@ Poznámka: jak můžeme vidět na příkladu dodatečné mezery nepozmění výs
         /size(15)
         /section
         Oficiálním názvem státu podle ústavy je Česká republika; jednoslovný název Česko se v ústavě nevyskytuje, je však součástí oficiální databáze OSN coby jednoslovný název státu.
-        /x
-    /x
-/x
+/x /x /x
 
 /section
 Poznámka: může se zdát, že obecný ukončovací příkaz dokáže být dosti nepřehledný, což se může u velmi komplikovaných výrazů stát, ale uvážil jsem, že při psaní klasického textu tato situace nenastane až tak často a napsání kratšího příkazu zvyšuje rychlost psaní textu a je pohodlnější, což jsem bral jako přednější. Plus matematická notace, která může mít mnoho příkazů na menší části textu, má pouze jednotky párových příkazů.
@@ -128,6 +122,14 @@ Limita f(x) jak x se přibližuje k A je rovna L /slash iff /slash forall /slash
 /math
 Limita f(x) jak x se přibližuje k A je rovna L /iff /forall /epsilon > 0 /exists /delta > 0 /forall x /in P( A, /delta ): f(x) /in U( L, /epsilon ).
 /x
+
+/gtitle(2) Technická omezení /x
+
+/section
+Při práci se seznami CzeTex umožňuje pouze globální nastavení fontu a velikosti pro celý seznam a ne pro bod nebo část bodu, speciální úpravy jako podtržení atd. nejsou podporovány vůbec.
+
+/section
+U matematické notace je možné zadávat jako parametry u mocnin, indexů a zlomků pouze příkazy, které mají get metodu, tedy pouze speciální znaky. Není tedy možné mít zlomek ve zlomku nebo mocninu ve zlomku atd.
 
 /x
 /offset

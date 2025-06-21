@@ -141,7 +141,7 @@ namespace CzeTex
                 if (TopNode().Next == null ||
                     TopNode().Next!.Value is not ListText)
                 {
-                    throw new Exception("List should comes before List item");
+                    throw new Exception("List should come right before List item");
                 }
 
                 //This warning is also unjustified based on the same reasoning.
