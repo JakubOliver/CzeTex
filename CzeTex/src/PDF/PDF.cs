@@ -559,5 +559,19 @@ namespace CzeTex{
 
             this.AddText("");
         }
+
+        /// <summary>
+        /// Starts section with size of text based 
+        /// on the parameter.
+        /// </summary>
+        public void AddDifferentSize(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 1);
+            CallerManager.IsParameterUint(list);
+
+            uint size = Convert.ToUInt32(list[0]);
+
+            this.stack.Push(size);
+        }
     }
 }

@@ -34,6 +34,11 @@
     "addFunction" : "GenericTitle",
     "getFunction" : null
   },
+  "size" : {
+    "_description" : "Start section with size of text based on 1 parameter. #pairFunction #hasParameter",
+    "addFunction" : "AddDifferentSize",
+    "getFunction" : null
+  },
   "section": {
     "_description" : "Starts new paragraph. #nonPairFunction",
     "addFunction": "CreateParagraph",
