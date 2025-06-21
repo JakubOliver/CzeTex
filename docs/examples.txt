@@ -55,8 +55,82 @@ Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypa
 /section
 V Setup.json jsou tyto příkazy označené /bold #hasParameter /xd
 
-/offset
+/gtitle(2) Konkrétní příklady /x
+
+/gtitle(3) Nadpis 1.úrovně /x
+
+/section
+/bold /slash title Toto je text nadpisu /slash x /x 
+/newline nebo můžeme nahradit konkrétní nadpis generickým /newline
+/bold /slash gtitle(1) Toto je text nadpisu /slash x /x
+
+/section
+/title Toto je text nadpisu /x
+
+/justify
+/gtitle(3) Odstavec textu a speciální úpravy /x
+
+/bold 
+/section
+/slash section /newline
+/slash bold Česko /slash xc plným názvem /slash cursive Česká republika /slash xc /newline je /slash underline vnitrozemský stát /slash x ve /slash linethrough východní /slash x 
+/newline /slash bold /slash cursive střední Evropě /slash x /slash xd
 /x
+
+/section
+/bold Česko /xc plným názvem /cursive Česká republika /xc 
+je /underline vnitrozemský stát /x ve /linethrough východní /x 
+/bold /cursive střední Evropě /x /xd
+
+/section
+Poznámka: jak můžeme vidět na příkladu dodatečné mezery nepozmění výsledný text, ten je generován pouze podle příkazů a textu. Dokonce příkazy jako /slash slash, odpovídající znaku /slash , nevytvoří za sebou ani mezeru.
+
+/newpage
+
+/gtitle(3) Změna nepatkového na patkový font (a naopak) a zarovnání textu /xc
+
+/section
+/bold
+/slash right /newline
+/tab /slash serif /newline
+/tab /tab /slash size(15) /newline
+/tab /tab /slash section /newline
+/tab /tab Oficiálním názvem státu podle ústavy je Česká republika; jednoslovný název Česko se v ústavě nevyskytuje, je však součástí oficiální databáze OSN coby jednoslovný název státu. /newline
+/tab /tab /slash x /newline
+/tab /slash x /newline
+/slash x
+/x
+
+/x
+/serif
+    /right
+        /size(15)
+        /section
+        Oficiálním názvem státu podle ústavy je Česká republika; jednoslovný název Česko se v ústavě nevyskytuje, je však součástí oficiální databáze OSN coby jednoslovný název státu.
+        /x
+    /x
+/x
+
+/section
+Poznámka: může se zdát, že obecný ukončovací příkaz dokáže být dosti nepřehledný, což se může u velmi komplikovaných výrazů stát, ale uvážil jsem, že při psaní klasického textu tato situace nenastane až tak často a napsání kratšího příkazu zvyšuje rychlost psaní textu a je pohodlnější, což jsem bral jako přednější. Plus matematická notace, která může mít mnoho příkazů na menší části textu, má pouze jednotky párových příkazů.
+
+/gtitle(3) Matematická notace /x
+
+/section
+/bold 
+/slash section /newline
+/slash math /newline
+Limita f(x) jak x se přibližuje k A je rovna L /slash iff /slash forall /slash epsilon > 0 /slash exists /slash delta > 0 /slash forall x /slash in P( A, /slash delta ): f(x) /slash in U( L, /slash epsilon ). /newline
+/slash x
+/x
+
+/section
+/math
+Limita f(x) jak x se přibližuje k A je rovna L /iff /forall /epsilon > 0 /exists /delta > 0 /forall x /in P( A, /delta ): f(x) /in U( L, /epsilon ).
+/x
+
+/x
+/offset
 
 /center
 /gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE CZETEX/EXAMPLES, DEFINICE FUNKCÍ V SETUP.JSON NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU. /x /x
