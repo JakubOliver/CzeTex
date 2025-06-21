@@ -254,38 +254,70 @@ namespace CzeTex{
             {
                 if (this.stack.Font == Fonts.sansBoldFont)
                 {
-                    this.stack.Push(Fonts.serifCursiveFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.serifBoldFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
                 else if (this.stack.Font == Fonts.sansCursiveFont)
                 {
-                    this.stack.Push(Fonts.serifCursiveFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.serifCursiveFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
                 else if (this.stack.Font == Fonts.sansBoldCursiveFont)
                 {
-                    this.stack.Push(Fonts.serifBoldCursiveFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.serifBoldCursiveFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
                 else
                 {
-                    this.stack.Push(Fonts.serifDefaultFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.serifDefaultFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
             }
             else
             {
                 if (this.stack.Font == Fonts.serifBoldFont)
                 {
-                    this.stack.Push(Fonts.sansBoldFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.sansBoldFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
                 else if (this.stack.Font == Fonts.serifCursiveFont)
                 {
-                    this.stack.Push(Fonts.sansCursiveFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.sansCursiveFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
                 else if (this.stack.Font == Fonts.serifBoldCursiveFont)
                 {
-                    this.stack.Push(Fonts.sansBoldCursiveFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.sansBoldCursiveFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
                 else
                 {
-                    this.stack.Push(Fonts.sansDefaultFont);
+                    this.stack.Push(new SerifTextCharacteristics(
+                        Fonts.sansDefaultFont,
+                        this.stack.Size,
+                        this.stack.Alignment
+                    ));
                 }
             }
 
@@ -557,7 +589,20 @@ namespace CzeTex{
         {
             CallerManager.CorrectParameters(list, 0);
 
-            this.AddText("");
+            this.AddText(Signs.nonPrintableCharacter, false);
+        }
+
+        /// <summary>
+        /// Adds wider whitespace to the text
+        /// </summary>
+        public void AddTabulator(List<string> list)
+        {
+            CallerManager.CorrectParameters(list, 0);
+
+            for (int i = 0; i < Fonts.sizeOfTabulator; i++)
+            {
+                this.AddWhitespace(list);
+            }
         }
 
         /// <summary>

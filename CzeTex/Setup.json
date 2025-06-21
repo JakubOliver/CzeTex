@@ -39,6 +39,11 @@
     "addFunction" : "AddDifferentSize",
     "getFunction" : null
   },
+  "tab" : {
+    "_description" : "Adds wider whitespace to the text. #nonPairFunction",
+    "addFunction" : "AddTabulator",
+    "getFunction" : null
+  },
   "section": {
     "_description" : "Starts new paragraph. #nonPairFunction",
     "addFunction": "CreateParagraph",

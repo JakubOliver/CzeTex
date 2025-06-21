@@ -12,6 +12,7 @@ namespace CzeTex
     public static class Fonts
     {
         public const bool usingSans = true;
+        public const int sizeOfTabulator = 4;
 
         public static readonly PdfFont sansDefaultFont =
             PdfFontFactory.CreateFont(

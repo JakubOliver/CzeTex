@@ -5,6 +5,7 @@ namespace CzeTex
     /// </summary>
     public static class Signs
     {
+        public const string nonPrintableCharacter = "\u00A0";
         public const string multiplicationDot = "\u22C5";
         public const string multiplicationSign = "\u00D7";
         public const string divisionSign = "\u00F7";

@@ -198,7 +198,9 @@ namespace CzeTex
                         //The iText library has auto cropping enabled after 
                         //every word in the cell, so it is necessary to use 
                         // non-printable characters instead of spaces
-                        paragraph.Add(new CzeTexText("\u00A0"));
+                        paragraph.Add(
+                            new CzeTexText(Signs.nonPrintableCharacter)
+                        );
                     }
                 }
             }
