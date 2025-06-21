@@ -10,8 +10,9 @@ namespace CzeTex.Tests
 {
     public class Tests
     {
-        public static string startOfScript = "run --project ../CzeTex/CzeTex.csproj ";
-        public static string textExamples = "../CzeTex.Tests/examples/";
+        private const string startOfScript = "run --project ../CzeTex/CzeTex.csproj ";
+        private const string textExamples = "../CzeTex.Tests/examples/";
+        private const int exitCode = 134; 
 
         private Process RunScript(string input, string setup = "")
         {
@@ -48,6 +49,7 @@ namespace CzeTex.Tests
         [InlineData("examples/principMaximality.txt")]
         [InlineData("examples/recipe.txt")]
         [InlineData("examples/review.txt")]
+        [InlineData("examples/steamTrain.txt")]
         [InlineData("../docs/examples.txt")]
         [InlineData("../docs/user.txt")]
         [InlineData("../docs/programmer.txt")]
@@ -71,6 +73,7 @@ namespace CzeTex.Tests
         [InlineData("../CzeTex.Tests/examples/parameters9.txt")]
         [InlineData("../CzeTex.Tests/examples/parameters10.txt")]
         [InlineData("../CzeTex.Tests/examples/parameters11.txt")]
+        [InlineData("../CzeTex.Tests/examples/extremelyLong.txt")]
         public void OnlyInput(string input)
         {
             Process proc = this.RunScript(input);
@@ -88,63 +91,63 @@ namespace CzeTex.Tests
         public void InvalidInput()
         {
             Process proc = this.RunScript($"{textExamples}neexistuje.txt");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
         public void InvalidInputAndSetup()
         {
             Process proc = this.RunScript($"{textExamples}neexistuje.txt {textExamples}neexistuje.json");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
         public void InvalidSetup()
         {
             Process proc = this.RunScript($"{textExamples}dobre.txt {textExamples}neexistuje.json");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
         public void InvalidCzeTexFunction()
         {
             Process proc = this.RunScript($"{textExamples}wrongCzeTexFunction.txt");
-            Assert.Equal(134, proc.ExitCode); //TrieException
+            Assert.Equal(exitCode, proc.ExitCode); //TrieException
         }
 
         [Fact]
         public void InvalidJson()
         {
             Process proc = this.RunScript($"{textExamples}wrongCzeTexFunction.txt {textExamples}spatnySetup.json");
-            Assert.Equal(134, proc.ExitCode); //JSONLoaderException
+            Assert.Equal(exitCode, proc.ExitCode); //JSONLoaderException
         }
 
         [Fact]
         public void InvalidParameter()
         {
             Process proc = this.RunScript($"{textExamples}invalidParameter.txt");
-            Assert.Equal(134, proc.ExitCode); //InvalidParameterException
+            Assert.Equal(exitCode, proc.ExitCode); //InvalidParameterException
         }
 
         [Fact]
         public void NotGetFunction()
         {
             Process proc = this.RunScript($"{textExamples}getFunction.txt");
-            Assert.Equal(134, proc.ExitCode); //InvalidParameterException
+            Assert.Equal(exitCode, proc.ExitCode); //InvalidParameterException
         }
 
         [Fact]
         public void NoSection()
         {
             Process proc = this.RunScript($"{textExamples}noSection.txt");
-            Assert.Equal(134, proc.ExitCode); //No active section
+            Assert.Equal(exitCode, proc.ExitCode); //No active section
         }
 
         [Fact]
         public void InvalidListStructure()
         {
             Process proc = this.RunScript($"{textExamples}listItemNoList.txt");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
@@ -163,28 +166,28 @@ namespace CzeTex.Tests
         public void InvalidJsonSign()
         {
             Process proc = this.RunScript($"{textExamples}dobre.txt {textExamples}noSign.json");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
         public void InvalidGTitleParameter()
         {
             Process proc = this.RunScript($"{textExamples}invalidGTitle.txt");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
         public void RemovingFromEmpty()
         {
             Process proc = this.RunScript($"{textExamples}removingFromEmpty.txt");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]
         public void ParagraphIsNotSet()
         {
             Process proc = this.RunScript($"{textExamples}paragraphIsNotSet.txt");
-            Assert.Equal(134, proc.ExitCode);
+            Assert.Equal(exitCode, proc.ExitCode);
         }
 
         [Fact]

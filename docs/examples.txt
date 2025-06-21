@@ -18,7 +18,7 @@ Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /
 /subtitle Vytváření vstupního souboru /x
 
 /section
-Projekt obsahuje desítky příkazů a nepovažuji za příznačné zde udělat vyčerpávající výčet všech, poněvadž s jiným setup souborem by byli nepoužitelné. Proto zde spíš ukážu myšlenku tvorby. Všechny příkazy potom najdete v konkrétním setup souboru, který budete chtít použít, například výchozí CzeTex/Setup.json.
+Projekt obsahuje desítky příkazů a nepovažuji za příznačné zde udělat vyčerpávající výčet všech, poněvadž s jiným setup souborem by byli nepoužitelné. Proto zde spíš ukážu myšlenku tvorby. Všechny příkazy potom najdete v konkrétním setup souboru, který budete chtít použít, například výchozí CzeTex/Setup.json, ve kterém jsou všechny příkazy okomentované a označené správným /cursive hashtagem /xd
 
 /section
 /bold
@@ -59,5 +59,5 @@ V Setup.json jsou tyto příkazy označené /bold #hasParameter /xd
 /x
 
 /center
-/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE EXAMPLES, DEFINICE FUNKCÍ V Setup.json NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU. /x /x
+/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE CZETEX/EXAMPLES, DEFINICE FUNKCÍ V SETUP.JSON NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU. /x /x
 /x

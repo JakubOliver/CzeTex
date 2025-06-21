@@ -1,0 +1,105 @@
+/serif
+/center
+
+/offset
+
+/title /size(30) Parní lokomotivy odjely do vzpomínek před 40 lety /x /xc
+
+/offset
+
+/section
+/size(15)
+/bold 
+/cursive
+Rok, který končí nulou, upomíná vždy na výročí události, kterou leckdo oplakal, ale nebylo vyhnutí – totiž na konec parního železničního provozu v Československu. Parní lokomotivy se oficiálně rozloučily v létě 1980 zvláštními jízdami v severních Čechách, ve skutečnosti zmizely poslední nákladní lokomotivy z pravidelného provozu na přelomu let 1980 a 1981. 
+Nyní, po 40 letech, jsme již tak daleko, že ani historický vlak automaticky neznamená, že by to byl vlak parní. Ale vzpomínky na dým stoupající z komína a podmanivý zvuk parního stroje zůstává doslova duší železnice.
+/x
+/x
+/x
+/x
+
+/offset
+
+/justify
+/size(13)
+/section
+Pamětníci parního provozu vzpomínají hlavně na nejmodernější typy parních lokomotiv zkonstruované v /underline 50. letech /xc protože na nejslavnější období rakouských rychlíkových /cursive „Hrbáčů“ /x nebo i prvních rychlíkových lokomotiv československé konstrukce řady 365.0 vskutku pamatuje už jen málokdo.
+
+/section
+Poslední období provozu parních lokomotiv od poloviny 50. do 70. let bylo na jedné straně érou mimořádných výkonů, ale také obdobím, kdy to tyto stroje již měly spočítané. V polovině 50. let sice ještě vyjížděly z továren poslední nové parní lokomotivy, které byly technicky tím nejdokonalejším, co mohla parní trakce nabídnout, ale zároveň již vznikaly podél kolejí sloupy trakčního vedení a nad pražci se začaly natahovat troleje. Nejvýkonnější parní lokomotivy – často ještě zánovní – se pak z nejvytíženějších tratí, jmenovitě z hlavního tahu Praha–Ostrava–Žilina–Košice a následně i z Bratislavy stěhovaly nejprve na tratě z /bold Prahy /x do /bold Plzně, Děčína, Českých Budějovic /x a na trať /bold Brno – /underline  Česká Třebová /x /xd
+
+/section
+I když se zmíněné tratě dočkaly elektrizace v pozdních 80. letech a třebovská trať až na konci století, parní lokomotivy z nich stejně zmizely již na přelomu 60. a 70. let. V čele rychlíků na hlavní dvoukolejné trati jely parní lokomotivy pravidelně naposledy v červnu 1973, kdy plzeňské depo stáhlo z elitní služby dost možná nejlepší československé parní lokomotivy – „Albatrosy“ řady 498.1. V průběhu 70. let ještě jezdily parní lokomotivy s některými vlaky na Liberecku, Děčínsku či Klatovsku, ale postupně je i zde nahradily nové dieselové lokomotivy.
+
+/section
+Nejmodernější československé parní lokomotivy potom často končily ve šrotu nějakých dvacet let od chvíle, kdy opustily vrata továrny, a paradoxně je ve službě přežily i některé předválečné lokomotivy. K posledním vyřazeným lokomotivám patřila „Ušatá“ 464.053, která sloužila v Klatovech (dnes je muzejní a je deponována v Lužné). Vyrobili ji v ČKD v roce 1938, dosloužila v roce 1981. 
+
+/section
+Z vrcholných rychlíkových „Albatrosů“ řady 498.1 naproti tomu nejdéle sloužila lokomotiva 498.106, kterou vyrobila Škoda Plzeň v roce 1955. ČSD ji vyřadily v roce 1980, kdy ji předaly Národnímu technickému muzeu. Její sesterské stroje byly většinou v té době již rok nebo dva ve šrotu, jen jedna se ještě dochovala jako muzejní a dvě další sloužily jako vytápěcí kotle (jedna byla sešrotována v 90. letech, druhou se podařilo zachránit a České dráhy letos zahájily její rekonstrukci). Vyřazování těchto lokomotiv ovšem začalo již v roce 1972, tedy po sedmnácti letech od vyrobení – jako by České dráhy nyní vyřazovaly pendolina.
+
+/newpage
+
+/gtitle(2) Anglie, Rakousko, Libeň, Plzeň /xc
+
+/section
+Provoz na první železniční trati v českých zemích začal již v roce 1827, ale to byla koněspřežná železnice. Parostrojní železnice dospěla na Moravu až o jedenáct let později a do Čech ještě o dalších sedm let později.
+
+/section
+První lokomotivy rakouských železnic byly vyvinuté i postavené v Anglii. Moravii, která přijela v roce 1838 do Brna, i její sesterskou Austrii vyrobila továrna George Stephensona. Další lokomotivy zakoupila Severní dráha císaře Ferdinanda – tedy společnost, která stavěla parostrojní železnici z Vídně do Brna, z Břeclavi do Olomouce a později dále z Přerova do Haliče a provozovala na ní dopravu – u anglické společnosti Jones, Turner and Evans. Počátkem 40. let již začaly vyvíjet své vlastní lokomotivy, byť anglickou konstrukcí nepochybně inspirované, i rakouské strojírny.
+
+/section
+Pro Severní státní dráhu, která v roce 1845 dovedla parostrojní železnici z Olomouce do Prahy, postavila její první lokomotivy společnost Günther z Vídeňského Nového Města. První lokomotivou postavenou v českých zemích byl Český lev. Ten ale nejezdil po žádné dálkové železnici, nýbrž na okruhu na Žofíně, kde se Pražanům parní lokomotiva představila v roce 1841 jako nejnovější výkřik techniky. Vyrobila ji Breitfeldova strojírna, což ale nelze považovat za zahájení trvalé produkce lokomotiv v Čechách, přestože někdejší firma Breitfeld lokomotivy v určitém rozsahu vyráběla a stala se mnohem později i součástí ČKD.
+
+/section
+V českých zemích se ve větším rozsahu začaly lokomotivy vyrábět v roce 1900 v První českomoravské továrně na stroje v Praze-Libni (další součásti pozdější ČKD) a šlo pochopitelně o lokomotivu rakouské konstrukce. Na přelomu století vrcholilo postupné postátňování původně soukromých železničních společností a c. a k. Státní dráhy si nechaly vyrábět lokomotivy jednotné konstrukce na různých místech monarchie.
+
+/section
+Například rychlíkové lokomotivy řady 310 (u ČSD později 375.0) se dodnes zachovaly dvě. Jedna stojí v dopravní hale Národního technického muzea a vyrobila ji Českomoravská v roce 1911, zatímco druhá má domov v rakouském železničním muzeu ve Strasshofu a vyrobila ji v témže roce lokomotivka Společnosti státní dráhy ve Vídni. Své rakouské, maďarské nebo třeba slovinské „sourozence“ má i mnoho dalších lokomotiv zkonstruovaných před rozpadem rakousko-uherské monarchie a používaných nebo i nadále vyráběných v Československu po roce 1918.
+
+/section
+Československé lokomotivky – k Českomoravské přibyly v roce 1920 i Škodovy závody v Plzni, tedy významná zbrojovka, která po rozpadu monarchie ztratila část trhu, a lokomotivy v menším vyráběli i Breitfeld a Daněk či Adamovské strojírny – začaly své vlastní typy vyvíjet až po vzniku republiky. 
+
+/section
+Českomoravská postavila svoji první vlastní lokomotivu v roce 1921, šlo o rychlíkový stroj řady 365.0. Škodovka ji následovala v roce 1923 s nákladními lokomotivami 534.0, které vydržely ve výrobě až do roku 1947.
+
+/section
+V dalších letech přišly na svět doslova klenoty – lokálkoví „Velcí bejčci“ řady 423.0 (ČKD od roku 1921, v menší míře i Škoda a další strojírny), mocná rychlíková „Mikáda“ řady 387.0 (Škoda od roku 1925), ale i nezdolné „Ušaté“ řady 464.0 (ČKD od roku 1933, v menší míře i Škoda) určené pro rychlíkovou dopravu na tratích s menší únosností. 
+
+/section
+Druhá světová válka vývoj i stavbu lokomotiv téměř zastavila. Lokomotivky se dostaly do německých rukou a orientovaly se hlavně na vojenskou výrobu. Její součástí byly pouze konstrukčně jednoduché „válečné lokomotivy“ vyvinuté v Německu, které se ovšem po válce uplatnily i v československé nákladní dopravě a částečně inspirovaly vývoj poslední generace parních lokomotiv. 
+
+/section
+Po válce pak nové typy – v prvé řadě rychlíkové „Albatrosy“ řady 498.0 a konstrukčně jednodušší univerální „Šlechtičny“ 475.1 – navázaly na předválečnou lokomotivní školu. Kromě nových typů se lokomotivky vrátily i k osvědčeným předválečným konstrukcím a vyráběly dále řady 534.0 či 423.0, byť poněkud modifikované.
+
+/section
+Společenské a ekonomické změny z konce 40. let se projevily v tom, že počátkem 50. let ještě bylo potřeba opravdu ve velkém vyrábět nákladní lokomotivy, aby uspokojily potřeby sílícího těžkého průmyslu. A tak se nejpočetnější lokomotivní řadou u ČSD jednou provždy staly „Bugatky“ (neboli „Štokři“) řady 556.0. Škodovka jich v letech 1951 až 1958 vyrobila 510 a poslední z nich se zároveň stala poslední parní lokomotivou vyrobenou v Československu (nepočítáme-li akumulační parní lokomotivy z 80. let).
+
+/section
+Lokomotivy 556.0 také byly u samotného konce parního provozu, když na Liberecku pomáhaly až do začátku roku 1981 příležitostně na postrku nákladních vlaků, a dokonce ještě jezdily i v osobní dopravě – až do úplného konce parního provozu přetahovaly přes hranice z Českých Velenic do Gmündu mezistátní expres Vindobona.
+
+/newpage
+/gtitle(2) Z kolejí do muzeí /x
+
+/section
+Konec parního provozu samozřejmě neznamenal, že by všechny zbylé lokomotivy rázem zmizely. Některé i po roce 1981 končily ve šrotu, jiné se ale dochovaly. Hlavním patronem vysloužilých parních lokomotiv bylo odjakživa Národní technické muzeum, které opatruje například lokomotivu Kladno z roku 1855, již zmíněnou rychlíkovou lokomotivu 375.007, ale například i rychlíkový „Albatros“ 498.106, který v roce 1964 stanovil československý rychlostní rekord parní lokomotivy, když se – poněkud neplánovaně – rozjel ve Velimi až na 162 kilometrů za hodinu.
+
+/section
+V 80. letech také z různých důvodů zůstalo několik parních lokomotiv u ČSD. Převážně šlo o stroje, které měly utvořit plánovaný lokomotivní skanzen v České Třebové. Ten však nevznikl, některé jeho zvažované exponáty šly do šrotu, ale jiné se dochovaly dodnes. Například „Albatros“ 498.022 – tedy zástupce první generace těchto poválečných rychlíkových lokomotiv vyrobený v roce 1947 – byl tři desetiletí po ukončení parního provozu ozdobou leckteré železniční slavnosti. V roce 1987 po něm dokonce železničáři sáhli, když bylo potřeba z Plzně do Prahy vypravit náhradní soupravu za zpožděný expres a v Plzni zrovna „Albatros“ s prázdnou soupravou byl.
+
+/section
+Nicméně „nulkový Albatros“ Českých drah i rekordní „jedničkový Albatros“ technického muzea již nejezdí. Starší z nich stojí v drážním muzeu v Lužné, novější v depozitáři NTM v Chomutově. S tím, jak lokomotivy stárnou, stává se čím dál náročnější jejich údržba. Opravit kotel tak, aby splňoval podmínky k bezpečnému provozu, je náročné technicky i finančně a situaci ještě komplikuje fakt, že ubývá lidí a firem, kteří to umí.
+
+/section
+Někdejší československé rychlíkové lokomotivy jsou tak v provozu pouze na Slovensku. V Bratislavě jezdí „Albatros“ 498.104 a ve Vrútkách „Anton“ 486.007, obě lokomotivy se tu a tam dostanou i do Česka stejně jako již zmíněná rakouská rychlíková lokomotiva 310.23, která občas jezdí „převlečená“ za českou muzejní 375.007.
+
+/section
+Největšími provozovanými parními lokomotivami v Česku tak v současnosti je trojice „Šlechtičen“, tedy univerzálních parních lokomotiv řady 475.1 z druhé poloviny 40. let. Jedna z nich patří spolku z Plzně, zbylé dvě Českým drahám. K velkým lokomotivám patří nepochybně také drážní „Bugatka“ neboli lokomotiva 556.0506 – jedna z posledních parních lokomotiv vyrobených v Československu – unikátní „Rosnička“ 464.202, o trochu starší „Papoušek“ 477.043 a snad i poválečný nákladní „Kremák“ 534.0432.
+
+/section
+Zároveň v Česku jezdí i několik „menších“ parních lokomotiv, které jsou ovšem ve srovnání s těmi „velkými“ mnohem starší. Dráhy letos po necelých třech letech znovu zprovoznily nákladní lokomotivu 434.2186 z roku 1917, stejně stará je i lokomotiva 354.7152, která patří spolku Herkules KHKD. Loni potom dráhy zprovoznily lokomotivu „Heligón“ 414.096 vyrobenou v roce 1906.
+
+/x
+
+/serif
+/section
+Převzaté z /link(ct24,https://ct24.ceskatelevize.cz/clanek/domaci/parni-lokomotivy-odjely-do-vzpominek-pred-40-lety-40105) .

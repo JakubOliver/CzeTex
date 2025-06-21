@@ -138,3 +138,10 @@ V projektu /bold CzeTex.Tests /x v soubor /bold Tests.cs /x můžeme najít něk
 
 /section
 Pro testování správné interpretace celých souborů se využívá funkce /bold RunScript /xc která simuluje chování uživatele a zadávání příkazů do terminálu. Tedy spouští příslušné /bold dotnet run /x příkazy v návaznosti na vstupní parametry funkce. Dokáže tedy testovat jak na pouze input soubory tak na kombinaci input a setup souborů.
+
+/gtitle(3) Spuštění testů /xc
+/section
+Pro spuštění textů musíte nejdříve přejít do složky /bold CzeTex.Tests /x a následně spustit příkaz /bold dotnet tests /xd
+
+/section
+Pozn: Funkce /bold RunScript /x nepropouští k volající funkci chybové hlášky, tedy vyhodnocení chování se provádí pomocí /bold exit kódu /xd Ten pro /bold CzeTexExceptions /x může být na různých zařízeních a operačních systémech jiný, poněvadž se automaticky generuje. Ve výchozím natavení je /bold exit kód /x roven 134, pokud spustíte testy a uvidíte že se všechny testy liší od 134 vždy se stejnou hodnotu, tak to znamená, že byl výjimkám přiřazen jiný /bold exit kód /xc tedy pro správné fungování musíte v třídě, kde se nachází testy zaměnit hodnotu původního /bold exit kódu /x za vaši, nahrazení konstantní proměnné na řádku /bold 15 /x v souboru /bold Tests.cs /xd 
