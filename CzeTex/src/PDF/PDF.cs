@@ -118,7 +118,7 @@ namespace CzeTex{
 
             uint size = Convert.ToUInt32(list[0]);
             size = Fonts.defaultTitleSize -
-                   (size * Fonts.defaultTitleSizeDifference);
+                   ((size - 1) * Fonts.defaultTitleSizeDifference);
 
             //Seconds checks whether the size overflow.
             if (size < Fonts.defaultSize || size > Fonts.defaultTitleSize)
