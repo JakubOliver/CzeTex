@@ -71,6 +71,8 @@ Posledním souborem v první sekci je /bold Trie.cs /x obsahující implementaci
 /section
 Mimo samotného stromu obsahuje třída také 2 pole, jedno pro add funkce a druhé pro get funkce. Bijekce na stromě je tvořena následovně: posloupnost písmen od kořene stromu do vrcholu musí odpovídat názvu CzeTex funkce. Z toho nám plynou určitá omezení pro názvy CzeTex funkcí. Strom je budovaný pouze z malých písmen anglické abecedy, tedy funkce nemohou používat jinou množinu znaků. Aby se jednalo o bijekci, tak musí platit, že každá funkce má unikátní jméno, což nám vyřeší už vstupní setup JSON soubor, poněvadž v něm nemůžou existovat 2 záznamy se stejným klíčem a v našem případě klíče odpovídají názvu CzeTex funkce. 
 
+/newpage
+
 /section
 Když najdeme vrchol jehož posloupnost znaků na cestě od kořene je stejná jako jméno CzeTex funkce, pak bude v daném vrcholu uložený unsigned číslo odpovídající indexu v polích add a get funkcí. Pozn: I když nějaká funkce nemusí mít get funkci, tak je dané políčko nastavené na null, tedy můžeme mít pouze jeden index pro 2 pole a vše bude fungovat korektně. 
 
@@ -97,6 +99,8 @@ Soubor /bold PDFSupport.cs /x obsahuje, jak už název naznačuje, shluk podpůr
 
 /section
 Máme jednu rodičovskou třídu /bold TextCharacteristics /xc která představuje takovou obecnou charakterizaci textu, font, velikost textu atd. Dále existuje několik tříd, které z této třídy dědí a následně implementují jednu nebo i více z virtuálních metod, jako je například metoda Special, Add atd. Následně tyto metody pozměňují nějakým způsobem vzhled výsledného textu. Např. třída UnderLineText si uzpůsobuje metodu Special tak, aby přidávala podtržení textu. 
+
+/newpage
 
 /section 
 Aby byla struktura dědění více přehlednější, tak potomci, kteří mají podobnou charakteristiku tak jim je nastaven předek, který tuto charakteristiku na stavuje a následně je možné je podle tohoto předka v kódu filtrovat. Pro názornost předvedu příklad na třídě UnderLineText: /bold TextCharacteristics /x /math /imply /x /bold SpecialTextCharacteristics /x /math /imply /x /bold UnderLineText /x neboli z TextCharacteristics dědí SpecialTextCharacteristics, která shlukuje všechny funkce s implementovanou speciální metodou a následně až potom z ní dědí třída UnderLineText. 
