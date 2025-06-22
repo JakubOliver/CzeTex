@@ -1,0 +1,7 @@
+/right  
+    /serif  
+        /size(15)  
+        /section  
+        Oficiálním názvem státu podle ústavy je Česká republika; jednoslovný název Česko se v 
+ústavě nevyskytuje, je však součástí oficiální databáze OSN coby jednoslovný název státu.  
+/x /x /x

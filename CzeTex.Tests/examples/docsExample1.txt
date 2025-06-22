@@ -1,0 +1,3 @@
+/title Toto je text nadpisu /x
+
+/gtitle(1) Toto je text nadpisu /x

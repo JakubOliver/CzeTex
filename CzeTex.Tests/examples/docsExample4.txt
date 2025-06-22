@@ -1,0 +1,5 @@
+/section  
+/math  
+Limita f(x) jak x se přibližuje k A je rovna L /iff /forall /epsilon > 0 /exists /delta > 0 /forall x /in P( 
+A, /delta ): f(x) /in U( L, /epsilon ).  
+/x

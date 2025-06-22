@@ -74,6 +74,10 @@ namespace CzeTex.Tests
         [InlineData("../CzeTex.Tests/examples/parameters10.txt")]
         [InlineData("../CzeTex.Tests/examples/parameters11.txt")]
         [InlineData("../CzeTex.Tests/examples/extremelyLong.txt")]
+        [InlineData("../CzeTex.Tests/examples/docsExample1.txt")]
+        [InlineData("../CzeTex.Tests/examples/docsExample2.txt")]
+        [InlineData("../CzeTex.Tests/examples/docsExample3.txt")]
+        [InlineData("../CzeTex.Tests/examples/docsExample4.txt")]
         public void OnlyInput(string input)
         {
             Process proc = this.RunScript(input);

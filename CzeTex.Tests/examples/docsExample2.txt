@@ -1,0 +1,4 @@
+/section  
+/bold Česko /xc plným názvem /cursive Česká republika /xc  
+je /underline vnitrozemský stát /x ve /linethrough východní /x  
+/bold /cursive střední Evropě /x /xd
