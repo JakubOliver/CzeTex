@@ -2,7 +2,7 @@
 /title Příklady použití /x
 
 /section
-Jak už bylo zmíněno v sekci pri uživatele hlavní způsob jak ovlivnit chod programu je pozměnění vstupních souborů.
+Jak už bylo zmíněno v sekci pro uživatele, hlavní způsob jak ovlivnit chod programu je pozměnění vstupních souborů.
 
 /subtitle Setup JSON soubor /x
 
@@ -10,7 +10,7 @@ Jak už bylo zmíněno v sekci pri uživatele hlavní způsob jak ovlivnit chod 
 Jednou z možností jak pozměnit program je předefinování jeho mapování CzeTex textových funkcí na ty kódové. 
 
 /section
-Výchozím nastavení mapování je CzeTex/Setup.json, ale je předpřipravená i verze s českou lokalizací (neobsahuje všechny funkce pro demonstraci, že není potřeba implementovat vše). Tu najdete v složce CzeTex/examples a jmenuje se nastaveni.json a soubor proNastaveni.txt využívá jeho mapování. 
+Výchozím nastavení mapování je CzeTex/Setup.json, ale je předpřipravená i verze s českou lokalizací (neobsahuje všechny funkce pro demonstraci, že není potřeba implementovat všechny funkce pro fungování). Tu najdete v složce CzeTex/examples a jmenuje se nastaveni.json a soubor proNastaveni.txt využívá toto mapování. 
 
 /section
 Tedy pokud chcete vyzkoušet alternativní mapování tak můžeme příkazem: /newline /bold dotnet run examples/proNastaveni.txt examples/nastaveni.json /x
@@ -28,17 +28,17 @@ Každý příkaz musí začínat speciálním znakem /slash /wspace a následně
 /gtitle(3) Nepárové příkazy /x
 
 /section
-Mezi nepárové příkazy patří mimo jiné například příkaz /bold /slash section /x který vytvoří nový paragraf. Pozn: Každý text musí být v nějakém bloku nebo paragrafu. 
+Mezi nepárové příkazy patří mimo jiné například příkaz /bold /slash section /x který vytvoří nový paragraf. Pozn: Každý text musí být umístěn v nějakém bloku nebo paragrafu. 
 
 /section
-V Setup.json jsou tyto příkazy označené /bold #nonPairFunction /xd
+V Setup.json jsou tyto příkazy označeny jako /bold #nonPairFunction /xd
 
 /gtitle(3) Párové příkazy /x
 /section 
-Mezi párové příkazy patří například vytvoření bloku tučného písma, tedy /bold /slash bold /x toto je tučný text /bold /slash x /x by byl tučný text. Můžete si povšimnout, že párové příkazy jsou ukončené generickým znakem /bold /slash x /x z toho plyne, že se nemohou příkazy překrývat (ten který začne později se dříve ukončí).
+Mezi párové příkazy patří například vytvoření bloku tučného písma, tedy /bold /slash bold /x toto je tučný text /bold /slash x /x by byl tučný text. Můžete si povšimnout, že párové příkazy jsou ukončené generickým znakem /bold /slash x /x z toho plyne, že se nemohou příkazy překrývat (ten, který začne později, se dříve ukončí).
 
 /section
-V Setup.json jsou tyto příkazy označené /bold #pairFunction /xd
+V Setup.json jsou tyto příkazy označeny jako /bold #pairFunction /xd
 
 /newpage
 
@@ -53,7 +53,7 @@ Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypa
 /math S = 4 /times /pi /times /pow(r,2) /x
 
 /section
-V Setup.json jsou tyto příkazy označené /bold #hasParameter /xd
+V Setup.json jsou tyto příkazy označeny jako /bold #hasParameter /xd
 
 /gtitle(2) Konkrétní příklady /x
 
@@ -83,9 +83,9 @@ je /underline vnitrozemský stát /x ve /linethrough východní /x
 /bold /cursive střední Evropě /x /xd
 
 /section
-Poznámka: jak můžeme vidět na příkladu dodatečné mezery nepozmění výsledný text, ten je generován pouze podle příkazů a textu. Dokonce příkazy jako /slash slash, odpovídající znaku /slash , nevytvoří za sebou ani mezeru.
+Poznámka: jak můžeme vidět na příkladu, dodatečné mezery nepozmění výsledný text, ten je generován pouze podle příkazů a textu. Dokonce příkazy jako /slash slash, odpovídající znaku /slash , nevytvoří za sebou ani mezeru.
 
-/gtitle(3) Změna nepatkového na patkový font (a naopak) a zarovnání textu /xc
+/gtitle(3) Změna nepatkového fontu na patkový (a naopak) a zarovnání textu /xc
 
 /section
 /bold
@@ -106,7 +106,7 @@ Poznámka: jak můžeme vidět na příkladu dodatečné mezery nepozmění výs
 /x /x /x
 
 /section
-Poznámka: může se zdát, že obecný ukončovací příkaz dokáže být dosti nepřehledný, což se může u velmi komplikovaných výrazů stát, ale uvážil jsem, že při psaní klasického textu tato situace nenastane až tak často a napsání kratšího příkazu zvyšuje rychlost psaní textu a je pohodlnější, což jsem bral jako přednější. Plus matematická notace, která může mít mnoho příkazů na menší části textu, má pouze jednotky párových příkazů.
+Poznámka: může se zdát, že obecný ukončovací příkaz dokáže být dosti nepřehledný, což se může u velmi komplikovaných výrazů stát, ale uvážil jsem, že při psaní klasického textu tato situace nenastane až tak často a napsání kratšího příkazu zvyšuje rychlost psaní textu a je pohodlnější, což jsem bral jako přednější. Navíc matematická notace, která může mít mnoho příkazů na menší části textu, má pouze jednotky párových příkazů.
 
 /gtitle(3) Matematická notace /x
 
@@ -126,7 +126,7 @@ Limita f(x) jak x se přibližuje k A je rovna L /iff /forall /epsilon > 0 /exis
 /gtitle(2) Technická omezení /x
 
 /section
-Při práci se seznami CzeTex umožňuje pouze globální nastavení fontu a velikosti pro celý seznam a ne pro bod nebo část bodu, speciální úpravy jako podtržení atd. nejsou podporovány vůbec.
+Při práci se seznami CzeTex umožňuje pouze globální nastavení fontu a velikosti pro celý seznam a ne pro bod nebo část bodu, speciální úpravy jako podtržení apod. nejsou podporovány vůbec.
 
 /section
 U matematické notace je možné zadávat jako parametry u mocnin, indexů a zlomků pouze příkazy, které mají get metodu, tedy pouze speciální znaky. Není tedy možné mít zlomek ve zlomku nebo mocninu ve zlomku atd.
@@ -135,5 +135,5 @@ U matematické notace je možné zadávat jako parametry u mocnin, indexů a zlo
 /offset
 
 /center
-/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE CZETEX/EXAMPLES, DEFINICE FUNKCÍ V SETUP.JSON NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ BYLA CELÁ PSANÁ V CZETEXU. /x /x
+/gtitle(2) /bold PRO VÍCE PŘÍKLADŮ MŮŽETE PROSTUDOVAT VZOROVÉ PŘÍKLADY V SLOŽCE CZETEX/EXAMPLES, DEFINICE FUNKCÍ V SETUP.JSON NEBO ZDROJOVÉ KÓDY K TÉTO DOKUMENTACI, PONĚVADŽ CELÁ DOKUMENTACE BYLA VYTVOŘENA POMOCÍ CZETEXU. /x /x
 /x

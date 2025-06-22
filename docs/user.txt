@@ -10,20 +10,20 @@ Program se spouští příkazem: /bold() dotnet run [vstupní soubor] [setup sou
 Kde vstupní soubor je povinnou součástí, ale setup soubor je implicitním parametrem, pokud se nezadá, tak je nahrazen globálním Setup.json.
 
 /section
-Pro správné fungování programu je potřeba ještě nad rámec klasické distribuce dotnet doinstalovat balíček /bold() iText /x verze 9.1.0 nebo vyšší a /bold itext7.bouncy-castle-adapter /x verze 9.1.0 nebo vyšší. Oba tyto balíčky by se měli automaticky doinstalovat při spouštění programu pomocí příkazu pro spuštění viz výše.
+Pro správné fungování programu je potřeba ještě nad rámec klasické distribuce dotnet doinstalovat balíček /bold() iText /x verze 9.1.0 nebo vyšší a /bold itext7.bouncy-castle-adapter /x verze 9.1.0 nebo vyšší. Oba tyto balíčky by se měly automaticky doinstalovat při spouštění programu pomocí příkazu pro spuštění viz výše.
 
 /section
-Pozn: pokud by i tak byl nějaký problém s balíčky, tak je možné je doinstalovat ručně pomocí příkazu /bold dotnet add package /x + název balíčku.
+Pozn: pokud by i přesto nastal nějaký problém s balíčky, tak je možné je doinstalovat ručně pomocí příkazu /bold dotnet add package /x + název balíčku.
 
 /subtitle() Ovládání /x
 
 /section 
 Program nemá žádná dodatečné interaktivní ovládání. Uživatel může chod programu upravovat při volání programu pomocí dvou vstupních parametrů. 
-Jediná další možnost personalizace programu se skrývá právě v druhém parametru, poněvadž si může uživatel vytvořit své vlastní textové CzeTex funkce, která následně může v textu využívat. 
+Další možností personalizace programu se skrývá právě v druhém parametru, poněvadž si může uživatel vytvořit své vlastní textové CzeTex funkce, která následně může v textu využívat. 
 
 /section
-Detailnější informace o psaní vstupních souborů v CzeTex syntaxi si můžete přečíst v části dokumentace zabývající se /bold příklady použití /xd
+Detailnější informace o psaní vstupních souborů v CzeTex syntaxi najdete v části dokumentace zabývající se /bold příklady použití /xd
 
 /section()
-/bold() Doporučení: Setup soubory musí mít přesnou strukturu a správné odkazy na interní funkce, proto se doporučuje, aby se při vytváření personalizovaných setup souborů využila kopie globálního a pouze upravili klíčová slova dle vlastní preferencí. /x
+/bold() Doporučení: Setup soubory musí mít přesnou strukturu a správné odkazy na interní funkce, proto se doporučuje, aby se při vytváření personalizovaných setup souborů využila kopie globálního a pouze upravili klíčová slova dle vlastních preferencí. /x
 /x
