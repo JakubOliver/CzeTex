@@ -25,5 +25,5 @@ Další možností personalizace programu se skrývá právě v druhém parametr
 Detailnější informace o psaní vstupních souborů v CzeTex syntaxi najdete v části dokumentace zabývající se /bold příklady použití /xd
 
 /section()
-/bold() Doporučení: Setup soubory musí mít přesnou strukturu a správné odkazy na interní funkce, proto se doporučuje, aby se při vytváření personalizovaných setup souborů využila kopie globálního a pouze upravili klíčová slova dle vlastních preferencí. /x
+/bold() Doporučení: Setup soubory musí mít přesnou strukturu a správné odkazy na interní funkce, proto se doporučuje, aby se při vytváření personalizovaných setup souborů využila kopie globálního setup souboru a pouze upravili klíčová slova dle vlastních preferencí. /x
 /x

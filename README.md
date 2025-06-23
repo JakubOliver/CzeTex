@@ -4,7 +4,7 @@
 ## Specifikace
 
 
-Aplikace CzeTex je interpret vlastní verze jazyka inspirovaného LaTeXem. Interpret převádí textový soubor dle předem stanového gramatiky do .pdf výstupního dokumentu, který za pomocí funkcí v textovém souboru modifikuje. Aplikace umožňuje základní i mírně pokročilou práci s textem a nabízí základní využití matematické notace. Cílem projektu je silná personalizace textových CzeTex funkcí a přizpůsobení syntaxe i výběr speciálních znaků českému rozložení klávesnice. 
+Aplikace CzeTex je interpret vlastní verze jazyka inspirovaného LaTeXem. Interpret převádí textový soubor dle předem stanové gramatiky do .pdf výstupního dokumentu, který za pomocí funkcí v textovém souboru modifikuje. Aplikace umožňuje základní i mírně pokročilou práci s textem a nabízí základní využití matematické notace. Cílem projektu je silná personalizace textových CzeTex funkcí a přizpůsobení syntaxe i výběr speciálních znaků českému rozložení klávesnice. 
 
 ## Instalace a spuštění
 

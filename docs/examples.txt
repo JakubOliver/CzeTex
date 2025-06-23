@@ -44,7 +44,7 @@ V Setup.json jsou tyto příkazy označeny jako /bold #pairFunction /xd
 
 /gtitle(3) Příkazy s parametry /x
 /section
-Některé příkazy mají parametry, podle kterých se mění jejich funkčnost nebo vzhled. Například funkce /bold /slash pow /x má 2 parametry, základ a exponent. 
+Některé příkazy mají parametry, podle kterých se mění jejich funkčnost nebo vzhled. Například funkce pro mocninu /bold /slash pow /x má 2 parametry, základ a exponent. 
 
 /section 
 Tedy pokud bychom chtěli například napsat vzorec pro obsah koule. Tak by vypadal následovně: /newline /bold /slash math /x S = 4 /bold /slash times /slash pi /slash times /slash pow(r,2) /slash x /x .

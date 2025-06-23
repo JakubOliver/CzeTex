@@ -69,7 +69,7 @@ V neposlední řadě tu také najdeme třídy /bold FunctionGeneratorForPDF /x k
 Posledním souborem v první sekci je /bold Trie.cs /x obsahující implementaci /bold trie /x stromu, také známý jako písmenkový strom, který se využívá pro vytvoření bijekce mezi CzeTex textovými funkce a funkce provádějící konkrétní kód. 
 
 /section
-Mimo samotného stromu obsahuje třída také 2 pole, jedno pro add funkce a druhé pro get funkce. Bijekce na stromě je tvořena následovně: posloupnost písmen od kořene stromu do vrcholu musí odpovídat názvu CzeTex funkce. Z toho nám plynou určitá omezení pro názvy CzeTex funkcí. Strom je budovaný pouze z malých písmen anglické abecedy, tedy funkce nemohou používat jinou množinu znaků. Aby se jednalo o bijekci, tak musí platit, že každá funkce má unikátní jméno, což nám vyřeší už vstupní setup JSON soubor, poněvadž v něm nemůžou existovat 2 záznamy se stejným klíčem a v našem případě klíče odpovídají názvu CzeTex funkce. 
+Mimo samotného stromu obsahuje třída také 2 pole, jedno pro add funkce a druhé pro get funkce. Bijekce na stromě je tvořena následovně: posloupnost písmen na cestě od kořene stromu do vrcholu musí odpovídat názvu CzeTex funkce. Z toho nám plynou určitá omezení pro názvy CzeTex funkcí. Strom je budovaný pouze z malých písmen anglické abecedy, tedy funkce nemohou používat jinou množinu znaků. Aby se jednalo o bijekci, tak musí platit, že každá funkce má unikátní jméno, což nám vyřeší už vstupní setup JSON soubor, poněvadž v něm nemůžou existovat 2 záznamy se stejným klíčem a v našem případě klíče odpovídají názvu CzeTex funkce. 
 
 /newpage
 
@@ -90,12 +90,12 @@ Druhá část zdrojového kódu se zabývá generováním PDF a souvisejícími 
 /gtitle(4) Fonts.cs a Signs.cs /x
 
 /section
-Tyto 2 soubory jsou si dost podobné poněvadž každý z nich obsahuje jednu třídu, která obsahuje konstanty. Tech třída Fonts obsahuje různé fonty, výchozí velikost textu nebo velikost odsazení mezi odstavci či řádky. Třída Signs na druhou stranu obsahuje konstanty reprezentující různé speciální znaky jako je např. znak pro děleno, implikace, kvantifikátory atd.
+Tyto 2 soubory jsou si dost podobné poněvadž každý z nich obsahuje jednu třídu, která obsahuje konstanty. Tedy třída Fonts obsahuje různé fonty, výchozí velikost textu nebo velikost odsazení mezi odstavci či řádky. Třída Signs na druhou stranu obsahuje konstanty reprezentující různé speciální znaky jako je např. znak pro děleno, implikace, kvantifikátory atd.
 
 /gtitle(4) PDFSupport.cs /x
 
 /section
-Soubor /bold PDFSupport.cs /x obsahuje, jak už název naznačuje, shluk podpůrných tříd a metod, tedy hlavně třídy pro různé vrstvy testu nebo wrapper pro iText třídy pro text, který rozšiřuje funkcionalitu knihovní třídy.
+Soubor /bold PDFSupport.cs /x obsahuje, jak už název naznačuje, shluk podpůrných tříd a metod, tedy hlavně třídy pro různé vrstvy testu nebo wrapper pro iText třídu pro text, který rozšiřuje funkcionalitu knihovní třídy.
 
 /section
 Máme jednu rodičovskou třídu /bold TextCharacteristics /xc která představuje takovou obecnou charakterizaci textu, font, velikost textu atd. Dále existuje několik tříd, které z této třídy dědí a následně implementují jednu nebo i více z virtuálních metod, jako je například metoda Special, Add atd. Následně tyto metody pozměňují nějakým způsobem vzhled výsledného textu. Např. třída UnderLineText si uzpůsobuje metodu Special tak, aby přidávala podtržení textu. 
@@ -103,7 +103,7 @@ Máme jednu rodičovskou třídu /bold TextCharacteristics /xc která představu
 /newpage
 
 /section 
-Aby byla struktura dědění více přehlednější, tak potomci, kteří mají podobnou charakteristiku tak jim je nastaven předek, který tuto charakteristiku na stavuje a následně je možné je podle tohoto předka v kódu filtrovat. Pro názornost předvedu příklad na třídě UnderLineText: /bold TextCharacteristics /x /math /imply /x /bold SpecialTextCharacteristics /x /math /imply /x /bold UnderLineText /x neboli z TextCharacteristics dědí SpecialTextCharacteristics, která shlukuje všechny funkce s implementovanou speciální metodou a následně až potom z ní dědí třída UnderLineText. 
+Aby byla struktura dědění více přehlednější, tak potomci, kteří mají podobnou charakteristiku tak jim je nastaven předek, který tuto charakteristiku nastavuje a následně je možné je podle tohoto předka v kódu filtrovat. Pro názornost předvedu příklad na třídě UnderLineText: /bold TextCharacteristics /x /math /imply /x /bold SpecialTextCharacteristics /x /math /imply /x /bold UnderLineText /x neboli z TextCharacteristics dědí SpecialTextCharacteristics, která shlukuje všechny funkce s implementovanou speciální metodou a následně až potom z ní dědí třída UnderLineText. 
 
 /section
 Jak už bylo zmíněno výše v tomto souboru můžeme také najít třídu, která dědí z knihovní třídy Text, a rozšiřuje její funkcionalitu. A to zejména kvůli nastavení "pozdvihnutí" textu, poněvadž knihovní třída má tuto funkcionalitu ne úplně nejlépe implementovanou.
@@ -138,7 +138,7 @@ V soubory /bold PDFMath.cs /x jak už bylo zmíněno najdeme matematicky zaměř
 /gtitle(2) Testy /x
 
 /section
-V projektu /bold CzeTex.Tests /x v soubor /bold Tests.cs /x můžeme najít několik desítek testovacích procedur, které testují jak konkrétní funkce, tak správnou interpretaci souborů s různými testovacími příklady. 
+V projektu /bold CzeTex.Tests /x v souboru /bold Tests.cs /x můžeme najít několik desítek testovacích procedur, které testují jak konkrétní funkce, tak správnou interpretaci souborů s různými testovacími příklady. 
 
 /section
 Pro testování správné interpretace celých souborů se využívá funkce /bold RunScript /xc která simuluje chování uživatele a zadávání příkazů do terminálu. Tedy spouští příslušné /bold dotnet run /x příkazy v návaznosti na vstupní parametry funkce. Dokáže tedy testovat jak na pouze input soubory tak na kombinaci input a setup souborů.
