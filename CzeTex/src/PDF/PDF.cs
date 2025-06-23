@@ -124,7 +124,7 @@ namespace CzeTex{
             if (size < Fonts.defaultSize || size > Fonts.defaultTitleSize)
             {
                 throw new InvalidParametersException(
-                    "Generic title is too small");
+                    "Generic title is too small!");
             }
 
             list.RemoveAt(0);
@@ -148,8 +148,8 @@ namespace CzeTex{
         {
             if (this.activeParagraph == null)
             {
-                throw new Exception(
-                    "No active paragraph. Create a paragraph first.");
+                throw new CzeTexException(
+                    "No active paragraph. Create a paragraph first!");
             }
 
             if (this.stack.Top() is DoNotAddTextCharacteristics)
@@ -489,7 +489,7 @@ namespace CzeTex{
             {
                 throw new RemovingFromParagraphException(
                     "Cannot remove last text from paragraph when" +
-                    "active paragraph does not exist");
+                    "active paragraph does not exist!");
             }
 
             int numberOfChild = this.activeParagraph.GetChildren().Count;
@@ -497,7 +497,7 @@ namespace CzeTex{
             if (numberOfChild == 0)
             {
                 throw new RemovingFromParagraphException(
-                    "Cannot remove last text from empty paragraph");
+                    "Cannot remove last text from empty paragraph!");
             }
 
             this.activeParagraph.GetChildren().RemoveAt(numberOfChild - 1);

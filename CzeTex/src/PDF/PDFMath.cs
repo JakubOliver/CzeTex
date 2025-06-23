@@ -247,6 +247,7 @@ namespace CzeTex
         public void AddFraction(List<string> list)
         {
             CallerManager.CorrectParameters(list, 2);
+            CallerManager.ParagraphIsSet(this.activeParagraph);
 
             int length = Math.Max(list[0].Length, list[1].Length);
 
@@ -261,6 +262,8 @@ namespace CzeTex
             denominator.SetBorderBottom(new SolidBorder(1));
             fraction.AddCell(denominator);
 
+            //Waring is unjustified because it it checked in 
+            //ParagraphIsSet function.
             this.activeParagraph!.Add(fraction);
             this.AddText(" ");
         }

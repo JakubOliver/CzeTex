@@ -62,7 +62,7 @@ namespace CzeTex
         /// </summary>
         public virtual CzeTexText Special(CzeTexText text)
         {
-            throw new Exception("Special is not defined");
+            throw new NotImplementedException("Special is not defined");
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace CzeTex
         /// </summary>
         public virtual void End(Document document)
         {
-            throw new Exception("End method is not defined");
+            throw new NotImplementedException("End method is not defined");
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace CzeTex
         /// </summary>
         public virtual void End()
         {
-            throw new Exception("End method is not defined");
+            throw new NotImplementedException("End method is not defined");
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace CzeTex
         /// </summary>
         public virtual void Add(ListItem item)
         {
-            throw new Exception("Add method is not defined");
+            throw new NotImplementedException("Add method is not defined");
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace CzeTex
         /// </summary>
         public virtual ListItem GetBack()
         {
-            throw new Exception("GetBack method is not defined");
+            throw new NotImplementedException("GetBack method is not defined");
         }
     }
 

@@ -125,7 +125,7 @@ namespace CzeTex
             }
 
             throw new System.IO.FileNotFoundException(
-                $"File {this.ConcatPath(path)} not found");
+                $"File {this.ConcatPath(path)} not found!");
         }
 
         /// <summary>

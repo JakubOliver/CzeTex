@@ -267,7 +267,7 @@ namespace CzeTex
             {
                 throw new InvalidNumberOfParametersException(
                     $"Function {callerFunction} should have" +
-                    "{count} parameters not {list.Count}.");
+                    $" {count} parameters not {list.Count}!");
             }
         }
 
@@ -284,7 +284,8 @@ namespace CzeTex
                 if (!uint.TryParse(parameter, out uint n))
                 {
                     throw new InvalidParametersException(
-                        $"Parameter of function {callerFunction} should be a number");
+                        $"Parameter of function {callerFunction}" +
+                        " should be a number!");
                 }
             }
         }
@@ -300,7 +301,8 @@ namespace CzeTex
             if (paragraph == null)
             {
                 throw new AddingToNonExistingParagraphException(
-                    $"Paragraph needs to be set before calling {callerFunction}");
+                    $"Paragraph needs to be set before" +
+                    $" calling {callerFunction}!");
             }
         }
     }
@@ -320,8 +322,10 @@ namespace CzeTex
         /// <summary>
         /// Returns dynamically generated AddSign function.
         /// </summary>
-        public Action<List<string>>
-            CreateAddSignFunction(string sign, int numberOfParameters = 0)
+        public Action<List<string>> CreateAddSignFunction(
+            string sign,
+            int numberOfParameters = 0
+        )
         {
             return (List<string> list) =>
                 pdf.AddSign(sign, list, numberOfParameters);
@@ -330,8 +334,10 @@ namespace CzeTex
         /// <summary>
         /// Returns dynamically generated GetSign function.
         /// </summary>
-        public Func<List<string>, CzeTexText>
-            CreateGetSignFunction(string sign,int numberOfParameters = 0)
+        public Func<List<string>, CzeTexText> CreateGetSignFunction(
+            string sign,
+            int numberOfParameters = 0
+        )
         {
             return (List<string> list) =>
                 pdf.GetSign(sign, list, numberOfParameters);

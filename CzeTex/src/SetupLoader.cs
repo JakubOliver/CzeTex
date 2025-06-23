@@ -59,7 +59,7 @@ namespace CzeTex
             if (entry.Value.sign == null)
             {
                 throw new JSONLoaderException($"CzeTex function with name {entry.Key}" +
-                    "should have assigned a sign");
+                    $" should have assigned a sign!");
             }
 
             //Looking for an attribute in the Signs class 
@@ -69,7 +69,7 @@ namespace CzeTex
             if (attribute == null || attribute.FieldType != typeof(string))
             {
                 throw new JSONLoaderException($"CzeTex function with name {entry.Key}" +
-                    "should have correct name of sign not {entry.Value.sign}");
+                    $" should have correct name of sign not {entry.Value.sign}!");
             }
 
             string? sign = attribute.GetValue(null) as string;
@@ -77,7 +77,7 @@ namespace CzeTex
             if (sign == null)
             {
                 throw new JSONLoaderException($"CzeTex function with name {entry.Key}" +
-                    "should have been not null name of sign not {entry.Value.sign}");
+                    $" should have been not null name of sign not {entry.Value.sign}!");
             }
 
             //Adds dynamically generated add and get functions into the tree structure
@@ -101,7 +101,7 @@ namespace CzeTex
             if (method == null)
             {
                 throw new JSONLoaderException(
-                    $"Method with name {entry.Value.addFunction} does not exists");
+                    $"Method with name {entry.Value.addFunction} does not exists!");
             }
 
             Delegate addMethod = Delegate.CreateDelegate(
@@ -120,7 +120,7 @@ namespace CzeTex
                 if (getMethodInfo == null)
                 {
                     throw new JSONLoaderException(
-                        $"Method with name {entry.Value.getFunction} does not exists");
+                        $"Method with name {entry.Value.getFunction} does not exists!");
                 }
 
                 Delegate getMethod = Delegate.CreateDelegate(
