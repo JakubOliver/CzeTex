@@ -125,14 +125,7 @@ Posledními soubory jsou /bold PDF.cs /x a /bold PDFMath.cs /xc které obsahují
 Tedy v souboru /bold PDF.cs /x a následně v třídě /bold PDF /x dochází již při volání konstruktoru k vytvoření kostry .pdf souboru a následně pomocí volání funkcí namapovaných na textové CzeTex funkce dochází k upravování .pdf souboru. Můžeme tady najít metody jak pro vytvoření textu, přidání nadpisu, vytvoření seznamu atd. 
 
 /section
-V soubory /bold PDFMath.cs /x jak už bylo zmíněno najdeme matematicky zaměřené textové funkce. Tedy najdeme tu metody, které slouží k přidávání matematické notace a využívají je např. delegáti pro znakové dynamicky generované funkce.
-
-/offset
-/x
-
-/center
-/gtitle(2) /bold PODROBNĚJŠÍ INFORMACE KE VŠEM TŘÍDÁM, METODÁM ATD. SI MŮŽETE PŘEČÍST PŘÍMO V KOMENTOVANÉM ZDROJOVÉM KÓDU. /x /x
-/x
+V soubory /bold PDFMath.cs /x jak už bylo zmíněno najdeme matematicky zaměřené textové funkce, speciální matematické znaky jako kvantifikátory či znaky řecké abecedy, jednoduché algebraické výrazy atd. Tedy najdeme tu metody, které slouží k přidávání matematické notace a využívají je např. delegáti pro znakové dynamicky generované funkce.
 
 /newpage
 /gtitle(2) Testy /x
@@ -149,3 +142,31 @@ Pro spuštění testů musíte nejdříve přejít do složky /bold CzeTex.Tests
 
 /section
 Pozn: Funkce /bold RunScript /x nepropouští k volající funkci chybové hlášky, tedy vyhodnocení chování se provádí pomocí /bold exit kódu /xd Ten pro /bold CzeTexExceptions /x může být na různých zařízeních a operačních systémech jiný, poněvadž se automaticky generuje. Ve výchozím natavení je /bold exit kód /x roven 134, pokud spustíte testy a uvidíte že se všechny testy liší od 134 vždy se stejnou hodnotou, tak to znamená, že byl výjimkám přiřazen jiný /bold exit kód /xc tedy pro správné fungování musíte v třídě, kde se nachází testy zaměnit hodnotu původního /bold exit kódu /x za vaši, nahrazení konstantní proměnné na řádku /bold 15 /x v souboru /bold Tests.cs /xd 
+
+/offset
+/x
+
+/center
+/gtitle(2) /bold PODROBNĚJŠÍ INFORMACE KE VŠEM TŘÍDÁM, METODÁM ATD. SI MŮŽETE PŘEČÍST PŘÍMO V KOMENTOVANÉM ZDROJOVÉM KÓDU. /x /x
+/x
+
+/newpage
+
+/gtitle(2) Možné rozšíření /x
+
+/section
+Jednou z nejpřímočarejších rozšíření je přidání komplikovanějších výrazů matematické notace. Tato úprava je spjata s vytvořeních algoritmů pro určování velikosti částí notace. Knihovna /bold iText /x neobsahuje žádné rozumné prostředky pro generování této notace, tedy by bylo potřeba rozšířit knihovnu pro lepší implementaci obrázků a vkládat notaci jako vektorové obrázky. 
+
+/section 
+Dalším potencionálním rozšířením je přidání názvů CzeTex textových funkcí, které obsahují diakritiku nebo speciální znaky. Implementace s velkými písmeny anglické abecedy už je rozebraná v části zabývající datovou strukturou /bold Trie /xd
+
+/section 
+Je možné také rozšířit aplikaci o podporu pro očíslované texty nebo přidat možnost kombinování speciálních úprav textu, jako například podtržení a přeškrtnutí.
+
+/gtitle(2) Závěr /x
+
+/section
+Aplikace /bold CzeTex /x úspěšně implementuje základní i mírně pokročilé textové funkce, jako nastavení fontů, konců stránek, korektního odsazení nebo speciálního vzhledu textu, a možnosti vyobrazení základní matematické notace, základní algebraické výrazy, kvantifikátory nebo speciální matematické znaky. 
+
+/section
+Navíc je umožněno uživateli přímočaře upravovat tento projekt pomocí setup .json souborů, které dokáží upravovat názvy textových CzeTex funkcí. Je možné využívat i varianty projekty, kdy budou setup soubory obsahovat pouze nějakou podmnožinu všech funkcí a aplikace bude pořád fungovat korektně. Tyto úpravy mohou velmi ulehčit práci s aplikací lidem, které např. nevládnou angličtinou, proto existuje např. česká verze, nebo nepotřebují celou paletu funkcí a díky tomu se urychlí načítání interpretu. 

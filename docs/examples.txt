@@ -30,17 +30,35 @@ Každý příkaz musí začínat speciálním znakem /slash /wspace a následně
 /section
 Mezi nepárové příkazy patří mimo jiné například příkaz /bold /slash section /x který vytvoří nový paragraf. Pozn: Každý text musí být umístěn v nějakém bloku nebo paragrafu. 
 
+/section 
+Např:
+
+/section
+/tab /bold /slash pi /x
+
+/section
+/tab /pi
+
 /section
 V Setup.json jsou tyto příkazy označeny jako /bold #nonPairFunction /xd
+
+/newpage
 
 /gtitle(3) Párové příkazy /x
 /section 
 Mezi párové příkazy patří například vytvoření bloku tučného písma, tedy /bold /slash bold /x toto je tučný text /bold /slash x /x by byl tučný text. Můžete si povšimnout, že párové příkazy jsou ukončené generickým znakem /bold /slash x /x z toho plyne, že se nemohou příkazy překrývat (ten, který začne později, se dříve ukončí).
 
 /section
-V Setup.json jsou tyto příkazy označeny jako /bold #pairFunction /xd
+Např:
 
-/newpage
+/section
+/tab /bold /slash underline tento text je podtržený /slash x /x
+
+/section
+/tab /underline tento text je podtržený /x
+
+/section
+V Setup.json jsou tyto příkazy označeny jako /bold #pairFunction /xd
 
 /gtitle(3) Příkazy s parametry /x
 /section
@@ -82,6 +100,8 @@ V Setup.json jsou tyto příkazy označeny jako /bold #hasParameter /xd
 je /underline vnitrozemský stát /x ve /linethrough východní /x 
 /bold /cursive střední Evropě /x /xd
 
+/newpage
+
 /section
 Poznámka: jak můžeme vidět na příkladu, dodatečné mezery nepozmění výsledný text, ten je generován pouze podle příkazů a textu. Dokonce příkazy jako /slash slash, odpovídající znaku /slash , nevytvoří za sebou ani mezeru.
 
@@ -122,6 +142,8 @@ Limita f(x) jak x se přibližuje k A je rovna L /slash iff /slash forall /slash
 /math
 Limita f(x) jak x se přibližuje k A je rovna L /iff /forall /epsilon > 0 /exists /delta > 0 /forall x /in P( A, /delta ): f(x) /in U( L, /epsilon ).
 /x
+
+/newpage
 
 /gtitle(2) Technická omezení /x
 
