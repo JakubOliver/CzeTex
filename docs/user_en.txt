@@ -1,0 +1,29 @@
+/justify
+/title() User Documentation /x
+
+/subtitle() Launching /x
+
+/section
+The program is launched using the command: /bold() dotnet run [input file] [setup file] /x
+
+/section
+The input file is a required argument, but the setup file is optional. If it is not provided, it defaults to the global Setup.json.
+
+/section
+For the program to work correctly, in addition to the standard .NET distribution, you must install the /bold() iText /x package version 9.1.0 or higher and /bold itext7.bouncy-castle-adapter /x version 9.1.0 or higher. Both packages should install automatically when launching the program using the command shown above.
+
+/section
+Note: If issues with the packages still occur, they can be installed manually using the command /bold dotnet add package /x followed by the package name.
+
+/subtitle() Controls /x
+
+/section 
+The program has no additional interactive controls. The user can influence its behavior through the two input parameters when running it.
+Another option for personalization lies in the second parameter, as the user can create their own custom CzeTex text functions and use them in the input file.
+
+/section
+For more detailed information about writing input files in CzeTex syntax, see the documentation section on /bold usage examples /xd
+
+/section()
+/bold() Recommendation: Setup files must follow a precise structure and contain valid references to internal functions. Therefore, when creating a personalized setup file, it is recommended to start with a copy of the global setup file and only modify the keywords according to your preferences. /x
+/x

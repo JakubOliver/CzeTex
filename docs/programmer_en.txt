@@ -1,0 +1,172 @@
+/justify
+/title() Programmer Documentation /x
+
+/section
+In the repository, you can find two projects: /bold() CzeTex /x and /bold() CzeTex.Tests /xc where /bold() CzeTex /x represents the main program and /bold() CzeTex.Tests /x is the project that runs the tests.
+
+/subtitle() CzeTex /x
+
+/section
+The project and source code are divided into two parts. The first part deals with input file processing, building helper data structures, and providing utility methods. The second part handles generating the final .pdf file using the /bold iText /xd library.
+
+/gtitle(3) First Part /x
+
+/section
+The first part includes the following files: /bold() Commander.cs, Files.cs, SetupLoader.cs, Trie.cs /x and /bold() Util.cs /xd
+Let’s go through these files and their contents one by one.
+
+/gtitle(4) Commander.cs /x
+
+/section() 
+The file /bold() Commander.cs /x contains a class of the same name, which serves as the core of the program. It calls various functions and classes and ensures consistency throughout execution. It processes the content loaded from the input file and calls the class for processing the setup .json file.
+
+/section
+The input file is processed using the method /bold ReadContent /xc which detects a special character (default: /slash()), then extracts functions and their parameters from the text, searches the /bold trie /x data structure for the relevant function reference, and calls it.
+
+/section 
+The class includes several functions such as /bold ReadRestForParameter, ReadParameter, etc., /x which complement each other in various cases to correctly extract parameters of CzeTex text functions.
+
+/gtitle( 4) Files.cs /x
+
+/section( )
+Another file is /bold Files.cs /xc which contains a class of the same name. This class is responsible for locating the file based on a user-provided parameter and correctly opening, reading, and closing it.
+
+/section 
+In addition, the Files class provides methods like /bold GetPdfPath /x for generating the output .pdf path, or /bold GetBaseName /xc to return the base name of the input file, and others.
+
+/gtitle(4 ) SetupLoader.cs /x
+
+/section
+Next is /bold SetupLoader.cs /xc which contains two classes: /bold JsonEntry /x and /bold SetupLoader /xd
+
+/section
+As the name suggests, /bold JsonEntry /x represents a single entry in the setup .json file. It includes attributes for /bold addFunction, getFunction /xc and optionally whether the function is dynamically generated and the symbol used in such case.
+
+/section
+The /bold SetupLoader /x class reads the mapping from the setup JSON file, which is then used to match specific CzeTex text functions with their code equivalents.
+As mentioned, functions can be divided into dynamically generated and predefined ones. In the /bold AddFunctions /x method, we loop through all entries in the JSON file (already instantiated JsonEntry objects) and determine whether each function should be dynamically generated based on the /bold dynamicallyGenerated /xd flag.
+
+/section
+If a function needs to be created, we switch to the method /bold AddDynamicallyGeneratedFunction /xc where delegates for `add` and `get` functions are generated and then added to the /bold trie /x structure. Note: These dynamic functions are used only for functions that render a character, so they are tightly coupled with character generation. However, extending this is simple—just use a different delegate generator.
+
+/section
+For code-defined functions, we determine whether they should have both `add` and `get` or just `add`. Then we use the /bold CreateDelegate /x method with necessary parameters to create delegates and add them to the /bold trie /x similarly as with dynamic functions.
+
+/gtitle(4) Util.cs /x
+
+/section
+This file contains a number of utility classes/functions used throughout the rest of the code. You'll find a generic stack implementation and the corresponding generic linked list node.
+
+/section
+It also includes custom error classes that enhance error messages to better indicate where the user made a mistake in their CzeTex code. Furthermore, it contains static classes with string or parameter processing utilities.
+
+/section
+Last but not least, it includes the class /bold FunctionGeneratorForPDF /xc which provides methods to generate delegates for both `add` and `get` dynamic functions (as described earlier).
+
+/gtitle( 4 ) Trie.cs /x
+
+/section
+The last file in this section is /bold Trie.cs /xc which implements the /bold trie /x (prefix tree) data structure used to create a bijective mapping between CzeTex text functions and actual implementation functions.
+
+/section
+Besides the tree itself, the class has two arrays—one for `add` functions and another for `get` functions. The bijection is built such that the character path from the root to a node corresponds to the CzeTex function name. This places constraints on the function naming: names must consist of lowercase English letters only. Uniqueness is guaranteed by the setup JSON, which does not allow duplicate keys (function names).
+
+/section
+When a node is reached whose character path matches a function name, it stores an unsigned integer representing an index into the add/get arrays. Note: If a function lacks a `get`, the corresponding slot is just `null`, allowing a single index to serve both arrays.
+
+/section 
+This mapping technique ensures we can find the function mapping in time linear to the function name length, instead of the number of entries. It avoids the upper-bound performance issues of hashing, and since the function name universe is known, hashing would be overkill.
+
+/newpage
+
+/section
+Note: Extending support to uppercase letters would only require changing constants in /bold TrieConstants /x : `smallestAvailableCharacter` to `'A'` and `numberOfChildren` to `58`. However, this would also include special characters and increase memory usage—each node would reserve space for 57 children even if only one is used, which is inefficient for sparse trees.
+
+/gtitle(3) Second Part /x
+
+/section
+The second part of the source code handles PDF generation and related operations, again split across multiple files.
+
+/gtitle(4) Fonts.cs and Signs.cs /x
+
+/section
+These two files are quite similar, each containing a class of constants. `Fonts` defines font types, default text size, and paragraph/line spacing. `Signs` defines constants for special characters such as division, implication, quantifiers, etc.
+
+/gtitle(4) PDFSupport.cs /x
+
+/section
+The /bold PDFSupport.cs /x file contains, as the name suggests, supporting classes and methods—mostly classes for text layers or wrappers around iText’s text class to extend its functionality.
+
+/section
+There is a base class /bold TextCharacteristics /xc representing text features like font and size. Several subclasses inherit from it and override virtual methods like `Special`, `Add`, etc., to affect text rendering. For example, `UnderLineText` overrides `Special` to apply underlining.
+
+/section 
+To keep the inheritance structure clear, classes with shared traits inherit from a common parent. For example: /bold TextCharacteristics /x /math /imply /x /bold SpecialTextCharacteristics /x /math /imply /x /bold UnderLineText /x — so `UnderLineText` inherits from `SpecialTextCharacteristics`, which groups all text features that override the `Special` method.
+
+/section
+As mentioned, this file also includes a class extending the iText `Text` class, primarily to fix its suboptimal implementation of vertical shifting ("raising") of text.
+
+/gtitle(4) PDFStack.cs /x
+
+/section
+In /bold PDFStack.cs /x you’ll find the `CharacteristicsStack` class—a stack implementation storing text characteristics. The top layer is used to determine current rendering style.
+
+/section
+The stack allows partial definitions; for example, if a new layer defines only the font, other values (like size) are inherited. If the stack is empty, defaults are used.
+
+/newpage
+
+/gtitle(4) PDF.cs and PDFMath.cs /x
+
+/section
+The final files are /bold PDF.cs /x and /bold PDFMath.cs /xc containing the /bold PDF /x class, which provides the actual PDF generation functions. The mathematical functions are in PDFMath.cs, the rest in PDF.cs.
+
+/section
+In /bold PDF.cs /xc the `PDF` class initializes the PDF structure in its constructor and then modifies it by calling mapped functions. It includes methods for creating text, headings, lists, etc.
+
+/section
+In /bold PDFMath.cs /x you’ll find math-related text functions, special math symbols (quantifiers, Greek letters), and basic algebraic expressions. These methods are used by the dynamic character rendering functions.
+
+/newpage
+/gtitle(2) Tests /x
+
+/section
+In the /bold CzeTex.Tests /x project, the /bold Tests.cs /x file contains dozens of tests for both individual functions and full file interpretation.
+
+/section
+The /bold RunScript /xc function simulates user terminal input and runs `dotnet run` with specific input parameters. It supports input-only files or input with setup files.
+
+/gtitle(3) Running Tests /xc
+/section
+To run the tests, navigate to /bold CzeTex.Tests /x and run /bold dotnet tests /xd
+
+/section
+Note: /bold RunScript /x does not return error messages—it uses the /bold exit code /xd to evaluate behavior. This may vary by platform. The default /bold exit code /x is 134, but if your tests all return a consistent different value, it means the exit code for exceptions is different. Update it by replacing the value of the constant on line /bold 15 /x in /bold Tests.cs /xd 
+
+/offset
+/x
+
+/center
+/gtitle(2) /bold FOR DETAILED INFORMATION ABOUT ALL CLASSES, METHODS, ETC., SEE THE COMMENTED SOURCE CODE. /x /x
+/x
+
+/newpage
+
+/gtitle(2) Possible Extensions /x
+
+/section
+One of the most straightforward extensions would be to support more complex mathematical expressions. This would require algorithms to calculate the size of notation parts. Since the /bold iText /x library lacks proper math support, this would involve image/vector insertion for rendering formulas.
+
+/section 
+Another potential extension is support for CzeTex function names with diacritics or special characters. Uppercase support is already discussed in the /bold Trie /xd section.
+
+/section 
+Other possible additions include support for numbered text or combining multiple formatting styles like underline and strikethrough.
+
+/gtitle(2) Conclusion /x
+
+/section
+The /bold CzeTex /x application successfully implements both basic and moderately advanced text features like font settings, page breaks, proper spacing, special styles, and basic mathematical notation—algebraic expressions, quantifiers, and math symbols.
+
+/section
+It also allows the user to easily customize it via setup .json files to remap function names. Partial setups are supported, so users who don’t need all features (or don’t speak English) can load faster and work more comfortably—for example, using the Czech version.

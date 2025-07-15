@@ -1,0 +1,163 @@
+/justify
+/title Usage Examples /x
+
+/section
+As already mentioned in the user section, the main way to control the program is by modifying the input files.
+
+/subtitle Setup JSON File /x
+
+/section
+One way to modify the program is to redefine the mapping of CzeTex text functions to the code functions.
+
+/section
+The default mapping is located in CzeTex/Setup.json, but there is also a pre-prepared version with Czech localization (it does not contain all functions as a demonstration that not all functions are required for it to work). You can find it in the CzeTex/examples folder under the name `nastaveni.json`, and the file `proNastaveni.txt` uses this mapping.
+
+/section
+So if you want to try alternative mapping, you can run the command: /newline /bold dotnet run examples/proNastaveni.txt examples/nastaveni.json /x
+
+/subtitle Creating the Input File /x
+
+/section
+The project includes dozens of commands, and I do not consider it appropriate to list all of them here exhaustively, since they may not work with other setup files. Instead, I will demonstrate the idea behind creating them. You can find all commands in the specific setup file you plan to use, such as the default CzeTex/Setup.json, where all commands are commented and labeled with the proper /cursive hashtag /xd
+
+/section
+/bold
+Each command must start with the special character /slash /wspace and then continue with the command name. Different commands have different specifics, as will be shown below.
+/x
+
+/gtitle(3) Non-paired Commands /x
+
+/section
+Among non-paired commands is for example the /bold /slash section /x command, which creates a new paragraph. Note: All text must be placed within some block or paragraph.
+
+/section
+For example:
+
+/section
+/tab /bold /slash pi /x
+
+/section
+/tab /pi
+
+/section
+In Setup.json, these commands are labeled as /bold #nonPairFunction /xd
+
+/newpage
+
+/gtitle(3) Paired Commands /x
+
+/section
+Paired commands include, for example, bold text block creation, i.e., /bold /slash bold /x this is bold text /bold /slash x /x would be bold text. You can notice that paired commands are closed using the generic character /bold /slash x /x which implies that commands cannot overlap (the one that starts later is closed earlier).
+
+/section
+For example:
+
+/section
+/tab /bold /slash underline this text is underlined /slash x /x
+
+/section
+/tab /underline this text is underlined /x
+
+/section
+In Setup.json, these commands are labeled as /bold #pairFunction /xd
+
+/gtitle(3) Commands with Parameters /x
+
+/section
+Some commands have parameters that change their functionality or appearance. For example, the power function /bold /slash pow /x has 2 parameters: base and exponent.
+
+/section
+So if we wanted to write the formula for the surface area of a sphere, it would look like this: /newline /bold /slash math /x S = 4 /bold /slash times /slash pi /slash times /slash pow(r,2) /slash x /x .
+
+/section
+/math S = 4 /times /pi /times /pow(r,2) /x
+
+/section
+In Setup.json, these commands are labeled as /bold #hasParameter /xd
+
+/gtitle(2) Concrete Examples /x
+
+/gtitle(3) Heading Level 1 /x
+
+/section
+/bold /slash title This is heading text /slash x /x 
+/newline or we can replace a specific heading with a generic one /newline
+/bold /slash gtitle(1) This is heading text /slash x /x
+
+/section
+/title This is heading text /x
+
+/justify
+/gtitle(3) Paragraph Text and Special Formatting /x
+
+/bold 
+/section
+/slash section /newline
+/slash bold Czechia /slash xc full name /slash cursive Czech Republic /slash xc /newline is an /slash underline inland state /slash x in /slash linethrough eastern /slash x 
+/newline /slash bold /slash cursive Central Europe /slash x /slash xd
+/x
+
+/section
+/bold Czechia /xc full name /cursive Czech Republic /xc 
+is an /underline inland state /x in /linethrough eastern /x 
+/bold /cursive Central Europe /x /xd
+
+/newpage
+
+/section
+Note: As we can see in the example, extra spaces do not affect the final text. The output is generated only based on the commands and text. Even commands like /slash slash corresponding to the character /slash do not create a space between them.
+
+/gtitle(3) Switching Between Sans-serif and Serif Fonts and Text Alignment /xc
+
+/section
+/bold
+/slash right /newline
+/tab /slash serif /newline
+/tab /tab /slash size(15) /newline
+/tab /tab /slash section /newline
+/tab /tab The official name of the state according to the constitution is Czech Republic; the one-word name Czechia does not appear in the constitution, but is included in the official UN database as the single-word name of the country. /newline
+/slash x /slash x /slash x 
+/x
+
+/x
+/serif
+    /right
+        /size(15)
+        /section
+        The official name of the state according to the constitution is Czech Republic; the one-word name Czechia does not appear in the constitution, but is included in the official UN database as the single-word name of the country.
+/x /x /x
+
+/section
+Note: It may seem that the generic closing command can become quite confusing, which can happen in very complex expressions. However, I concluded that in regular text this does not occur very often, and writing a shorter command increases typing speed and comfort, which I considered more important. Moreover, mathematical notation, which may use many commands on small text segments, only uses a few paired commands.
+
+/gtitle(3) Mathematical Notation /x
+
+/section
+/bold 
+/slash section /newline
+/slash math /newline
+The limit of f(x) as x approaches A equals L /slash iff /slash forall /slash epsilon > 0 /slash exists /slash delta > 0 /slash forall x /slash in P( A, /slash delta ): f(x) /slash in U( L, /slash epsilon ). /newline
+/slash x
+/x
+
+/section
+/math
+The limit of f(x) as x approaches A equals L /iff /forall /epsilon > 0 /exists /delta > 0 /forall x /in P( A, /delta ): f(x) /in U( L, /epsilon ).
+/x
+
+/newpage
+
+/gtitle(2) Technical Limitations /x
+
+/section
+When working with lists, CzeTex only allows global font and size settings for the entire list, not per item or part of an item. Special formatting such as underlining is not supported at all.
+
+/section
+For mathematical notation, only commands with a `get` method (i.e., special characters) can be used as parameters in powers, indices, and fractions. It is therefore not possible to have a fraction within a fraction or a power within a fraction, etc.
+
+/x
+/offset
+
+/center
+/gtitle(2) /bold FOR MORE EXAMPLES, YOU CAN REVIEW SAMPLE FILES IN THE CZETEX/EXAMPLES FOLDER, FUNCTION DEFINITIONS IN SETUP.JSON, OR THE SOURCE CODE OF THIS DOCUMENTATION, AS THE ENTIRE DOCUMENT WAS CREATED USING CZETEX. /x /x
+/x
